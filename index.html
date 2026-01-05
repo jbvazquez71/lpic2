@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador LPIC-2 Pro</title>
-    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
-    <script src="js/LPIC1.js?v=1.1"></script>
-    <script src="js/LPIC2-1.js?v=1.1"></script>
-    <script src="js/LPIC2-2.js?v=1.1"></script>
-    <script src="js/main.js?v=1.1"></script>
-    
-    <link rel="stylesheet" type="text/css" href="css/main.css?v=1.1">
+    <script src="js/LPIC1.js?v=1.4"></script>
+    <script src="js/LPIC2-1.js?v=1.4"></script>
+    <script src="js/LPIC2-2.js?v=1.4"></script>
+    <script src="js/main.js?v=1.4"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1.4">
 </head>
 <body>
     <div id="header">
-        <h1>LPIC-2 Engineer - 05/01/2025 - 10:05</h1>
+        <h1>LPIC-2 Engineer - 05/01/2026 - 10:15 horas</h1>
         <div class="header-right">
             <select id="examSelect">
                 <option value="LPIC2_1">LPIC-2 (101-500)</option>
@@ -35,9 +33,9 @@
         </div>
 
         <div class="card" id="resultReport" style="display:none; text-align:center;">
-            <h2>📊 Fin del Test</h2>
-            <div id="finalScore" style="font-size: 3rem; margin: 20px 0; font-weight: 800; color: var(--primary-color);"></div>
-            <button onclick="window.location.reload();" style="background:var(--success-color); padding:15px 40px;">Reiniciar Examen</button>
+            <h2>📊 Resultados Finales</h2>
+            <div id="finalScore" style="font-size: 3.5rem; margin: 20px 0; font-weight: bold; color: var(--primary-color);"></div>
+            <button onclick="window.location.reload();" style="background:var(--success-color); padding:15px 40px; border-radius:8px; color:white; border:none; cursor:pointer; font-weight:bold; font-size:1.1rem;">Reiniciar Examen</button>
         </div>
     </div>
 
