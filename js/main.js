@@ -17,7 +17,12 @@ function switchExam(examKey) {
 function resetStats() {
     preguntas_hechas = []; numCorrect = 0; numIncorrect = 0;
     $("#mainCard").show(); $("#resultReport").hide();
-    updatefooter();
+    updateProgressBar(); updatefooter();
+}
+
+function updateProgressBar() {
+    let progress = (preguntas_hechas.length / arr.length) * 100;
+    $("#progressBar").css("width", progress + "%");
 }
 
 function nextQuestion() {
@@ -33,17 +38,17 @@ function nextQuestion() {
         $("#question").html(`<h2>${q.question}</h2>`);
         $("#answer").html(generateOptions(q));
         $("#buttons").html("<button id='actionBtn' onclick='checkAnswer()'>Verificar Respuesta (Intro)</button>");
-        $(this).show();
+        $(this).show(); updateProgressBar();
     });
 }
 
 function generateOptions(q) {
     if (!q || !q.answer) return "";
-    let splited = q.answer.split(", ");
-    let type = (q.options) ? (splited.length === 1 ? 1 : 2) : 3;
+    let splitedLetters = q.answer.split(", ");
+    let type = (q.options) ? (splitedLetters.length === 1 ? 1 : 2) : 3;
     if (type === 3) return '<input type="text" id="text" style="width:100%; padding:12px; border-radius:8px; border:1px solid #ccc;" placeholder="Escribe el comando...">';
     
-    // Añadimos (1), (2)... como pista visual para el teclado
+    // Mostramos opciones con números (1), (2)... y valor alfabético original
     return q.options.map((opt, i) => `
         <div class="option-row" style="width:100%;">
             <label class="option-container">
@@ -55,8 +60,11 @@ function generateOptions(q) {
 }
 
 function checkAnswer() {
-    let question = arr[rand]; let splited = question.answer.split(", "); let userAnswer = [];
-    let type = (question.options) ? (splited.length === 1 ? 1 : 2) : 3;
+    let question = arr[rand];
+    let splitedLetters = question.answer.split(", ");
+    let userAnswer = [];
+    let type = (question.options) ? (splitedLetters.length === 1 ? 1 : 2) : 3;
+    
     if (type === 1) {
         let val = $("input[name='answer']:checked").val();
         if(val === undefined) return alert("Selecciona una opción");
@@ -64,9 +72,11 @@ function checkAnswer() {
     } else if (type === 2) {
         $("input[name='answer']:checked").each(function() { userAnswer.push(arrOpt[$(this).val()]); });
         if(userAnswer.length === 0) return alert("Selecciona al menos una");
-    } else { userAnswer.push($("#text").val().trim()); }
+    } else {
+        userAnswer.push($("#text").val().trim());
+    }
 
-    let isCorrect = userAnswer.sort().toString().toLowerCase() === splited.sort().toString().toLowerCase();
+    let isCorrect = userAnswer.sort().toString().toLowerCase() === splitedLetters.sort().toString().toLowerCase();
     if (isCorrect) numCorrect++; else numIncorrect++;
 
     let color = isCorrect ? "#10b981" : "#ef4444";
@@ -75,7 +85,7 @@ function checkAnswer() {
     $("#answer").append(`
         <div style="margin-top:20px; padding:15px; background:rgba(0,0,0,0.03); border-radius:8px; border-left:5px solid ${color}">
             <p><strong>${message}</strong></p>
-            <p><strong>Respuesta: ${question.answer}</strong></p>
+            <p><strong>Respuesta correcta:</strong> ${question.answer}</p>
             <hr style="opacity:0.1">
             <p style="font-size:0.9rem;">${question.explicacion}</p>
         </div>
@@ -93,21 +103,19 @@ function updatefooter() {
 }
 
 $(document).ready(() => {
-    // --- SOPORTE GLOBAL PARA TECLADO ---
+    // --- SOPORTE PARA TECLAS 1-5 e INTRO ---
     $(document).on('keydown', function(e) {
-        // Ignorar si el usuario está escribiendo en un campo de texto
         if ($(e.target).is("input[type='text']")) {
             if (e.key === "Enter") $("#actionBtn").click();
             return;
         }
 
-        // Tecla Intro: Verificar, Siguiente o Reiniciar
         if (e.key === "Enter") {
             if ($("#resultReport").is(":visible")) $("#restartBtn").click();
             else if ($("#actionBtn").length > 0) $("#actionBtn").click();
         }
 
-        // Teclas 1-5: Seleccionar opciones
+        // Detección de números 1-5
         if (e.key >= "1" && e.key <= "5") {
             let index = parseInt(e.key) - 1;
             let input = $("input[name='answer']").eq(index);
