@@ -1,0 +1,147 @@
+:root {
+    --primary-color: #3b82f6;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --bg-dark: #0f172a;
+    --card-dark: #1e293b;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s ease;
+}
+
+/* Modo Oscuro por defecto o via clase */
+body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+}
+
+/* Header Moderno */
+#header {
+    padding: 1.5rem 2rem;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body.dark-mode #header {
+    background: var(--card-dark);
+    border-bottom: 1px solid #334155;
+}
+
+h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.025em;
+}
+
+/* Contenedor Principal */
+#content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Tarjeta de Pregunta Estilo Moderno */
+.card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 800px;
+    transition: transform 0.2s ease;
+}
+
+body.dark-mode .card {
+    background: var(--card-dark);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.question h2 {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* Estilo de Opciones */
+.answer input[type="radio"], 
+.answer input[type="checkbox"] {
+    margin-right: 12px;
+    transform: scale(1.2);
+}
+
+.answer br {
+    content: "";
+    display: block;
+    margin: 10px 0;
+}
+
+/* Botones */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 1rem;
+}
+
+button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/* Footer con estadísticas tipo 'Status Bar' */
+#footer {
+    background: #1e293b;
+    color: white;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    text-align: center;
+}
+
+.footer-item span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.footer-item div {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Modal de Feedback */
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    border: none;
+}
+
+body.dark-mode .modal-content {
+    background: var(--card-dark);
+}

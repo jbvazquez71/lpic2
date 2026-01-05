@@ -1,0 +1,1409 @@
+const preguntasLPIC1 = [ 
+    {
+        "question": "¿Qué comando se utiliza para establecer el nombre de host del sistema local? (Especifica solo el comando sin ruta ni parámetros).",
+        "answer": "hostname",
+        "explicacion": "El comando 'hostname' se utiliza para establecer el nombre de host del sistema local.",
+        "pista": "Es un comando muy común para ver o configurar el nombre del sistema."
+    },
+    {
+        "question": "¿Cuál de las siguientes es una dirección IPv6 válida?",
+        "options": [
+            "A. 2001:db8:0g21::1",
+            "B. 2001::db8:4581::1",
+            "C. 2001:db8:3241::1",
+            "D. 2001%db8%9990%%1",
+            "E. 2001.db8.819f..1"
+        ],
+        "answer": "C",
+        "explicacion": "La dirección '2001:db8:3241::1' es una dirección IPv6 válida.",
+        "pista": "La dirección debe seguir el formato correcto de 8 bloques de 4 caracteres hexadecimales."
+    },
+    {
+        "question": "¿Qué comando, dependiendo de sus opciones, puede mostrar las conexiones TCP abiertas, las tablas de enrutamiento, así como las estadísticas de las interfaces de red? (Especifica solo el comando sin ruta ni parámetros).",
+        "answer": "netstat",
+        "explicacion": "El comando 'netstat' muestra estadísticas de red, incluyendo las conexiones TCP abiertas y las tablas de enrutamiento.",
+        "pista": "Este comando es comúnmente utilizado para obtener información de red."
+    },
+    {
+        "question": "¿Qué comando incluido en NetworkManager es una aplicación de texto que proporciona fácil acceso a NetworkManager en la línea de comandos? (Especifica solo el comando sin ruta ni parámetros).",
+        "answer": "nmtui",
+        "explicacion": "'nmtui' es una interfaz de texto (curses) que permite administrar la red a través de NetworkManager en la línea de comandos.",
+        "pista": "El nombre del comando es un acrónimo de 'NetworkManager Text User Interface'."
+    },
+    {
+        "question": "¿Cuál de las siguientes herramientas, utilizada para depuración de DNS, informa no solo la respuesta del servidor de nombres, sino también detalles sobre la consulta?",
+        "options": [
+            "A. dnsq",
+            "B. hostname",
+            "C. dig",
+            "D. dnslookup",
+            "E. zoneinfo"
+        ],
+        "answer": "C",
+        "explicacion": "'dig' es una herramienta de línea de comandos que se utiliza para realizar consultas de DNS, mostrando no solo la respuesta, sino también detalles sobre la consulta.",
+        "pista": "Es muy útil para diagnóstico de DNS."
+    },
+    {
+        "question": "¿Cuál de las siguientes afirmaciones es válida en el archivo /etc/nsswitch.conf?",
+        "options": [
+            "A. multi on",
+            "B. 192.168.168.4 dns-server",
+            "C. namespaces: net mount procs",
+            "D. include /etc/nsswitch.d/",
+            "E. hosts: files dns"
+        ],
+        "answer": "E",
+        "explicacion": "La afirmación 'hosts: files dns' es válida, indicando que se deben buscar los hosts primero en archivos locales y luego en DNS.",
+        "pista": "Es una línea común en la configuración de resolución de nombres."
+    },
+    {
+        "question": "¿Cuáles de los siguientes tipos de conexión, como se ve en 'nmcli connection show', pueden existir en NetworkManager? (Elige tres).",
+        "options": [
+            "A. tcp",
+            "B. ethernet",
+            "C. wifi",
+            "D. ipv6",
+            "E. bridge"
+        ],
+        "answer": "B, C, E",
+        "explicacion": "Los tipos de conexión que existen en NetworkManager incluyen 'ethernet', 'wifi' y 'bridge'.",
+        "pista": "Son los tipos de conexiones de red más comunes."
+    },
+    {
+        "question": "En una estación de trabajo Linux, el comando 'route' tarda mucho tiempo antes de imprimir la tabla de enrutamiento. ¿Qué error indica eso?",
+        "options": [
+            "A. La información de enrutamiento local puede estar corrupta y debe ser revalidada utilizando un protocolo de enrutamiento.",
+            "B. Uno de los routers en la tabla de enrutamiento no está disponible, lo que hace que el mecanismo de detección automática de fallos del router (ARF-D) espere un tiempo de espera.",
+            "C. Puede haber accidentalmente más de un router predeterminado, en cuyo caso se debe realizar una elección de router predeterminado en la red para elegir un router como el predeterminado.",
+            "D. El Daemon de Enrutamiento del Núcleo de Linux (LKRD) no está en ejecución y debe ser iniciado utilizando su script init o unidad systemd.",
+            "E. La resolución DNS puede no estar funcionando, ya que 'route' intenta resolver los nombres de los routers y destinos por defecto y puede generar un tiempo de espera."
+        ],
+        "answer": "E",
+        "explicacion": "El comando 'route' intenta resolver los nombres de routers y destinos, lo que puede causar un tiempo de espera si DNS no está funcionando.",
+        "pista": "Revisa la configuración DNS si el comando tarda mucho."
+    },
+    {
+        "question": "¿Qué es cierto sobre el campo Hop Limit en el encabezado IPv6?",
+        "options": [
+            "A. El campo no se cambia durante el transporte de un paquete.",
+            "B. El campo se transmite dentro de un encabezado de extensión de salto a salto.",
+            "C. Cada router que reenvía el paquete aumenta el valor del campo.",
+            "D. Cada router que reenvía el paquete disminuye el valor del campo.",
+            "E. Para los paquetes multicast, el valor del campo siempre es 1."
+        ],
+        "answer": "D",
+        "explicacion": "El campo 'Hop Limit' disminuye con cada router que reenvía el paquete, como un contador de saltos.",
+        "pista": "Este campo ayuda a evitar que los paquetes queden atrapados en bucles de enrutamiento."
+    },
+    {
+        "question": "¿Cuáles de los siguientes subcomandos de 'nmcli' existen? (Elige dos).",
+        "options": [
+            "A. nmcli ethernet",
+            "B. nmcli device",
+            "C. nmcli wifi",
+            "D. nmcli address",
+            "E. nmcli connection"
+        ],
+        "answer": "B, E",
+        "explicacion": "'nmcli device' y 'nmcli connection' son subcomandos válidos de NetworkManager.",
+        "pista": "Son usados para gestionar dispositivos y conexiones de red."
+    },
+    {
+        "question": "¿Cuáles de los siguientes subcomandos de nmcli existen? (Elige dos).",
+        "options": [
+            "A. nmcli ethernet",
+            "B. nmcli device",
+            "C. nmcli wifi",
+            "D. nmcli address",
+            "E. nmcli connection"
+        ],
+        "answer": "B, E",
+        "explicacion": "Los subcomandos válidos de nmcli son 'nmcli device' y 'nmcli connection'.",
+        "pista": "Son subcomandos utilizados para gestionar dispositivos y conexiones en NetworkManager."
+    },
+    {
+        "question": "¿Cuáles de los siguientes cambios pueden ocurrir como consecuencia de usar el comando ip? (Elige tres).",
+        "options": [
+            "A. Las interfaces de red pueden volverse activas o inactivas.",
+            "B. Pueden añadirse nuevos servidores de nombres a la configuración del resolutor.",
+            "C. El nombre del sistema puede cambiar.",
+            "D. Las direcciones IP pueden cambiar.",
+            "E. La tabla de rutas puede cambiar."
+        ],
+        "answer": "A, D, E",
+        "explicacion": "El comando 'ip' puede activar o desactivar interfaces de red, cambiar direcciones IP y modificar la tabla de rutas.",
+        "pista": "Este comando es muy versátil para la configuración de redes y rutas en Linux."
+    },
+    {
+        "question": "¿Cuántas direcciones IP pueden ser utilizadas para hosts únicos dentro de la subred IPv4 192.168.2.128/26?",
+        "options": [
+            "A. 6",
+            "B. 14",
+            "C. 30",
+            "D. 62",
+            "E. 126"
+        ],
+        "answer": "D",
+        "explicacion": "Con una subred /26, se tienen 64 direcciones totales, de las cuales 2 se reservan para la red y la difusión. Por lo tanto, quedan 62 direcciones utilizables para hosts.",
+        "pista": "Recuerda que en cada subred, la primera y la última dirección son reservadas para la red y la difusión."
+    },
+    {
+        "question": "¿Cuáles de las siguientes redes IPv4 están reservadas por la IANA para la asignación de direcciones privadas y enrutamiento privado? (Elige tres).",
+        "options": [
+            "A. 10.0.0.0/8",
+            "B. 127.0.0.0/8",
+            "C. 169.255.0.0/16",
+            "D. 172.16.0.0/12",
+            "E. 192.168.0.0/16"
+        ],
+        "answer": "A, D, E",
+        "explicacion": "Las redes 10.0.0.0/8, 172.16.0.0/12 y 192.168.0.0/16 están reservadas para direcciones privadas según la IANA.",
+        "pista": "Son rangos de direcciones que se utilizan para redes internas, no accesibles desde la internet pública."
+    },
+    {
+        "question": "¿Cuál de los siguientes comandos configura interfaces de red basándose en los archivos de configuración específicos de la distribución del sistema? (Elige dos).",
+        "options": [
+            "A. ifconf",
+            "B. ifdown",
+            "C. ifpause",
+            "D. ifstart",
+            "E. ifup"
+        ],
+        "answer": "B, E",
+        "explicacion": "Los comandos 'ifdown' e 'ifup' se utilizan para desactivar o activar interfaces de red respectivamente, configurándolas según los archivos de configuración del sistema.",
+        "pista": "Estos comandos son comunes para administrar interfaces de red en sistemas Linux."
+    },
+    {
+        "question": "¿Cuál de las siguientes afirmaciones es verdadera si el UID de un usuario regular es idéntico al GID de un grupo?",
+        "options": [
+            "A. Los UID tienen prioridad sobre los GID, por lo tanto, el usuario está disponible mientras que el grupo no.",
+            "B. El usuario y el grupo no están disponibles para evitar ambigüedades debido al conflicto de ID.",
+            "C. Los UID y los GID son independientes entre sí, por lo tanto, tanto el usuario como el grupo están disponibles.",
+            "D. El usuario es el único miembro del grupo, incluso si la configuración del grupo contiene otros miembros.",
+            "E. Los GID tienen prioridad sobre los UID, por lo tanto, el grupo está disponible mientras que el usuario no lo está."
+        ],
+        "answer": "C",
+        "explicacion": "Los UID y GID son independientes entre sí, por lo que el usuario y el grupo siguen estando disponibles incluso si sus identificadores coinciden.",
+        "pista": "Asegúrate de entender cómo funcionan los UID y los GID en el sistema de usuarios y grupos."
+    },
+    {
+    "question": "¿Qué información se almacena en /etc/shadow para cada usuario?",
+    "options": [
+        "A. El sello de tiempo del último inicio de sesión del usuario",
+        "B. Las claves SSH privadas del usuario",
+        "C. La contraseña hasheada del usuario",
+        "D. El ID numérico del usuario (UID)",
+        "E. La ruta al directorio home del usuario"
+    ],
+    "answer": "C",
+    "explicacion": "El archivo /etc/shadow almacena la contraseña hasheada del usuario.",
+    "pista": "Este archivo es crucial para la seguridad del sistema, ya que contiene las contraseñas de los usuarios de manera protegida."
+    },
+    {
+    "question": "¿Cuál de los siguientes comandos muestra todos los temporizadores activos de systemd?",
+    "options": [
+        "A. systemctl-timer show",
+        "B. timectl list",
+        "C. systemctl –t",
+        "D. systemctl list-timers",
+        "E. timeq"
+    ],
+        "answer": "D",
+        "explicacion": "El comando 'systemctl list-timers' muestra todos los temporizadores activos de systemd.",
+        "pista": "Los temporizadores en systemd se usan para ejecutar tareas programadas en el sistema."
+    },
+    {
+        "question": "¿Cuáles de las siguientes tareas puede realizar el comando date? (Elige dos).",
+        "options": [
+            "A. Establecer la fecha y hora del sistema.",
+            "B. Establecer solo la fecha del sistema, pero no la hora.",
+            "C. Calcular el intervalo de tiempo entre dos fechas.",
+            "D. Imprimir un calendario de un mes o un año.",
+            "E. Mostrar la hora en un formato específico."
+        ],
+        "answer": "A, E",
+        "explicacion": "El comando 'date' puede establecer la fecha y hora del sistema, así como mostrar la hora en un formato específico.",
+        "pista": "Es un comando muy útil para manipular y mostrar información relacionada con el tiempo y las fechas."
+    },
+    {
+        "question": "¿Qué archivo, si está presente, debe contener a todos los usuarios que tienen permitido usar el sistema de programación cron? (Especifica el nombre completo del archivo, incluyendo la ruta).",
+        "answer": "/etc/cron.allow",
+        "explicacion": "El archivo '/etc/cron.allow' contiene los usuarios autorizados para usar el sistema cron. Si no existe, los usuarios que no están en '/etc/cron.deny' pueden usar cron.",
+        "pista": "Si '/etc/cron.allow' no está presente, el sistema consulta '/etc/cron.deny'."
+    },
+    {
+        "question": "¿Qué se puede especificar con useradd? (Elige dos).",
+        "options": [
+            "A. Los comandos que el usuario puede ejecutar usando sudo.",
+            "B. La ruta absoluta al directorio home del usuario.",
+            "C. Qué impresoras están disponibles para el nuevo usuario.",
+            "D. Las claves SSH usadas para iniciar sesión en la nueva cuenta.",
+            "E. El ID numérico del usuario (UID) del usuario."
+        ],
+        "answer": "B, E",
+        "explicacion": "El comando 'useradd' permite especificar el directorio home absoluto y el ID numérico (UID) del usuario.",
+        "pista": "Este comando es utilizado para crear usuarios y establecer su configuración básica en el sistema."
+    },
+    {
+        "question": "¿Qué es cierto sobre el archivo /etc/localtime?",
+        "options": [
+            "A. Es un archivo de texto plano que contiene una cadena como Europe/Berlin",
+            "B. Es creado y mantenido por el servicio NTP basado en la ubicación de la dirección IP del sistema.",
+            "C. Es un enlace simbólico a /sys/device/clock/ltime y siempre contiene la hora local actual.",
+            "D. Después de cambiar este archivo, debe ejecutarse newtzconfig para que los cambios tengan efecto.",
+            "E. Es un enlace simbólico o una copia de un archivo de información de zona horaria como /usr/share/zoneinfo/Europe/Berlin."
+        ],
+        "answer": "E",
+        "explicacion": "El archivo '/etc/localtime' es un enlace simbólico o una copia de un archivo de información de zona horaria de '/usr/share/zoneinfo/'.",
+        "pista": "Es importante para la configuración de la zona horaria del sistema."
+    },
+    {
+        "question": "¿Cuál de las siguientes afirmaciones es verdadera con respecto a las unidades de temporizador systemd?",
+        "options": [
+            "A. Las unidades de temporizador solo se pueden definir dentro del archivo de una unidad de servicio.",
+            "B. El comando ejecutado por el temporizador está especificado en la sección [Cmd] de la unidad de temporizador.",
+            "C. Un servicio dedicado, systemd-cron, maneja la ejecución de las unidades de temporizador.",
+            "D. Las unidades de temporizador solo existen en el ámbito del sistema y no están disponibles para los usuarios.",
+            "E. Cada unidad de temporizador systemd controla una unidad de servicio específica de systemd."
+        ],
+        "answer": "E",
+        "explicacion": "Cada unidad de temporizador de systemd controla una unidad de servicio específica de systemd.",
+        "pista": "Es útil para ejecutar tareas programadas dentro de systemd."
+    },
+    {
+        "question": "¿Cuáles de los siguientes campos están disponibles en el formato estándar tanto del archivo global /etc/crontab como en los archivos crontab específicos del usuario? (Elige dos.)",
+        "options": [
+            "A. Año",
+            "B. Minuto",
+            "C. Nombre de usuario",
+            "D. ID de grupo efectivo",
+            "E. Comando"
+        ],
+        "answer": "B, D",
+        "explicacion": "Los campos disponibles tanto en '/etc/crontab' como en los archivos crontab específicos de usuario son 'Minuto' y 'ID de grupo efectivo'.",
+        "pista": "Los campos 'Año' y 'Nombre de usuario' no están presentes en todos los formatos."
+    },
+    {
+        "question": "¿Qué comando debe ejecutarse al iniciar un shell de inicio para cambiar el idioma de los mensajes para un programa internacionalizado a portugués (pt)?",
+        "options": [
+            "A. export LANGUAGE=“pt”",
+            "B. export LC_MESSAGES=“pt”",
+            "C. export UI_MESSAGES=“pt”",
+            "D. export MESSAGE=“pt”",
+            "E. export ALL_MESSAGES=“pt”"
+        ],
+        "answer": "B",
+        "explicacion": "El comando 'export LC_MESSAGES=\"pt\"' cambia el idioma de los mensajes a portugués.",
+        "pista": "Este comando establece el entorno de idioma para los mensajes del sistema."
+    },
+    {
+        "question": "¿Qué archivo asigna un usuario a su grupo primario?",
+        "options": [
+            "A. /etc/pgroup",
+            "B. /etc/shadow",
+            "C. /etc/passwd",
+            "D. /etc/group",
+            "E. /etc/gshadow"
+        ],
+        "answer": "C",
+        "explicacion": "El archivo '/etc/passwd' asigna un usuario a su grupo primario.",
+        "pista": "Este archivo contiene la información de cada usuario, incluido su grupo principal."
+    },
+    {
+        "question": "¿Cuál de los siguientes pasos evita que un usuario obtenga una sesión interactiva de inicio?",
+        "options": [
+            "A. Establecer el UID del usuario a 0.",
+            "B. Ejecutar el comando chsh –s /bin/false con el nombre de usuario.",
+            "C. Eliminar al usuario del grupo staff.",
+            "D. Agregar al usuario a /etc/noaccess.",
+            "E. Crear un archivo .nologin en el directorio de inicio del usuario."
+        ],
+        "answer": "B",
+        "explicacion": "El comando 'chsh –s /bin/false' cambia el shell de inicio del usuario a '/bin/false', lo que evita que obtenga una sesión de inicio interactiva.",
+        "pista": "Esto desactiva el acceso al sistema para el usuario."
+    },
+    {
+        "question": "¿Qué comando incluido en systemd permite seleccionar mensajes del journal de systemd por criterios como el tiempo o el nombre de la unidad?",
+        "answer": "journalctl",
+        "explicacion": "El comando 'journalctl' se utiliza para seleccionar mensajes del journal de systemd según criterios como el tiempo o el nombre de la unidad.",
+        "pista": "Este comando es útil para analizar los logs del sistema."
+    },
+    {
+        "question": "¿Cuáles de las siguientes afirmaciones sobre systemd-journald son ciertas? (Elige tres.)",
+        "options": [
+            "A. Es incompatible con syslog y no se puede instalar en un sistema que use syslog regular.",
+            "B. Solo procesa los mensajes de systemd y no los mensajes de otras herramientas.",
+            "C. Puede pasar mensajes de log a syslog para su posterior procesamiento.",
+            "D. Mantiene metadatos como _UID o _PID para cada mensaje.",
+            "E. Soporta facilidades de syslog como kern, user y auth."
+        ],
+        "answer": "C, D, E",
+        "explicacion": "systemd-journald puede pasar mensajes de log a syslog (C), mantiene metadatos como _UID o _PID para cada mensaje (D) y soporta facilidades de syslog como kern, user y auth (E).",
+        "pista": "systemd-journald es el sistema de logging por defecto en muchas distribuciones basadas en systemd."
+    },
+    {
+        "question": "¿Qué comando debe ejecutarse después de agregar un nuevo alias de correo electrónico a la configuración para que este cambio surta efecto?",
+        "answer": "newaliases",
+        "explicacion": "El comando 'newaliases' debe ejecutarse para que los cambios en los alias de correo electrónico tengan efecto.",
+        "pista": "Este comando actualiza las bases de datos de alias del correo."
+    },
+    {
+        "question": "¿Qué opción en el archivo de configuración de chrony cambia el intervalo inicial de sondeos a un servidor NTP para acelerar la sincronización inicial?",
+        "options": [
+            "A. iburst",
+            "B. quickstart",
+            "C. fast",
+            "D. fsync",
+            "E. flood"
+        ],
+        "answer": "A",
+        "explicacion": "La opción 'iburst' en el archivo de configuración de chrony reduce el tiempo de sincronización inicial al hacer que los primeros sondeos se realicen más rápido.",
+        "pista": "Es útil para mejorar la sincronización de tiempo al iniciar chrony."
+    },
+    {
+        "question": "¿Cuál de los siguientes comandos se utiliza para rotar, comprimir y enviar por correo los registros del sistema?",
+        "options": [
+            "A. logrotate",
+            "B. striplog",
+            "C. syslogd –-rotate",
+            "D. rotatelog",
+            "E. logger"
+        ],
+        "answer": "A",
+        "explicacion": "logrotate es el comando utilizado para rotar, comprimir y enviar por correo los registros del sistema.",
+        "pista": "Es una herramienta muy común para la administración de logs en sistemas Unix."
+    },
+    {
+        "question": "¿Por qué es importante la correcta configuración de la zona horaria de un sistema?",
+        "options": [
+            "A. Porque la zona horaria se incluye en los cálculos de sumas de verificación y los cambios de zona horaria invalidan las sumas de verificación existentes.",
+            "B. Porque la zona horaria se guarda como parte de los tiempos de modificación de los archivos y no se puede cambiar después de que un archivo ha sido creado.",
+            "C. Porque las variables de entorno LANG y LC_MESSAGES se configuran, por defecto, según la zona horaria.",
+            "D. Porque NTP elige servidores cercanos basándose en la zona horaria configurada.",
+            "E. Porque la conversión de las marcas de tiempo de Unix a hora local depende de la configuración de la zona horaria."
+        ],
+        "answer": "E",
+        "explicacion": "La zona horaria es esencial para convertir correctamente las marcas de tiempo de Unix a la hora local.",
+        "pista": "Es importante para la sincronización precisa de la hora del sistema."
+    },
+    {
+        "question": "¿Qué comando, disponible con todos los MTAs compatibles con sendmail, se usa para listar el contenido de la cola de correo del MTA?",
+        "answer": "mailq",
+        "explicacion": "El comando mailq se usa para listar el contenido de la cola de correo de un MTA compatible con sendmail.",
+        "pista": "Es útil para administrar los correos en espera."
+    },
+    {
+        "question": "¿Cuál es el directorio de nivel superior que contiene los archivos de configuración de CUPS?",
+        "answer": "/etc/cups/",
+        "explicacion": "El directorio /etc/cups/ contiene los archivos de configuración de CUPS. (Ejercicio corregido, la respuesta en el pdf es: '/etc/cups/ cups-files.conf')",
+        "pista": "Es el sistema de impresión utilizado en muchas distribuciones de Linux."
+    },
+    {
+        "question": "¿Cuál de los siguientes comandos lista todos los trabajos de impresión en cola?",
+        "options": [
+            "A. lpd",
+            "B. lpr",
+            "C. lp",
+            "D. lsq",
+            "E. lpq"
+        ],
+        "answer": "E",
+        "explicacion": "lpq es el comando utilizado para listar todos los trabajos de impresión en cola.",
+        "pista": "Es útil para verificar el estado de las impresoras."
+    },
+    {
+        "question": "¿Cuál de las siguientes entradas en /etc/syslog.conf escribe todos los eventos relacionados con el correo en el archivo /var/log/maillog y envía todos los eventos críticos al servidor remoto logger.example.com?",
+        "options": [
+            "A. mail.* /var/log/maillog\nmail,crit @logger.example.org",
+            "B. mail.* /var/log/maillog\nmail.crit syslog://logger.example.org",
+            "C. mail /var/log/maillog\nmail.crit @logger.example.org",
+            "D. mail.* /var/log/maillog\nmail.crit @logger.example.org",
+            "E. mail * /var/log/maillog\nmail crit @logger.example.org"
+        ],
+        "answer": "D",
+        "explicacion": "Esta es la configuración correcta en /etc/syslog.conf para escribir los eventos relacionados con el correo en /var/log/maillog y enviar los eventos críticos al servidor remoto logger.example.org.",
+        "pista": "La configuración correcta debe separar los eventos y las direcciones del servidor de registro."
+    },
+    {
+        "question": "¿Qué opción en el archivo /etc/ntp.conf especifica una fuente externa de NTP para consultar la información de hora?",
+        "answer": "server",
+        "explicacion": "La opción 'server' en el archivo /etc/ntp.conf especifica una fuente externa de NTP a consultar para obtener la información de hora.",
+        "pista": "Es crucial para la sincronización precisa de la hora del sistema."
+    },
+    {
+        "question": "¿Cuál de los siguientes protocolos está relacionado con el término 'open relay'?",
+        "options": [
+            "A. SMTP",
+            "B. POP3",
+            "C. NTP",
+            "D. IMAP",
+            "E. LDAP"
+        ],
+        "answer": "A",
+        "explicacion": "El término 'open relay' está relacionado con el protocolo SMTP, que se utiliza para enviar correos electrónicos.",
+        "pista": "Los servidores de correo mal configurados pueden ser vulnerables a 'open relay'."
+    },
+    {
+        "question": "¿Cuál de los siguientes comandos muestra todas las variables de entorno y shell?",
+        "options": [
+            "A. getargs",
+            "B. lsenv",
+            "C. ls",
+            "D. env",
+            "E. lsshell"
+        ],
+        "answer": "D",
+        "explicacion": "El comando 'env' muestra todas las variables de entorno y variables de shell en el sistema.",
+        "pista": "Es útil para verificar las configuraciones del entorno del sistema."
+    },
+    {
+        "question": "¿Cuáles de los siguientes operadores de comparación para test funcionan en los elementos del sistema de archivos? (Elige dos.)",
+        "options": [
+            "A. –z",
+            "B. –eq",
+            "C. –d",
+            "D. –f",
+            "E. –lt"
+        ],
+        "answer": "C, D",
+        "explicacion": "Los operadores '–d' y '–f' se utilizan en el comando 'test' para verificar si un archivo es un directorio ('–d') o un archivo regular ('–f').",
+        "pista": "Son útiles para comprobar la existencia de archivos y directorios."
+    },
+    {
+        "question": "¿Qué información proporciona el comando echo $$?",
+        "options": [
+            "A. El ID del proceso de la shell actual.",
+            "B. El ID del proceso para el siguiente comando.",
+            "C. El ID del proceso del último comando ejecutado.",
+            "D. El ID del proceso del último comando que ha sido colocado en segundo plano.",
+            "E. El ID del proceso del comando echo."
+        ],
+        "answer": "A",
+        "explicacion": "El comando 'echo $$' muestra el ID del proceso de la shell actual.",
+        "pista": "Es útil para obtener el identificador del proceso actual de la shell."
+    },
+    {
+        "question": "¿Qué comando hace visible la variable de shell llamada VARIABLE para los subshells?",
+        "options": [
+            "A. export $VARIABLE",
+            "B. env VARIABLE",
+            "C. set $VARIABLE",
+            "D. set VARIABLE",
+            "E. export VARIABLE"
+        ],
+        "answer": "E",
+        "explicacion": "El comando 'export VARIABLE' hace que la variable 'VARIABLE' sea visible para los subshells.",
+        "pista": "Es necesario para que las variables de shell se compartan entre procesos."
+    },
+    {
+        "question": "¿Qué salida produce la siguiente secuencia de comandos? echo ‘1 2 3 4 5 6’ | while read a b c; do echo result $c $b $a; done",
+        "options": [
+            "A. result: 6 5 4",
+            "B. result: 1 2 3 4 5 6",
+            "C. result: 3 4 5 6 2 1",
+            "D. result: 6 5 4 3 2 1",
+            "E. result: 3 2 1"
+        ],
+        "answer": "C",
+        "explicacion": "El comando 'echo ‘1 2 3 4 5 6’ | while read a b c; do echo result $c $b $a; done' invierte el orden de los elementos de las variables 'a', 'b', 'c', produciendo 'result: 3 4 5 6 2 1'.",
+        "pista": "El comando 'while' procesa la entrada línea por línea."
+    },
+    {
+        "question": "¿Cuál de los siguientes archivos de configuración debe modificarse para establecer variables de shell globalmente para todos los usuarios?",
+        "options": [
+            "A. /etc/profile",
+            "B. /etc/bashrc",
+            "C. ~/.bash_profile",
+            "D. /etc/.bashrc",
+            "E. /etc/shellenv"
+        ],
+        "answer": "A",
+        "explicacion": "El archivo '/etc/profile' debe modificarse para establecer variables de shell globalmente para todos los usuarios.",
+        "pista": "Este archivo se ejecuta al inicio de sesión de todos los usuarios."
+    },
+    {
+        "question": "¿Qué salida produce el comando seq 10?",
+        "options": [
+            "A. Un continuo stream de número de 10 en 10 hasta que se termine el comando.",
+            "B. No crea un output porque le falta un segundo parametro.",
+            "C. Numeros del 0 al 9, con un numero por linea.",
+            "D. El numero 10 en la salida estandar.",
+            "E. Numeros del 1 al 10, con un numero por linea."
+        ],
+        "answer": "E",
+        "explicacion": "El comando 'seq 10' produce los números del 1 al 10, uno por línea.",
+        "pista": "Es un comando útil para generar secuencias numéricas."
+    },
+    {
+        "question": "¿Qué comando lista los alias definidos en la shell actual de Bash?",
+        "answer": "alias",
+        "explicacion": "El comando 'alias' lista los alias definidos en la shell actual de Bash.",
+        "pista": "Es útil para ver los atajos personalizados configurados."
+    },
+    {
+        "question": "¿Cuál de los siguientes comandos puede usarse para limitar la cantidad de memoria que un usuario puede usar?",
+        "options": [
+            "A. umask",
+            "B. usermod",
+            "C. passwd",
+            "D. ulimit",
+            "E. chage"
+        ],
+        "answer": "D",
+        "explicacion": "El comando 'ulimit' se utiliza para limitar la cantidad de memoria que un usuario puede usar.",
+        "pista": "Es útil para establecer límites de recursos para procesos."
+    },
+    {
+        "question": "¿Cuál es el propósito de una clave de host SSH?",
+        "options": [
+            "A. Debe ser enviada por cualquier cliente SSH además de una clave de usuario para identificar el host del cliente.",
+            "B. Es la clave raíz por la cual todas las claves SSH de usuario deben ser firmadas.",
+            "C. Proporciona la información de identidad del servidor a los clientes SSH que se conectan.",
+            "D. Autentica a cualquier usuario que inicie sesión en una máquina remota desde el host de la clave.",
+            "E. Es utilizada por servicios del sistema como cron, syslog o un trabajo de respaldo para conectarse automáticamente a hosts remotos."
+        ],
+        "answer": "C",
+        "explicacion": "La clave de host SSH se utiliza para proporcionar la identidad del servidor a los clientes SSH que se conectan.",
+        "pista": "Es esencial para la autenticación del servidor en conexiones SSH."
+    },
+    {
+        "question": "¿Cuál es el propósito de TCP wrapper?",
+        "options": [
+            "A. Gestionar y ajustar el ancho de banda utilizado por los servicios TCP.",
+            "B. Asociar un servicio de red a un puerto TCP.",
+            "C. Encapsular los mensajes TCP en paquetes IP.",
+            "D. Añadir soporte SSL a servicios TCP en texto claro.",
+            "E. Limitar el acceso a un servicio de red."
+        ],        
+        "answer": "E",
+        "explicacion": "TCP wrapper se utiliza para limitar el acceso a servicios de red configurados.",
+        "pista": "Es útil para aumentar la seguridad de los servicios de red."
+    },
+    {
+        "question": "Dada la siguiente configuración de sudo: 'jane ANY=NOPASSWD: /bin/kill, /bin/id, PASSWD: /sbin/fdisk' Which of the following statements are true? (Choose three.)",
+        "options": [
+            "A. Jane puede ejecutar /bin/id only después de especificar su contraseña.",
+            "B. Jane puede ejecutar /sbin/fdisk después de especificar la contraseña de root.",
+            "C. Jane puede ejecutar /sbin/fdisk después de especificar su contraseña.",
+            "D. Jane puede ejecutar /bin/kill sin especificar contraseña.",
+            "E. Jane puede ejecutar /bin/id sin especificar contraseña."
+        ],
+        "answer": "C, D, E",
+        "explicacion": "Según la configuración de 'sudo' dada, Jane puede ejecutar '/bin/kill' sin especificar una contraseña, puede ejecutar '/bin/id' sin especificar una contraseña y puede ejecutar '/sbin/fdisk' después de especificar su contraseña.",
+        "pista": "La configuración de sudo permite controlar los permisos y la autenticación de los usuarios."
+    },
+    {
+        "question": "¿Qué archivo de configuración contiene las opciones predeterminadas para los clientes SSH?",
+        "options": [
+            "A. /etc/ssh/sshd_config",
+            "B. /etc/ssh/ssh",
+            "C. /etc/ssh/ssh_config",
+            "D. /etc/ssh/client",
+            "E. /etc/ssh/ssh_client"
+        ],
+        "answer": "C",
+        "explicacion": "El archivo '/etc/ssh/ssh_config' contiene las opciones predeterminadas para los clientes SSH.",
+        "pista": "Este archivo se utiliza para configurar el comportamiento del cliente SSH."
+    },
+    {
+        "question": "Dependiendo de la configuración de un sistema, ¿cuál de los siguientes archivos puede utilizarse para habilitar y deshabilitar servicios de red que se ejecutan en este host?",
+        "options": [
+            "A. /etc/profile",
+            "B. /etc/xinetd.conf",
+            "C. /etc/ports",
+            "D. /etc/services",
+            "E. /etc/host.conf"
+        ],
+        "answer": "B",
+        "explicacion": "El archivo '/etc/services' define los puertos de red y los servicios asociados. Dependiendo de la configuración, puede usarse para habilitar o deshabilitar servicios. Respuesta corregida, la respuesta en el pdf es: '/etc/services'",
+        "pista": "Este archivo también define los puertos estándar utilizados por los servicios de red."
+    },
+    {
+        "question": "¿Cuál de los siguientes comandos puede identificar el PID de un proceso que ha abierto un puerto TCP?",
+        "options": [
+            "A. ptrace",
+            "B. strace",
+            "C. debug",
+            "D. lsof",
+            "E. nessus"
+        ],
+        "answer": "D",
+        "explicacion": "El comando 'lsof' se utiliza para identificar el PID de un proceso que ha abierto un puerto TCP.",
+        "pista": "Es útil para ver qué procesos están utilizando puertos específicos."
+    },
+    {
+        "question": "Cuando se utiliza el reenvío X11 en SSH, ¿qué variable de entorno se establece automáticamente en el shell remoto para ayudar a las aplicaciones a conectarse al servidor X11 correcto?",
+        "answer": "DISPLAY",
+        "explicacion": "La variable de entorno 'DISPLAY' se establece automáticamente cuando se utiliza el reenvío X11 en SSH, para que las aplicaciones se conecten al servidor X11 adecuado.",
+        "pista": "Es una variable clave en la configuración de X11."
+    },
+    {
+        "question": "¿La presencia de qué archivo previene temporalmente que todos los usuarios, excepto root, inicien sesión en un sistema?",
+        "answer": "/sbin/nologin",
+        "explicacion": "El archivo '/sbin/nologin' impide que todos los usuarios, excepto root, inicien sesión en el sistema.",
+        "pista": "Este archivo se utiliza para restringir el acceso al sistema sin eliminar cuentas de usuario."
+    },
+    {
+        "question": "¿Cuál de los siguientes comandos precarga y gestiona las claves SSH existentes que se utilizan para la autenticación automática al iniciar sesión en máquinas remotas usando SSH?",
+        "options": [
+            "A. sshd",
+            "B. ssh-keyring",
+            "C. ssh-keygen",
+            "D. ssh-pki",
+            "E. ssh-agent"
+        ],
+        "answer": "E",
+        "explicacion": "El comando 'ssh-agent' gestiona las claves SSH existentes y las precarga para su uso en la autenticación automática.(Pregunta corregida, la respuesta del pdf es: 'C'",
+        "pista": "Es útil para gestionar la autenticación sin tener que ingresar la contraseña cada vez."
+    },
+    {
+        "question": "En una máquina que ejecuta varios servidores X, ¿cómo identifican los programas las diferentes instancias del servidor X11?",
+        "options": [
+            "A. Por un UUID fijo que está definido en el archivo de configuración de X11.",
+            "B. Por un nombre de display como: 1.",
+            "C. Por el nombre del usuario que ejecuta el servidor X, como x11:bob.",
+            "D. Por un nombre de dispositivo como /dev/X11/xservers/1.",
+            "E. Por una dirección IPv6 única del rango fe80::/64."
+        ],
+        "answer": "B",
+        "explicacion": "Las diferentes instancias del servidor X11 se identifican mediante un nombre de display como '1'.",
+        "pista": "Este nombre se utiliza para distinguir entre múltiples instancias de X11 en la misma máquina."
+    },
+    {
+        "question": "¿Cuál es el propósito de un lector de pantalla?",
+        "options": [
+            "A. Gestiona teclados virtuales en pantallas táctiles.",
+            "B. Lee los parámetros de los monitores conectados y crea una configuración X11 apropiada.",
+            "C. Muestra líneas y marcadores para ayudar a las personas a usar técnicas de lectura rápida",
+            "D. Gestiona y muestra archivos que contienen libros electrónicos.",
+            "E. Lee el texto mostrado para acomodarse a las necesidades de personas ciegas o con discapacidad visual."
+        ],
+        "answer": "E",
+        "explicacion": "Un lector de pantalla lee el texto en pantalla para ayudar a las personas con discapacidades visuales.",
+        "pista": "Es una herramienta esencial para la accesibilidad informática."
+    },
+    {
+        "question": "El archivo de configuración de X11 xorg.conf está dividido en secciones. ¿Cómo se representa el contenido de la sección 'SectionName'?",
+        "options": [
+            "A. Se coloca entre corchetes como en Section SectionName {…}.",
+            "B. Se coloca entre las etiquetas <Section name=“SectionName”> y </Section>.",
+            "C. Se coloca entre una línea que contiene Section “SectionName” y una línea que contiene EndSection.",
+            "D. Se coloca después de la fila [SectionName].",
+            "E. Se coloca después de una sección inicial no sangrada Section “SectionName” y debe ser sangrada por exactamente una."
+        ],
+        "answer": "C",
+        "explicacion": "El contenido de la sección 'SectionName' se coloca entre las líneas 'Section 'SectionName'' y 'EndSection'.",
+        "pista": "Esta es la estructura básica de cualquier sección en xorg.conf."
+    },
+    {
+        "question": "¿Qué características proporciona SPICE? (Elige dos.)",
+        "options": [
+            "A. Conectar dispositivos USB locales a aplicaciones remotas.",
+            "B. Acceder a aplicaciones gráficas en un host remoto.",
+            "C. Reemplazar Xorg como servidor X11 local.",
+            "D. Subir y ejecutar un programa binario en una máquina remota.",
+            "E. Descargar e instalar aplicaciones localmente desde una máquina remota."
+        ],
+        "answer": "A, D",
+        "explicacion": "SPICE proporciona las siguientes características: conectar dispositivos USB locales a aplicaciones remotas y subir y ejecutar programas binarios en una máquina remota.",
+        "pista": "Es útil para la virtualización y la administración remota."
+    },
+    {
+      "question": "¿Dónde se almacena el journal de systemd?",
+      "options": [
+        "A. /var/jlog/ y /var/jlogd/",
+        "B. /proc/log/ y /proc/klog/",
+        "C. /run/log/journal/ o /var/log/journal/",
+        "D. /var/log/syslog.bin o /var/log/syslog.jrn",
+        "E. /etc/systemd/journal/ o /usr/lib/systemd/journal/"
+      ],
+      "answer": "C",
+      "explicacion": "El journal de systemd se almacena en '/run/log/journal/' o '/var/log/journal/'.",
+      "pista": "Estos directorios almacenan los registros creados por systemd para systemd-journald."
+    },
+    {
+      "question": "¿Cuál de las siguientes afirmaciones es cierta respecto al comando sendmail?",
+      "options": [
+        "A. Con cualquier MTA, el comando sendmail debe ejecutarse periódicamente por el demonio cron.",
+        "B. Cuando se usa systemd, sendmail es un alias de relayctl.",
+        "C. El comando sendmail imprime el historial de la cola del MTA indicando qué correos han sido enviados correctamente.",
+        "D. Solo está disponible cuando el MTA sendmail está instalado.",
+        "E. Todos los MTAs comunes, incluidos Postfix y Exim, proporcionan un comando sendmail."
+      ],
+      "answer": "E",
+      "explicacion": "El comando sendmail está disponible en todos los MTAs comunes, como Postfix y Exim, no solo en el MTA Sendmail.",
+      "pista": "El comando sendmail es una interfaz utilizada por varios MTAs."
+    },
+    {
+      "question": "¿Qué archivo dentro del directorio de configuración de CUPS contiene la configuración de las impresoras?",
+      "options": [
+        "A. cups-devices.conf",
+        "B. snmp.conf",
+        "C. printers.conf",
+        "D. printcap.conf",
+        "E. cupsd.conf"
+      ],
+      "answer": "C",
+      "explicacion": "El archivo 'printers.conf' contiene la configuración de las impresoras en el directorio de configuración de CUPS.",
+      "pista": "Este archivo almacena la configuración de las impresoras configuradas en el sistema."
+    },
+    {
+      "question": "¿Qué archivo es procesado por newaliases? (Especifica el nombre completo del archivo, incluyendo la ruta.)",
+      "answer": "/etc/mail/aliases",
+      "explicacion": "El archivo '/etc/mail/aliases' es procesado por el comando 'newaliases' para actualizar la base de datos de alias.",
+      "pista": "Este archivo se utiliza para gestionar los alias de correo electrónico."
+    },
+    {
+      "question": "¿Cuáles de las siguientes son facilidades de syslog? (Elige dos.)",
+      "options": [
+        "A. local5",
+        "B. accounting",
+        "C. mail",
+        "D. postmaster",
+        "E. remote"
+      ],
+      "answer": "A, C",
+      "explicacion": "Las facilidades de syslog incluyen 'local5' y 'mail'. Estas representan categorías específicas para el registro de logs.",
+      "pista": "Las facilidades son categorías que determinan el origen de los mensajes de registro."
+    },
+    {
+      "question": "¿Cuáles de los siguientes parámetros se utilizan en journalctl para limitar el rango de tiempo de la salida? (Elige dos.)",
+      "options": [
+        "A. --since=",
+        "B. --from=",
+        "C. --until=",
+        "D. --upto=",
+        "E. --date="
+      ],
+      "answer": "A, C",
+      "explicacion": "Los parámetros '--since=' y '--until=' se utilizan en journalctl para limitar el rango de tiempo de la salida.",
+      "pista": "Estos parámetros permiten filtrar los logs por fecha."
+    },
+    {
+      "question": "¿Qué es cierto respecto al archivo ~/.forward?",
+      "options": [
+        "A. Cuando se configura correctamente, ~/.forward puede utilizarse para reenviar cada correo entrante a uno o más destinatarios.",
+        "B. Después de editar ~/.forward, el usuario debe ejecutar newaliases para que el servidor de correo reconozca los cambios.",
+        "C. Usando ~/.forward, root puede configurar cualquier dirección de correo, mientras que todos los demás usuarios solo pueden configurar sus propias direcciones.",
+        "D. Como ~/.forward es propiedad del MTA y no es editable por el usuario, debe editarse usando el comando editaliases.",
+        "E. Por defecto, solo los archivos ~/.forward de los usuarios en el grupo mailq son procesados, mientras que los archivos ~/.forward de otros usuarios son ignorados."
+      ],
+      "answer": "A",
+      "explicacion": "Cuando se configura correctamente, el archivo ~/.forward puede usarse para reenviar correos entrantes a otros destinatarios.",
+      "pista": "Este archivo se utiliza para redirigir correos electrónicos en el sistema."
+    },
+    {
+      "question": "¿Cuál de los siguientes comandos muestra una lista de trabajos en la cola de impresión? (Elige dos.)",
+      "options": [
+        "A. cups --list",
+        "B. lprm -l",
+        "C. lpstat",
+        "D. lpr -q",
+        "E. lpq"
+      ],
+      "answer": "C, E",
+      "explicacion": "Los comandos 'lpstat' y 'lpq' se utilizan para mostrar los trabajos en la cola de impresión.",
+      "pista": "Ambos comandos muestran la lista de trabajos de impresión en cola."
+    },
+    {
+      "question": "En un sistema que usa systemd-journald, ¿cuál de los siguientes comandos agrega el mensaje Howdy al registro del sistema? (Elige dos.)",
+      "options": [
+        "A. append Howdy",
+        "B. logger Howdy",
+        "C. systemd-cat echo Howdy",
+        "D. echo Howdy > /dev/journal",
+        "E. journalctl add Howdy"
+      ],
+      "answer": "B, C",
+      "explicacion": "Los comandos 'logger Howdy' y 'systemd-cat echo Howdy' agregan el mensaje Howdy al registro del sistema. CORREGIDA, respuesta del pdf: 'E'",
+      "pista": "Ambos comandos envían mensajes al registro de systemd."
+    },
+    {
+      "question": "¿Cuál de las siguientes opciones en el archivo de configuración de chrony define fuentes de tiempo remotas? (Elige dos.)",
+      "options": [
+        "A. source",
+        "B. clock",
+        "C. remote",
+        "D. pool",
+        "E. server"
+      ],
+      "answer": "D, E",
+      "explicacion": "Las opciones 'pool' y 'server' en el archivo de configuración de chrony definen fuentes de tiempo remotas.",
+      "pista": "Estas opciones se utilizan para configurar servidores de tiempo remotos."
+    },
+    {
+        "question": "¿Qué comando se usa para sincronizar el reloj de hardware con el reloj del sistema? (Especifica solo el comando sin ninguna ruta o parámetros.)",
+        "answer": "hwclock",
+        "explicacion": "El comando 'hwclock' se utiliza para sincronizar el reloj de hardware con el reloj del sistema.",
+        "pista": "Este comando se usa para gestionar el reloj del sistema en Linux."
+    },
+    {
+      "question": "¿Cuál de las siguientes situaciones es observada y corregida por un cliente NTP?",
+      "options": [
+        "A. El desfase de tiempo entre el reloj del sistema y el reloj de hardware de la computadora.",
+        "B. La ubicación física y la configuración de la zona horaria.",
+        "C. Cambios en la zona horaria de la ubicación actual de la computadora.",
+        "D. Ajuste necesario para soportar el horario de verano.",
+        "E. El desfase de tiempo entre el reloj del sistema y el reloj de referencia."
+      ],
+      "answer": "E",
+      "explicacion": "El cliente NTP corrige el desfase de tiempo entre el reloj del sistema y el reloj de referencia.",
+      "pista": "El protocolo NTP se usa para sincronizar relojes entre sistemas."
+    },
+    {
+      "question": "Si existe un alias ls, ¿cuál de los siguientes comandos actualiza el alias para que apunte al comando ls -l en lugar del objetivo actual del alias?",
+      "options": [
+        "A. set ls=’ls -l’",
+        "B. alias ls=’ls -l’",
+        "C. alias --force ls=’ls -l’",
+        "D. alias --update ls ls=’ls -l’",
+        "E. realias ls=’ls -l’"
+      ],
+      "answer": "B",
+      "explicacion": "El comando 'alias ls=’ls -l’’ actualiza el alias 'ls' para que apunte al comando 'ls -l'.",
+      "pista": "El comando alias se usa para crear o modificar alias en Bash."
+    },
+    {
+      "question": "¿Cuál de los siguientes comandos pone la salida del comando date en la variable de shell mydate?",
+      "options": [
+        "A. mydate=”date”",
+        "B. mydate=”exec date”",
+        "C. mydate=”$((date))”",
+        "D. mydate=”$(date)”",
+        "E. mydate=”${date}”"
+      ],
+      "answer": "D",
+      "explicacion": "El comando 'mydate=$(date)' pone la salida del comando 'date' en la variable mydate.",
+      "pista": "El uso de '$()' es la forma estándar de capturar la salida de un comando en una variable."
+    },
+    {
+      "question": "¿Qué información muestra el comando echo $?",
+      "options": [
+        "A. El ID del proceso del comando echo.",
+        "B. El valor de salida del comando ejecutado inmediatamente antes de echo.",
+        "C. El ID del proceso que se usará para el siguiente comando.",
+        "D. El valor de salida del comando echo.",
+        "E. El ID del proceso de la shell actual."
+      ],
+      "answer": "B",
+      "explicacion": "El comando 'echo $?' muestra el valor de salida del último comando ejecutado antes de echo.",
+      "pista": "Este valor indica si un comando se ejecutó correctamente (0) o con error (otro valor)."
+    },
+    {
+      "question": "¿Cuál de los siguientes archivos no es leído directamente por una shell de inicio de Bash?",
+      "options": [
+        "A. ~/.bashrc",
+        "B. ~/.bash_profile",
+        "C. ~/.bash_login",
+        "D. ~/.profile",
+        "E. /etc/profile"
+      ],
+      "answer": "A",
+      "explicacion": "El archivo '~/.bashrc' no es leído directamente por una shell de inicio de Bash, pero se ejecuta en shells no interactivas.",
+      "pista": "El archivo ~/.bashrc es ejecutado para shells no login o interactivas."
+    },
+    {
+      "question": "¿Qué es cierto sobre el archivo .profile en el directorio home de un usuario?",
+      "options": [
+        "A. Debe ser ejecutable.",
+        "B. Debe llamar al binario de la shell de login.",
+        "C. Debe usar una sintaxis válida de script de shell.",
+        "D. Debe comenzar con un shebang.",
+        "E. Debe ser legible solo por su propietario."
+      ],
+      "answer": "E",
+      "explicacion": "El archivo .profile debe ser legible solo por su propietario. Es un archivo de configuración de shell.",
+      "pista": "Este archivo es utilizado para configurar el entorno de inicio de la shell."
+    },
+    {
+      "question": "¿Qué es cierto sobre la declaración que comienza con #! en la primera línea de un script? (Elige dos.)",
+      "options": [
+        "A. Evita que los scripts se ejecuten hasta que se elimine el !.",
+        "B. Activa la instalación del intérprete del script.",
+        "C. Especifica la ruta y los argumentos del intérprete usado para ejecutar el script.",
+        "D. Define la codificación de caracteres del script.",
+        "E. Es un comentario que es ignorado por el intérprete del script."
+      ],
+      "answer": "B, C",
+      "explicacion": "La declaración #! especifica el intérprete utilizado para ejecutar el script y es crucial para la correcta ejecución.",
+      "pista": "Este es un shebang que le dice al sistema qué programa debe ejecutar el script."
+    },
+    {
+      "question": "¿Qué salida produce el comando seq 1 5 20?",
+      "options": [
+        "A. 1 5 10 15",
+        "B. 1 6 11 16",
+        "C. 1 2 3 4",
+        "D. 1 2 3 4 5",
+        "E. 5 10 15 20"
+      ],
+      "answer": "B",
+      "explicacion": "El comando 'seq 1 5 20' genera una secuencia comenzando en 1, incrementando de 5 en 5 hasta 20.",
+      "pista": "Este comando se utiliza para generar secuencias numéricas."
+    },
+    {
+      "question": "¿Cuál de los siguientes comandos lista todas las variables definidas y funciones dentro de Bash?",
+      "options": [
+        "A. env",
+        "B. export",
+        "C. env -a",
+        "D. set",
+        "E. echo $ENV"
+      ],
+      "answer": "D",
+      "explicacion": "El comando 'set' muestra todas las variables definidas y funciones en la shell de Bash.",
+      "pista": "Este comando es útil para depuración y ver variables en el entorno de Bash."
+    },
+    {
+       "question": "¿Qué información relacionada con una cuenta de usuario se modifica usando el comando chage?",
+       "options": [
+         "A. Propiedad predeterminada de los nuevos archivos",
+         "B. Membresía en el grupo",
+         "C. Conjunto de comandos disponibles para el usuario",
+         "D. Información de caducidad de la contraseña",
+         "E. Permisos predeterminados de los nuevos archivos"
+       ],
+       "answer": "D",
+       "explicacion": "El comando 'chage' modifica la información de caducidad de la contraseña para las cuentas de usuario.",
+       "pista": "Este comando se usa específicamente para gestionar la configuración de caducidad de las contraseñas."
+    },
+    {
+      "question": "¿Qué comando se utiliza para establecer restricciones sobre el tamaño de un archivo de volcado de memoria (core file) que se crea para un usuario cuando un programa falla?",
+      "options": [
+        "A. core",
+        "B. edquota",
+        "C. quota",
+        "D. ulimit",
+        "E. ktrace"
+      ],
+      "answer": "D",
+      "explicacion": "El comando 'ulimit' establece restricciones sobre el tamaño de los archivos de volcado de memoria (core files) para un usuario.",
+      "pista": "Este comando se usa comúnmente para controlar diversos límites de recursos en un entorno de shell."
+    },
+    {
+      "question": "¿Cómo mejoran las contraseñas en el archivo shadow la seguridad en comparación con las contraseñas estándar sin shadow?",
+      "options": [
+        "A. Los usuarios normales no tienen acceso a los hashes de las contraseñas en shadow.",
+        "B. Cada contraseña en shadow es válida durante 45 días y debe cambiarse después.",
+        "C. La clave del sistema se usa para cifrar todas las contraseñas en shadow.",
+        "D. Las contraseñas shadow siempre se combinan con una clave pública que debe coincidir con la clave privada del usuario.",
+        "E. Las contraseñas shadow se almacenan en texto plano y se pueden verificar en busca de contraseñas débiles."
+      ],
+      "answer": "A",
+      "explicacion": "Las contraseñas en shadow impiden que los usuarios normales accedan a los hashes de las contraseñas, mejorando la seguridad.",
+      "pista": "El archivo shadow se utiliza para almacenar los hashes de las contraseñas de forma segura, a diferencia del archivo /etc/passwd."
+    },
+    {
+      "question": "Después de editar la configuración de TCP wrapper para otorgar acceso a un servicio a hosts específicos, ¿cuándo entran en vigor estos cambios?",
+      "options": [
+        "A. La nueva configuración entra en vigor después de reiniciar el servicio correspondiente.",
+        "B. La nueva configuración entra en vigor en el próximo reinicio del sistema.",
+        "C. La nueva configuración entra en vigor cuando se cierra la última conexión establecida al servicio.",
+        "D. La nueva configuración entra en vigor después de reiniciar el servicio tcpd.",
+        "E. La nueva configuración entra en vigor inmediatamente para todas las nuevas conexiones."
+      ],
+      "answer": "E",
+      "explicacion": "Los cambios en la configuración de TCP wrapper entran en vigor inmediatamente para todas las nuevas conexiones.",
+      "pista": "Los cambios en la configuración de TCP wrapper solo afectan a las nuevas conexiones."
+    },
+    {
+      "question": "¿Qué es cierto respecto a las claves SSH públicas y privadas? (Elige dos.)",
+      "options": [
+        "A. Para cada cuenta de usuario, hay exactamente un par de claves que se puede usar para acceder a esa cuenta.",
+         "B. La clave privada nunca debe ser revelada a nadie.",
+         "C. Se pueden generar varias claves públicas diferentes para la misma clave privada.",
+         "D. Para mantener la confidencialidad de la clave privada, el par de claves SSH debe ser creado por su propietario.",
+         "E. Para permitir inicios de sesión remotos, la clave privada del usuario debe ser copiada al servidor remoto."
+       ],
+       "answer": "B, D",
+       "explicacion": "La clave privada debe permanecer confidencial y debe ser creada por el usuario para fines de seguridad.",
+       "pista": "La clave privada debe mantenerse segura, y se pueden asociar varias claves públicas con ella."
+    },
+    {
+       "question": "¿Cuál de los siguientes comandos encuentra todos los archivos propiedad de root que tienen el bit SetUID activado?",
+       "options": [
+         "A. find / -user root -perm -4000",
+         "B. find / -user 0 -mode +s",
+         "C. find / -owner root -setuid",
+         "D. find / -owner 0 -permbits 0x100000000",
+         "E. find / --filter uid=1 --filter pers=u+s"
+       ],
+       "answer": "A",
+       "explicacion": "El comando 'find / -user root -perm -4000' se usa para encontrar archivos propiedad de root con el bit SetUID activado.",
+       "pista": "El bit SetUID permite que un programa se ejecute con los permisos del propietario del archivo."
+    },
+    {
+       "question": "¿Qué comando se usa para agregar claves privadas de OpenSSH a una instancia en ejecución de ssh-agent? (Especifica solo el nombre del comando sin ninguna ruta.)",
+       "answer": "ssh-add",
+       "explicacion": "El comando 'ssh-add' agrega claves privadas SSH a una sesión ssh-agent en ejecución.",
+       "pista": "El ssh-agent se usa para gestionar las claves privadas para la autenticación SSH."
+    },
+    {
+       "question": "¿Qué directorio contiene los archivos de configuración para los servicios de xinetd? (Especifica la ruta completa al directorio.)",
+       "answer": "/etc/xinetd.d/",
+       "explicacion": "Los archivos de configuración para los servicios de xinetd se almacenan en el directorio '/etc/xinetd.d/'.",
+       "pista": "Este directorio contiene archivos de configuración específicos de cada servicio para xinetd."
+    },
+    {
+       "question": "¿Qué mecanismo usa ssh para interactuar con el agente SSH?",
+       "options": [
+         "A. Conectándose al puerto 2222, que es utilizado por el agente SSH a nivel de sistema.",
+         "B. Usando el socket fijo .ssh-agent/ipc.",
+         "C. Creando un alias que reemplaza ssh con llamadas a ssh-agent.",
+         "D. Iniciando ssh-agent como un proceso hijo para cada invocación de ssh.",
+         "E. Evaluando variables de entorno como SSH_AUTH_SOCK."
+       ],
+       "answer": "E",
+       "explicacion": "SSH interactúa con el agente SSH a través de variables de entorno como SSH_AUTH_SOCK.",
+       "pista": "La variable de entorno SSH_AUTH_SOCK permite que los clientes SSH se comuniquen con el ssh-agent."
+    },
+    {
+        "question": "¿Qué parámetro del comando ssh especifica la ubicación de la clave privada utilizada para los intentos de inicio de sesión? (Especifica solo el nombre de la opción sin valores ni parámetros.)",
+        "answer": "-i",
+        "explicacion": "La opción '-i' en el comando ssh especifica la ubicación de la clave privada utilizada para los intentos de inicio de sesión. (pregunta corregida, respuesta del PDF: ssh-keygen)",
+        "pista": "Esta opción permite usar una clave privada específica para la autenticación."
+    },
+    {
+        "question": "¿Cuál de las siguientes afirmaciones es cierta acerca de IPv6?",
+        "options": [
+          "A. IPv6 ya no admite direcciones de difusión (broadcast).",
+          "B. Con IPv6, los números de puerto TCP de la mayoría de los servicios han cambiado.",
+          "C. Las direcciones IPv4 pueden usarse sin ningún cambio con IPv6.",
+          "D. IPv6 ya no admite direcciones multicast.",
+          "E. Para IPv6, UDP y TCP han sido reemplazados por el Protocolo de Transmisión Rápida (RTP)."
+        ],
+        "answer": "A",
+        "explicacion": "IPv6 ya no admite direcciones de difusión (broadcast), lo que mejora la eficiencia y la seguridad en las redes.",
+        "pista": "IPv6 utiliza multidifusión (multicast) en lugar de difusión (broadcast) para la comunicación entre varios dispositivos."
+    },
+    {
+        "question": "¿Qué es cierto acerca del siguiente comando? nmcli device wifi connect WIFIoI",
+        "options": [
+          "A. NetworkManager abre un nuevo hotspot público con el SSID WIFIoI.",
+          "B. NetworkManager crea una nueva interfaz de red virtual no configurada llamada WIFIoI.",
+          "C. NetworkManager crea una nueva conexión wifi llamada WIFIoI y la activa.",
+          "D. NetworkManager devuelve un error si la conexión WIFIoI no existe.",
+          "E. NetworkManager devuelve un error porque WIFIoI es un dispositivo wifi no válido."
+        ],
+        "answer": "C",
+        "explicacion": "El comando 'nmcli device wifi connect WIFIoI' crea una nueva conexión wifi llamada WIFIoI y la activa, siempre que la red esté disponible y correctamente configurada.",
+        "pista": "El comando solo funcionará si la red especificada está disponible y correctamente escrita."
+    },
+    {
+        "question": "¿Qué parámetro falta en el comando 'ip link set ____ dev eth0' para activar la interfaz de red previamente inactiva eth0? (Especifica solo el parámetro, sin ningún comando, ruta ni opciones adicionales.)",
+        "answer": "up",
+        "explicacion": "El comando 'ip link set eth0 up' se utiliza para activar una interfaz de red que estaba inactiva.",
+        "pista": "Este es un comando comúnmente utilizado para gestionar interfaces de red en Linux."
+    },
+    {
+        "question": "¿Cuál de los siguientes estados puede mostrar NetworkManager respecto a la conectividad de red del sistema? (Elige dos.)",
+        "options": [
+          "A. up",
+          "B. portal",
+          "C. full",
+          "D. login-required",
+          "E. firewalled"
+        ],
+        "answer": "B, C",
+        "explicacion": "NetworkManager puede mostrar los estados 'portal' y 'full' para indicar el tipo de conectividad de red disponible.",
+        "pista": "Estos estados reflejan el nivel de acceso o las restricciones de la red del sistema."
+    },
+    {
+        "question": "¿Cuál de las siguientes son direcciones de host válidas para la subred 203.0.113.64/28? (Elige dos.)",
+        "options": [
+          "A. 203.0.113.64",
+          "B. 203.0.113.78",
+          "C. 203.0.113.65",
+          "D. 203.0.113.80",
+          "E. 203.0.113.81"
+        ],
+        "answer": "B, C",
+        "explicacion": "La subred 203.0.113.64/28 tiene un rango de direcciones válidas de 203.0.113.65 a 203.0.113.78, excluyendo la dirección de red y la dirección de broadcast.",
+        "pista": "Recuerda que la primera dirección en la subred es la dirección de red y la última es la de broadcast, las cuales no son válidas como direcciones de host."
+    },
+    {
+        "question": "¿Qué palabras clave se pueden usar en el archivo /etc/resolv.conf? (Elige dos.)",
+        "options": [
+          "A. substitute",
+          "B. lookup",
+          "C. search",
+          "D. nameserver",
+          "E. method"
+        ],
+        "answer": "C, D",
+        "explicacion": "En /etc/resolv.conf, las palabras clave válidas incluyen 'search' para especificar dominios de búsqueda y 'nameserver' para definir servidores DNS.",
+        "pista": "Este archivo es fundamental para configurar la resolución de nombres en un sistema Linux."
+    },
+    {
+        "question": "¿Cómo funciona el comando ping por defecto?",
+        "options": [
+          "A. Envía una solicitud ICMP Echo a un host remoto y espera recibir una respuesta ICMP Echo a cambio.",
+          "B. Envía una solicitud ARP a un host remoto y espera recibir una respuesta ARP a cambio.",
+          "C. Envía un paquete TCP SYN a un host remoto y espera recibir una respuesta TCP ACK a cambio.",
+          "D. Envía un paquete de difusión a todos los hosts de la red y espera recibir, entre otros, una respuesta del sistema de destino.",
+          "E. Envía un paquete UDP al puerto 0 del host remoto y espera recibir una respuesta de error UDP a cambio."
+        ],
+        "answer": "A",
+        "explicacion": "El comando ping envía una solicitud ICMP Echo a un host remoto y espera recibir una respuesta ICMP Echo a cambio para comprobar la conectividad de red.",
+        "pista": "Este comando es comúnmente utilizado para verificar la disponibilidad de una red o sistema."
+    },
+    {
+        "question": "¿Cuál de los siguientes comandos muestra el número de bytes transmitidos y recibidos a través de la interfaz de red eth0? (Elige dos.)",
+        "options": [
+          "A. route -v via eth0",
+          "B. ip stats show dev eth0",
+          "C. netstat -s -i eth0",
+          "D. ifconfig eth0",
+          "E. ip -s link show eth0"
+        ],
+        "answer": "C, D",
+        "explicacion": "Los comandos 'netstat -s -i eth0' y 'ifconfig eth0' pueden mostrar el número de bytes transmitidos y recibidos a través de la interfaz eth0.",
+        "pista": "Estos comandos son útiles para monitorear el tráfico de red y diagnosticar problemas de conectividad."
+    },
+    {
+        "question": "¿Cuál de los siguientes comandos eliminará la puerta de enlace predeterminada de la tabla de enrutamiento IP del sistema? (Elige dos.)",
+        "options": [
+          "A. ifconfig unset default",
+          "B. route del default",
+          "C. ip route del default",
+          "D. netstat -r default",
+          "E. sysctl ipv4.default_gw=0"
+        ],
+        "answer": "B, C",
+        "explicacion": "Los comandos 'route del default' y 'ip route del default' eliminan la puerta de enlace predeterminada del sistema.",
+        "pista": "Estos comandos afectan a la tabla de enrutamiento IP del sistema."
+    },
+    {
+        "question": "¿Qué comando habilita una interfaz de red según la configuración específica de la distribución, como /etc/network/interfaces o /etc/sysconfig/network-scripts/ifcfg-eth0? (Especifica solo el comando, sin ninguna ruta ni parámetros.)",
+        "answer": "up",
+        "explicacion": "El comando 'up' activa una interfaz de red según la configuración definida por la distribución.",
+        "pista": "Este comando se utiliza en sistemas Linux para activar interfaces de red."
+    },
+    {
+        "question": "¿Qué es cierto acerca de NetworkManager en un sistema Linux que utiliza los mecanismos de su distribución para configurar las interfaces de red? (Elige dos.)",
+        "options": [
+          "A. NetworkManager reconfigura todas las interfaces de red para usar DHCP, a menos que estén gestionadas específicamente por NetworkManager.",
+          "B. NetworkManager debe ser habilitado explícitamente para cada interfaz que debe gestionar.",
+          "C. NetworkManager, por defecto, no cambia las interfaces que ya están configuradas.",
+          "D. NetworkManager desactiva todas las interfaces que no fueron configuradas por NetworkManager.",
+          "E. NetworkManager puede configurarse para usar la configuración de interfaces de red de la distribución."
+        ],
+        "answer": "B, C",
+        "explicacion": "NetworkManager no modifica las interfaces ya configuradas y debe ser habilitado explícitamente para cada interfaz que debe gestionar.",
+        "pista": "Este comportamiento es importante para entender cómo interactúa NetworkManager con la configuración de red de un sistema Linux."
+    },
+    {
+        "question": "¿Qué puerto TCP estandarizado es utilizado por los servicios HTTPS?",
+        "options": [
+          "A. 25",
+          "B. 80",
+          "C. 8080",
+          "D. 443",
+          "E. 636"
+        ],
+        "answer": "D",
+        "explicacion": "El puerto 443 es el puerto estándar utilizado por el protocolo HTTPS para asegurar la comunicación web.",
+        "pista": "HTTPS es la versión segura de HTTP, y utiliza este puerto para las conexiones cifradas."
+    },
+    {
+        "question": "¿Cuál de las siguientes variables de entorno puede definirse en locale.conf? (Elige dos.)",
+        "options": [
+          "A. LC_ALL",
+          "B. LC_USERNAME",
+          "C. LC_UTF8",
+          "D. LC_GEOGRAPHY",
+          "E. LC_TIME"
+        ],
+        "answer": "A, E",
+        "explicacion": "En el archivo locale.conf, se pueden definir las variables 'LC_ALL' y 'LC_TIME', que controlan las configuraciones de localización y el formato de tiempo, respectivamente.",
+        "pista": "Este archivo se utiliza para la configuración regional del sistema."
+    },
+    {
+        "question": "¿Cuál de los siguientes comandos establece la zona horaria del sistema a la Hora Estándar del Este de Canadá?",
+        "options": [
+          "A. localegen -t -f /usr/share/zoneinfo/Canada/Eastern > /etc/locate.tz",
+          "B. tzconf /etc/localtime",
+          "C. sysctl -w clock.tz='Canada/Eastern'",
+          "D. modprobe tz_ca_est",
+          "E. ln -sf /usr/share/zoneinfo/Canada/Eastern /etc/localtime"
+        ],
+        "answer": "E",
+        "explicacion": "El comando 'ln -sf /usr/share/zoneinfo/Canada/Eastern /etc/localtime' establece la zona horaria del sistema a la Hora Estándar del Este de Canadá.",
+        "pista": "Este comando crea un enlace simbólico para configurar la zona horaria."
+    },
+    {
+        "question": "¿Qué opción de 'useradd' crea el directorio home de un nuevo usuario y lo aprovisiona con un conjunto de archivos estándar? (Especifica solo el nombre de la opción sin valores ni parámetros.)",
+        "answer": "-m",
+        "explicacion": "La opción '-m' de 'useradd' crea el directorio home del usuario y lo llena con archivos estándar. Según el pdf la respuesta es -D",
+        "pista": "Este comando es útil al agregar nuevos usuarios al sistema."
+    },
+    {
+        "question": "¿Cómo puede evitarse que un usuario específico programe tareas con at?",
+        "options": [
+          "A. Agregando al usuario específico en el archivo /etc/at.allow.",
+          "B. Agregando al usuario específico en la sección [deny] del archivo /etc/atd.conf.",
+          "C. Agregando al usuario específico al grupo nojobs.",
+          "D. Agregando al usuario específico en el archivo /etc/at.deny.",
+          "E. Ejecutando el comando atd --deny [usuario]."
+        ],
+        "answer": "D",
+        "explicacion": "El archivo '/etc/at.deny' puede utilizarse para evitar que un usuario específico programe tareas con 'at'.",
+        "pista": "Este archivo contiene los usuarios que están restringidos para programar tareas con 'at'."
+    },
+    {
+        "question": "¿Qué archivo contiene los datos del último cambio de la contraseña de un usuario?",
+        "options": [
+          "A. /etc/gshadow",
+          "B. /etc/passwd",
+          "C. /etc/pwdlog",
+          "D. /var/log/shadow",
+          "E. /etc/shadow"
+        ],
+        "answer": "E",
+        "explicacion": "El archivo '/etc/shadow' contiene la información sobre la contraseña del usuario, incluido el último cambio de la misma.",
+        "pista": "Este archivo es accesible solo por el administrador del sistema debido a la sensibilidad de la información que contiene."
+    },
+    {
+        "question": "¿Cuál de los siguientes campos puede encontrarse en el archivo /etc/group? (Elige dos.)",
+        "options": [
+          "A. El directorio home del grupo.",
+          "B. La lista de usuarios que pertenecen al grupo.",
+          "C. El nombre del grupo.",
+          "D. El ACL predeterminado del grupo.",
+          "E. La descripción del grupo."
+        ],
+        "answer": "B, C",
+        "explicacion": "El archivo '/etc/group' contiene el nombre del grupo y la lista de usuarios que pertenecen a ese grupo.",
+        "pista": "Este archivo es clave para gestionar los grupos de usuarios en Linux."
+    },
+    {
+        "question": "¿Cuál de las siguientes secciones existe en una unidad de temporizador systemd?",
+        "options": [
+          "A. [Events]",
+          "B. [Timer]",
+          "C. [cron]",
+          "D. [Schedule]",
+          "E. [Trigger]"
+        ],
+        "answer": "B",
+        "explicacion": "La sección '[Timer]' es la que se usa en las unidades de temporizador systemd.",
+        "pista": "Los temporizadores de systemd se configuran con la sección '[Timer]'."
+    },
+    {
+        "question": "¿Cuál de las siguientes invocaciones de getent lista todos los usuarios existentes?",
+        "options": [
+          "A. getent homes",
+          "B. getent uids",
+          "C. getent passwd",
+          "D. getent users",
+          "E. getent logins"
+        ],
+        "answer": "C",
+        "explicacion": "El comando 'getent passwd' lista todos los usuarios existentes en el sistema.",
+        "pista": "El archivo de contraseñas '/etc/passwd' se utiliza para obtener esta información."
+    },
+    {
+        "question": "Dada la siguiente entrada en el crontab de un usuario:\n15 14 * * 1-5 /usr/local/bin/example.sh\n¿Cuándo se ejecutará el script /usr/local/bin/example.sh?",
+        "options": [
+          "A. A las 14:15 hora local, de enero a mayo.",
+          "B. A las 15:14 hora local, del 1 al 5 del mes.",
+          "C. A las 14:15 hora local, de febrero a junio.",
+          "D. A las 14:15 hora local, del 1 al 5 del mes.",
+          "E. A las 14:15 hora local, de lunes a viernes."
+        ],
+        "answer": "E",
+        "explicacion": "El script se ejecutará a las 14:15 hora local, de lunes a viernes.",
+        "pista": "La sintaxis del cron permite especificar días de la semana (1-5 para lunes a viernes)."
+    },
+    {
+        "question": "Si ni cron.allow ni cron.deny existen en /etc/, ¿cuál de las siguientes afirmaciones es cierta?",
+        "options": [
+          "A. Sin configuración adicional, todos los usuarios pueden crear crontabs específicos de usuario.",
+          "B. Sin configuración adicional, solo root puede crear crontabs específicos de usuario.",
+          "C. El demonio cron se negará a iniciarse y reportará archivos faltantes en el registro del sistema.",
+          "D. Cuando un usuario crea un crontab específico de usuario, el administrador del sistema debe aprobarlo explícitamente.",
+          "E. La configuración predeterminada de /etc/crond.conf define si los crontabs específicos de usuario están permitidos o no."
+        ],
+        "answer": "E",
+        "explicacion": "Cuando no existen los archivos cron.allow o cron.deny, los permisos para los crontabs específicos de usuario se controlan a través de la configuración en /etc/crond.conf.",
+        "pista": "La configuración de crond.conf determina las reglas para la creación de crontabs por parte de los usuarios."
+    },
+    {
+        "question": "¿Cuál es el propósito del comando iconv?",
+        "options": [
+          "A. Convierte imágenes de mapa de bits de un formato a otro, como de PNG a JPEG.",
+          "B. Verifica que el árbol del directorio raíz cumpla con todas las convenciones del Sistema de Jerarquía de Archivos (FHS).",
+          "C. Convierte archivos de un conjunto de caracteres a otro.",
+          "D. Cambia el modo de un inode en el sistema de archivos ext4.",
+          "E. Muestra información adicional sobre los metadatos de archivos .ico."
+        ],
+        "answer": "C",
+        "explicacion": "El comando 'iconv' se utiliza para convertir archivos entre diferentes conjuntos de caracteres.",
+        "pista": "Se utiliza principalmente para la conversión de codificación de caracteres en textos."
+    },
+    {
+        "question": "¿Qué carácter en el campo de la contraseña de /etc/passwd se utiliza para indicar que la contraseña encriptada está almacenada en /etc/shadow?",
+        "options": [
+          "A. *",
+          "B. -",
+          "C. s",
+          "D. #",
+          "E. x"
+        ],
+        "answer": "E",
+        "explicacion": "El carácter 'x' en el archivo /etc/passwd indica que la contraseña encriptada se almacena en /etc/shadow.",
+        "pista": "Este es el formato comúnmente utilizado en sistemas modernos para almacenar contraseñas."
+    },
+    {
+        "question": "¿A qué se refiere el término 'Braille Display'?",
+        "options": [
+          "A. Un tema gráfico de alto contraste estandarizado para aplicaciones de escritorio.",
+          "B. Un entorno de escritorio de Linux similar a KDE y GNOME.",
+          "C. Una tecnología de pantalla heredada reemplazada por LCD.",
+          "D. Una representación física de caracteres usando pequeños puntos.",
+          "E. Un formato estándar de archivo para el intercambio de datos, similar a XML."
+        ],
+        "answer": "D",
+        "explicacion": "Un 'Braille Display' es un dispositivo que representa caracteres utilizando puntos en relieve, permitiendo a las personas ciegas leer mediante el tacto.",
+        "pista": "Se utiliza para accesibilidad en personas con discapacidad visual."
+    },
+    {
+        "question": "¿Qué variable de entorno es utilizada por un cliente X11 para determinar a qué servidor X conectarse? (Especifica solo el nombre de la variable sin ningún comando o valor anterior.)",
+        "options": [
+          "A. DISPLAY",
+          "B. X_SERVER",
+          "C. X_HOST",
+          "D. X11_SERVER",
+          "E. X_CONNECTION"
+        ],
+        "answer": "A",
+        "explicacion": "La variable de entorno 'DISPLAY' es utilizada por los clientes X11 para determinar el servidor X al que se conectarán.",
+        "pista": "Esta variable se usa en sistemas gráficos basados en X11."
+    },
+    {
+        "question": "¿Qué tareas maneja un administrador de pantalla como XDM o KDM? (Elige dos.)",
+        "options": [
+          "A. Configurar dispositivos adicionales como nuevos monitores o proyectores cuando se conectan.",
+          "B. Iniciar y preparar el entorno de escritorio para el usuario.",
+          "C. Crear un archivo de configuración X11 para los dispositivos gráficos y monitores actuales.",
+          "D. Bloquear la pantalla cuando el usuario ha estado inactivo por un tiempo configurable.",
+          "E. Manejar el inicio de sesión de un usuario."
+        ],
+        "answer": "B, E",
+        "explicacion": "Los administradores de pantalla como XDM o KDM se encargan de preparar el entorno de escritorio y manejar el inicio de sesión de los usuarios.",
+        "pista": "Estos son responsables de la gestión del acceso al sistema gráfico y de la interfaz de usuario."
+    },
+    {
+        "question": "¿Cuál de los siguientes protocolos está diseñado para acceder a la salida de la tarjeta de video de una máquina virtual?",
+        "options": [
+          "A. KDE",
+          "B. X11",
+          "C. Xfce",
+          "D. SPICE",
+          "E. XDMCP"
+        ],
+        "answer": "D",
+        "explicacion": "SPICE es un protocolo diseñado específicamente para acceder a la salida de la tarjeta de video de una máquina virtual.",
+        "pista": "Este protocolo es comúnmente utilizado en entornos virtualizados como QEMU/KVM."
+    }
+];

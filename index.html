@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador LPIC-2 Pro</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script src="js/LPIC1.js"></script>
+    <script src="js/LPIC2-1.js"></script>
+    <script src="js/LPIC2-2.js"></script>
+    
+    <script src="js/main.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+    <div id="header">
+        <h1>LPIC-2 Engineer</h1>
+        <div class="header-right">
+            <select id="examSelect">
+                <option value="LPIC2_1">LPIC-2 (Bloque 1)</option>
+                <option value="LPIC2_2">LPIC-2 (Bloque 2)</option>
+                <option value="LPIC1">LPIC-1</option>
+            </select>
+            <button id="toggleDarkMode">🌙</button>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="card" id="mainCard">
+            <div class="question" id="question"></div>
+            <div class="answer" id="answer"></div>
+            <div class="buttons" id="buttons"></div>
+        </div>
+
+        <div class="card" id="resultReport" style="display:none;">
+            <h2>📊 Resumen del Examen</h2>
+            <div id="summaryStats"></div>
+            <hr>
+            <h3>Temas a reforzar:</h3>
+            <div id="topicAnalysis"></div>
+            <button onclick="location.reload()">Reiniciar Examen</button>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="footer-item"><span>Tiempo</span><div id="timer">00:00</div></div>
+        <div class="footer-item"><span>Preguntas</span><div id="number">0</div></div>
+        <div class="footer-item"><span>Correctas</span><div id="correct">0</div></div>
+        <div class="footer-item"><span>Incorrectas</span><div id="incorrect">0</div></div>
+        <div class="footer-item"><span>%</span><div id="percentage">0%</div></div>
+    </div>
+</body>
+</html>

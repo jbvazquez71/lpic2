@@ -1,0 +1,130 @@
+:root {
+    --primary-color: #3b82f6;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --bg-light: #f8fafc;
+    --bg-dark: #0f172a;
+    --card-light: #ffffff;
+    --card-dark: #1e293b;
+    --text-light: #1e293b;
+    --text-dark: #f1f5f9;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+/* HEADER */
+#header {
+    padding: 1rem 2rem;
+    background: var(--card-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+body.dark-mode #header {
+    background: var(--card-dark);
+    border-bottom: 1px solid #334155;
+}
+
+/* CONTENEDOR DE PREGUNTA */
+#content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.card {
+    background: var(--card-light);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .card {
+    background: var(--card-dark);
+}
+
+/* --- AQUÍ ESTÁ EL CAMBIO CLAVE PARA LAS OPCIONES --- */
+#answer {
+    display: block; /* Fuerza el flujo vertical */
+    width: 100%;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.option-row {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.option-container {
+    display: flex; /* Alinea checkbox y texto en horizontal dentro de la fila */
+    align-items: flex-start;
+    padding: 15px;
+    background: rgba(0,0,0,0.03);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+body.dark-mode .option-container {
+    background: rgba(255,255,255,0.05);
+}
+
+.option-container:hover {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.option-container input {
+    margin-top: 4px;
+    margin-right: 12px;
+    transform: scale(1.2);
+}
+
+.option-text {
+    flex: 1;
+    line-height: 1.5;
+}
+
+/* BOTONES */
+button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+/* FOOTER */
+#footer {
+    background: #1e293b;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-item span { font-size: 0.7rem; color: #94a3b8; display: block; }
+.footer-item div { font-weight: bold; font-size: 1.1rem; }
