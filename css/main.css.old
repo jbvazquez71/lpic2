@@ -2,37 +2,37 @@
     --primary-color: #3b82f6;
     --success-color: #10b981;
     --error-color: #ef4444;
+    --bg-light: #f1f5f9;
     --bg-dark: #0f172a;
+    --card-light: #ffffff;
     --card-dark: #1e293b;
-    --text-main: #f1f5f9;
-    --text-muted: #94a3b8;
+    --text-light: #1e293b;
+    --text-dark: #f1f5f9;
 }
 
 body {
     margin: 0;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background-color: #f8fafc;
-    color: #1e293b;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-light);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    transition: background-color 0.3s ease;
+    transition: 0.3s;
 }
 
-/* Modo Oscuro por defecto o via clase */
 body.dark-mode {
     background-color: var(--bg-dark);
-    color: var(--text-main);
+    color: var(--text-dark);
 }
 
-/* Header Moderno */
 #header {
-    padding: 1.5rem 2rem;
-    background: white;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    background: var(--card-light);
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 body.dark-mode #header {
@@ -40,108 +40,84 @@ body.dark-mode #header {
     border-bottom: 1px solid #334155;
 }
 
-h1 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin: 0;
-    letter-spacing: -0.025em;
-}
-
-/* Contenedor Principal */
-#content {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-}
-
-/* Tarjeta de Pregunta Estilo Moderno */
 .card {
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    padding: 2.5rem;
-    width: 100%;
+    background: var(--card-light);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
     max-width: 800px;
-    transition: transform 0.2s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin: auto;
 }
 
 body.dark-mode .card {
     background: var(--card-dark);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
 }
 
-.question h2 {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
+/* --- DISEÑO VERTICAL DE OPCIONES --- */
+#answer {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px;
+    margin-top: 20px;
 }
 
-/* Estilo de Opciones */
-.answer input[type="radio"], 
-.answer input[type="checkbox"] {
-    margin-right: 12px;
-    transform: scale(1.2);
+.option-row {
+    display: block !important;
+    width: 100%;
 }
 
-.answer br {
-    content: "";
-    display: block;
-    margin: 10px 0;
+.option-container {
+    display: flex !important;
+    align-items: flex-start;
+    padding: 15px;
+    background: rgba(0,0,0,0.03);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 1px solid transparent;
 }
 
-/* Botones */
+body.dark-mode .option-container {
+    background: rgba(255,255,255,0.05);
+}
+
+.option-container:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--primary-color);
+}
+
+.option-text {
+    margin-left: 12px;
+    line-height: 1.4;
+}
+
+/* BOTONES */
 button {
-    background-color: var(--primary-color);
+    background: var(--primary-color);
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.2s;
-    margin-top: 1rem;
+    font-weight: bold;
 }
 
-button:hover {
-    filter: brightness(1.1);
-    transform: translateY(-1px);
+.btn-restart {
+    background: var(--success-color);
+    font-size: 1.1rem;
+    padding: 15px 40px;
 }
 
-/* Footer con estadísticas tipo 'Status Bar' */
+/* FOOTER */
 #footer {
     background: #1e293b;
     color: white;
     padding: 1rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 1rem;
+    display: flex;
+    justify-content: space-around;
     text-align: center;
 }
 
-.footer-item span {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    display: block;
-    margin-bottom: 4px;
-}
-
-.footer-item div {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-/* Modal de Feedback */
-.modal-content {
-    background: white;
-    padding: 2rem;
-    border-radius: 1.5rem;
-    border: none;
-}
-
-body.dark-mode .modal-content {
-    background: var(--card-dark);
-}
+.footer-item span { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; }
+.footer-item div { font-weight: bold; font-size: 1.2rem; }

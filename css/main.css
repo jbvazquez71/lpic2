@@ -1,8 +1,9 @@
+/* VARIABLES DE COLOR */
 :root {
     --primary-color: #3b82f6;
     --success-color: #10b981;
     --error-color: #ef4444;
-    --bg-light: #f8fafc;
+    --bg-light: #f1f5f9;
     --bg-dark: #0f172a;
     --card-light: #ffffff;
     --card-dark: #1e293b;
@@ -10,14 +11,16 @@
     --text-dark: #f1f5f9;
 }
 
+/* BASE */
 body {
     margin: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     background-color: var(--bg-light);
     color: var(--text-light);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    transition: background-color 0.3s;
 }
 
 body.dark-mode {
@@ -25,14 +28,14 @@ body.dark-mode {
     color: var(--text-dark);
 }
 
-/* HEADER */
+/* CABECERA */
 #header {
-    padding: 1rem 2rem;
     background: var(--card-light);
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 body.dark-mode #header {
@@ -40,50 +43,68 @@ body.dark-mode #header {
     border-bottom: 1px solid #334155;
 }
 
-/* CONTENEDOR DE PREGUNTA */
+/* --- CONTENEDOR PRINCIPAL (ELIMINA RECTÁNGULOS LATERALES) --- */
 #content {
     flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
     padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    /* Aseguramos que no haya fondos extraños a los lados */
+    background: transparent; 
 }
 
+/* LA TARJETA DEL TEST */
 .card {
     background: var(--card-light);
     padding: 2.5rem;
-    border-radius: 1rem;
+    border-radius: 16px;
     width: 100%;
-    max-width: 800px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    max-width: 850px; /* Ancho máximo para que no se estire demasiado en PC */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 body.dark-mode .card {
     background: var(--card-dark);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }
 
-/* --- AQUÍ ESTÁ EL CAMBIO CLAVE PARA LAS OPCIONES --- */
+/* OCULTAR CUALQUIER OTRO ELEMENTO QUE NO SEA LA CARD DENTRO DE CONTENT */
+#content > div:not(.card) {
+    display: none !important;
+}
+
+/* PREGUNTA Y OPCIONES */
+.question h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
 #answer {
-    display: block; /* Fuerza el flujo vertical */
-    width: 100%;
-    margin-top: 20px;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .option-row {
-    display: block;
     width: 100%;
-    margin-bottom: 12px;
 }
 
 .option-container {
-    display: flex; /* Alinea checkbox y texto en horizontal dentro de la fila */
+    display: flex;
     align-items: flex-start;
     padding: 15px;
     background: rgba(0,0,0,0.03);
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.2s;
+    border: 2px solid transparent;
 }
 
 body.dark-mode .option-container {
@@ -92,17 +113,12 @@ body.dark-mode .option-container {
 
 .option-container:hover {
     background: rgba(59, 130, 246, 0.1);
-}
-
-.option-container input {
-    margin-top: 4px;
-    margin-right: 12px;
-    transform: scale(1.2);
+    border-color: var(--primary-color);
 }
 
 .option-text {
-    flex: 1;
-    line-height: 1.5;
+    margin-left: 12px;
+    font-size: 1rem;
 }
 
 /* BOTONES */
@@ -110,21 +126,52 @@ button {
     background: var(--primary-color);
     color: white;
     border: none;
-    padding: 12px 25px;
+    padding: 12px 28px;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: bold;
     cursor: pointer;
-    margin-top: 15px;
+    transition: 0.2s;
 }
 
-/* FOOTER */
+button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/* FOOTER ESTADÍSTICAS */
 #footer {
     background: #1e293b;
     color: white;
-    padding: 15px;
+    padding: 1.2rem;
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
-.footer-item span { font-size: 0.7rem; color: #94a3b8; display: block; }
-.footer-item div { font-weight: bold; font-size: 1.1rem; }
+.footer-item span {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    display: block;
+}
+
+.footer-item div {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* INPUT DE TEXTO (COMANDOS) */
+.input-modern {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    background: transparent;
+    color: inherit;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+}
+
+body.dark-mode .input-modern {
+    border-color: #444;
+}
