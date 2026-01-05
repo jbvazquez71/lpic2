@@ -32,7 +32,7 @@ function nextQuestion() {
         let q = arr[rand]; preguntas_hechas.push(rand);
         $("#question").html(`<h2>${q.question}</h2>`);
         $("#answer").html(generateOptions(q));
-        $("#buttons").html("<button id='actionBtn' onclick='checkAnswer()'>Verificar Respuesta</button>");
+        $("#buttons").html("<button id='actionBtn' onclick='checkAnswer()'>Verificar Respuesta (Intro)</button>");
         $(this).show();
     });
 }
@@ -42,11 +42,13 @@ function generateOptions(q) {
     let splited = q.answer.split(", ");
     let type = (q.options) ? (splited.length === 1 ? 1 : 2) : 3;
     if (type === 3) return '<input type="text" id="text" style="width:100%; padding:12px; border-radius:8px; border:1px solid #ccc;" placeholder="Escribe el comando...">';
+    
+    // Añadimos (1), (2)... como pista visual para el teclado
     return q.options.map((opt, i) => `
         <div class="option-row" style="width:100%;">
             <label class="option-container">
                 <input type="${type === 1 ? 'radio' : 'checkbox'}" name="answer" value="${i}">
-                <span class="option-text" style="margin-left:10px;">${opt}</span>
+                <span class="option-text" style="margin-left:10px;"><strong>(${i+1})</strong> ${opt}</span>
             </label>
         </div>
     `).join("");
@@ -91,16 +93,26 @@ function updatefooter() {
 }
 
 $(document).ready(() => {
-    // --- SOPORTE GLOBAL PARA TECLA INTRO ---
+    // --- SOPORTE GLOBAL PARA TECLADO ---
     $(document).on('keydown', function(e) {
+        // Ignorar si el usuario está escribiendo en un campo de texto
+        if ($(e.target).is("input[type='text']")) {
+            if (e.key === "Enter") $("#actionBtn").click();
+            return;
+        }
+
+        // Tecla Intro: Verificar, Siguiente o Reiniciar
         if (e.key === "Enter") {
-            // Caso 1: Pantalla de Resultados visible -> Reiniciar
-            if ($("#resultReport").is(":visible")) {
-                $("#restartBtn").click();
-            } 
-            // Caso 2: Botón de acción (Verificar o Siguiente) visible -> Pulsar
-            else if ($("#actionBtn").length > 0) {
-                $("#actionBtn").click();
+            if ($("#resultReport").is(":visible")) $("#restartBtn").click();
+            else if ($("#actionBtn").length > 0) $("#actionBtn").click();
+        }
+
+        // Teclas 1-5: Seleccionar opciones
+        if (e.key >= "1" && e.key <= "5") {
+            let index = parseInt(e.key) - 1;
+            let input = $("input[name='answer']").eq(index);
+            if (input.length > 0 && !input.prop("disabled")) {
+                input.prop("checked", !input.prop("checked")).change();
             }
         }
     });
