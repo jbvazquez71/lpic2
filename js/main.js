@@ -91,11 +91,15 @@ function updatefooter() {
 }
 
 $(document).ready(() => {
-    // --- SOPORTE PARA TECLA INTRO ---
+    // --- SOPORTE GLOBAL PARA TECLA INTRO ---
     $(document).on('keydown', function(e) {
         if (e.key === "Enter") {
-            // Si hay un botón de acción visible, lo pulsamos
-            if ($("#actionBtn").length > 0) {
+            // Caso 1: Pantalla de Resultados visible -> Reiniciar
+            if ($("#resultReport").is(":visible")) {
+                $("#restartBtn").click();
+            } 
+            // Caso 2: Botón de acción (Verificar o Siguiente) visible -> Pulsar
+            else if ($("#actionBtn").length > 0) {
                 $("#actionBtn").click();
             }
         }
