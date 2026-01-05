@@ -31,14 +31,14 @@ function nextQuestion() {
     let q = arr[rand]; preguntas_hechas.push(rand);
     $("#question").html(`<h2>${q.question}</h2>`);
     $("#answer").html(generateOptions(q));
-    $("#buttons").html("<button onclick='checkAnswer()'>Verificar</button>");
+    $("#buttons").html("<button onclick='checkAnswer()'>Verificar Respuesta</button>");
 }
 
 function generateOptions(q) {
     if (!q || !q.answer) return "";
     let splited = q.answer.split(", ");
     let type = (q.options) ? (splited.length === 1 ? 1 : 2) : 3;
-    if (type === 3) return '<input type="text" id="text" style="width:100%; padding:12px; border-radius:8px; border:1px solid #ccc;" placeholder="Comando...">';
+    if (type === 3) return '<input type="text" id="text" style="width:100%; padding:12px; border-radius:8px; border:1px solid #ccc;" placeholder="Escribe el comando...">';
     return q.options.map((opt, i) => `
         <div class="option-row" style="width:100%;">
             <label class="option-container">
@@ -50,20 +50,43 @@ function generateOptions(q) {
 }
 
 function checkAnswer() {
-    let question = arr[rand]; let splited = question.answer.split(", "); let userAnswer = [];
+    let question = arr[rand];
+    let splited = question.answer.split(", ");
+    let userAnswer = [];
     let type = (question.options) ? (splited.length === 1 ? 1 : 2) : 3;
+
     if (type === 1) {
         let val = $("input[name='answer']:checked").val();
-        if(val === undefined) return alert("Selecciona una opción");
+        if(val === undefined) return alert("Por favor, selecciona una opción");
         userAnswer.push(arrOpt[val]);
     } else if (type === 2) {
         $("input[name='answer']:checked").each(function() { userAnswer.push(arrOpt[$(this).val()]); });
-        if(userAnswer.length === 0) return alert("Selecciona al menos una");
-    } else { userAnswer.push($("#text").val().trim()); }
+        if(userAnswer.length === 0) return alert("Por favor, selecciona al menos una");
+    } else {
+        userAnswer.push($("#text").val().trim());
+    }
+
+    // Lógica de verificación
     let isCorrect = userAnswer.sort().toString().toLowerCase() === splited.sort().toString().toLowerCase();
     if (isCorrect) numCorrect++; else numIncorrect++;
-    $("#answer").append(`<div style="margin-top:20px; padding:15px; background:rgba(0,0,0,0.03); border-radius:8px;"><strong>Correcta: ${question.answer}</strong><br><br>${question.explicacion}</div>`);
-    $("#buttons").html("<button onclick='nextQuestion()'>Siguiente</button>");
+
+    // --- Arreglo de Feedback Visual (imagen 10) ---
+    let color = isCorrect ? "#10b981" : "#ef4444"; // Colores de éxito/error
+    let message = isCorrect ? '✅ ¡Correcto!' : '❌ ¡Incorrecto!';
+
+    $("#answer").append(`
+        <div class="feedback-box" style="border-left:5px solid ${color}; margin-top:20px; padding:15px; background:rgba(0,0,0,0.03); border-radius:8px;">
+            <p><strong>${message}</strong></p>
+            <p><strong>Respuesta correcta:</strong> ${question.answer}</p>
+            <hr style="opacity:0.1">
+            <p style="margin-top:10px; font-size:0.9rem;">${question.explicacion}</p>
+        </div>
+    `);
+
+    // Desactivar inputs
+    $("input").prop("disabled", true);
+    
+    $("#buttons").html("<button onclick='nextQuestion()'>Siguiente Pregunta</button>");
     updatefooter();
 }
 
@@ -85,4 +108,3 @@ $(document).ready(() => {
     setTimeout(() => { switchExam($("#examSelect").val()); }, 500);
     setInterval(() => { totalSeconds++; let m = Math.floor(totalSeconds / 60), s = totalSeconds % 60; $("#timer").text(`${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`); }, 1000);
 });
-/* 20260105 - 10:15 */
