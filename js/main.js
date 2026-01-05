@@ -11,7 +11,7 @@ const TEMAS = {
     "Redes/IPv6": ["ipv6", "ip6tables", "router", "forwarding", "dhcp"],
     "DNS/BIND": ["dns", "bind", "named", "dig", "ptr", "soa"],
     "Servicios Web": ["httpd", "apache", "nginx", "ssl", "vhost"],
-    "Almacenamiento": ["samba", "nfs", "iscsi", "storage"],
+    "Correo": ["postfix", "dovecot", "smtp", "imap", "mail"],
     "Seguridad": ["pam", "ssh", "fail2ban", "iptables", "nmap"]
 };
 
@@ -40,9 +40,10 @@ function nextQuestion() {
         rand = Math.floor(Math.random() * arr.length);
     } while (preguntas_hechas.includes(rand));
 
-    preguntas_hechas.push(rand);
     let q = arr[rand];
+    if (!q) return; 
 
+    preguntas_hechas.push(rand);
     $("#question").html(`<h2>${q.question}</h2>`);
     $("#answer").html(generateOptions(q));
     $("#buttons").html("<button onclick='checkAnswer()'>Verificar Respuesta</button>");
@@ -51,7 +52,7 @@ function nextQuestion() {
 function generateOptions(q) {
     let splited = q.answer.split(", ");
     let type = (q.options) ? (splited.length === 1 ? 1 : 2) : 3;
-    if (type === 3) return '<input type="text" id="text" style="width:100%; padding:10px;" placeholder="Comando...">';
+    if (type === 3) return '<input type="text" id="text" style="width:100%; padding:12px; border-radius:8px; border:1px solid #ccc;" placeholder="Escribe el comando...">';
     
     return q.options.map((opt, i) => `
         <div class="option-row">
@@ -81,16 +82,13 @@ function checkAnswer() {
     }
 
     let isCorrect = userAnswer.sort().toString().toLowerCase() === splited.sort().toString().toLowerCase();
-
-    if (isCorrect) numCorrect++;
-    else numIncorrect++;
+    if (isCorrect) numCorrect++; else numIncorrect++;
 
     let color = isCorrect ? "#10b981" : "#ef4444";
     $("#answer").append(`
         <div style="margin-top:20px; padding:15px; border-radius:8px; background:rgba(0,0,0,0.03); border-left:5px solid ${color}">
             <strong>${isCorrect ? '✅ Correcto' : '❌ Incorrecto'}</strong><br>
-            <small>Respuesta correcta: ${question.answer}</small>
-            <p style="margin-top:10px; font-size:0.9rem;">${question.explicacion}</p>
+            <p style="margin: 10px 0; font-size: 0.9rem;">${question.explicacion}</p>
         </div>
     `);
 
