@@ -20,27 +20,39 @@ function resetStats() {
     updatefooter();
 }
 
+// --- MODIFICADO PARA LA ANIMACIÓN (NUEVO) ---
 function nextQuestion() {
-    if (!arr || arr.length === 0) return $("#question").html("<h2>Cargando...</h2>");
+    if (!arr || arr.length === 0) return $("#question").html("<h2>Cargando datos...</h2>");
+
     if (preguntas_hechas.length >= arr.length) {
-        $("#mainCard").hide(); $("#resultReport").show();
+        $("#mainCard").hide(); 
+        $("#resultReport").show(); // Aquí también se activará la animación fadeIn de la card de resultados
         $("#finalScore").text(((numCorrect / arr.length) * 100).toFixed(1) + "%");
         return;
     }
-    do { rand = Math.floor(Math.random() * arr.length); } while (preguntas_hechas.includes(rand));
-    let q = arr[rand]; preguntas_hechas.push(rand);
-    $("#question").html(`<h2>${q.question}</h2>`);
-    $("#answer").html(generateOptions(q));
-    $("#buttons").html("<button onclick='checkAnswer()'>Verificar Respuesta</button>");
+
+    // Pequeña pausa para que la tarjeta principal se oculte y reaparezca con la animación
+    $("#mainCard").hide(0, function() {
+        do { rand = Math.floor(Math.random() * arr.length); } while (preguntas_hechas.includes(rand));
+        let q = arr[rand]; preguntas_hechas.push(rand);
+        
+        // Actualizamos el contenido
+        $("#question").html(`<h2>${q.question}</h2>`);
+        $("#answer").html(generateOptions(q));
+        $("#buttons").html("<button onclick='checkAnswer()'>Verificar Respuesta</button>");
+        
+        // Mostramos la tarjeta de nuevo, lo que activa la animación fadeIn CSS
+        $(this).show();
+    });
 }
 
 function generateOptions(q) {
     if (!q || !q.answer) return "";
     let splited = q.answer.split(", ");
     let type = (q.options) ? (splited.length === 1 ? 1 : 2) : 3;
-    if (type === 3) return '<input type="text" id="text" style="width:100%; padding:12px; border-radius:8px; border:1px solid #ccc;" placeholder="Comando...">';
+    if (type === 3) return '<input type="text" id="text" style="width:100%; padding:12px; border-radius:8px; border:2px solid #ccc;" placeholder="Escribe el comando...">';
     return q.options.map((opt, i) => `
-        <div class="option-row" style="width:100%;">
+        <div class="option-row">
             <label class="option-container">
                 <input type="${type === 1 ? 'radio' : 'checkbox'}" name="answer" value="${i}">
                 <span class="option-text" style="margin-left:10px;">${opt}</span>
@@ -49,31 +61,33 @@ function generateOptions(q) {
     `).join("");
 }
 
+// --- ARREGLO DE FEEDBACK VISUAL (imagen 10) ---
 function checkAnswer() {
     let question = arr[rand]; let splited = question.answer.split(", "); let userAnswer = [];
     let type = (question.options) ? (splited.length === 1 ? 1 : 2) : 3;
+    
     if (type === 1) {
         let val = $("input[name='answer']:checked").val();
-        if(val === undefined) return alert("Selecciona una opción");
+        if(val === undefined) return alert("Por favor, selecciona una opción");
         userAnswer.push(arrOpt[val]);
     } else if (type === 2) {
         $("input[name='answer']:checked").each(function() { userAnswer.push(arrOpt[$(this).val()]); });
-        if(userAnswer.length === 0) return alert("Selecciona al menos una");
+        if(userAnswer.length === 0) return alert("Por favor, selecciona al menos una");
     } else { userAnswer.push($("#text").val().trim()); }
 
     let isCorrect = userAnswer.sort().toString().toLowerCase() === splited.sort().toString().toLowerCase();
     if (isCorrect) numCorrect++; else numIncorrect++;
 
-    // --- CAJA DE FEEDBACK VISUAL ---
     let color = isCorrect ? "#10b981" : "#ef4444";
     let message = isCorrect ? '✅ ¡Correcto!' : '❌ ¡Incorrecto!';
 
+    // Caja de feedback restaurada y mejorada visualmente
     $("#answer").append(`
-        <div style="margin-top:20px; padding:15px; background:rgba(0,0,0,0.03); border-radius:8px; border-left:5px solid ${color}">
+        <div class="feedback-box" style="border-left:5px solid ${color}; border-radius:8px; transition: 0.3s;">
             <p><strong>${message}</strong></p>
-            <p><strong>Respuesta: ${question.answer}</strong></p>
+            <p><strong>Respuesta correcta: ${question.answer}</strong></p>
             <hr style="opacity:0.1">
-            <p style="font-size:0.9rem;">${question.explicacion}</p>
+            <p style="font-size:0.9rem; margin-top:10px;">${question.explicacion}</p>
         </div>
     `);
 
@@ -89,14 +103,24 @@ function updatefooter() {
 }
 
 $(document).ready(() => {
+    // Evento Modo Oscuro reparado
     $(document).on('click', '#toggleDarkMode', function() {
         $('body').toggleClass('dark-mode');
         const isDark = $('body').hasClass('dark-mode');
         localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
         $(this).text(isDark ? '☀️' : '🌙');
     });
+    
     if (localStorage.getItem("darkMode") === "enabled") { $("body").addClass("dark-mode"); $("#toggleDarkMode").text("☀️"); }
+    
     $("#examSelect").on('change', function() { switchExam($(this).val()); });
+    
+    // Pequeño retraso para asegurar la carga de datos
     setTimeout(() => { switchExam($("#examSelect").val()); }, 500);
-    setInterval(() => { totalSeconds++; let m = Math.floor(totalSeconds / 60), s = totalSeconds % 60; $("#timer").text(`${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`); }, 1000);
+    
+    setInterval(() => { 
+        totalSeconds++; 
+        let m = Math.floor(totalSeconds / 60), s = totalSeconds % 60; 
+        $("#timer").text(`${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`); 
+    }, 1000);
 });
