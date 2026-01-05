@@ -39,7 +39,7 @@ body.dark-mode #header {
     border-bottom: 1px solid #334155;
 }
 
-/* CENTRADO Y LIMPIEZA DE LATERALES */
+/* CENTRADO Y ELIMINACIÓN DE RECTÁNGULOS LATERALES */
 #content {
     flex: 1;
     display: flex;
@@ -48,7 +48,7 @@ body.dark-mode #header {
     padding: 20px;
 }
 
-/* Ocultar cualquier div residual que genere rectángulos vacíos */
+/* Oculta cualquier div que no sea la tarjeta principal (Solución imagen 9) */
 #content > div:not(.card) {
     display: none !important;
 }
@@ -60,14 +60,13 @@ body.dark-mode #header {
     width: 100%;
     max-width: 800px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: background 0.3s;
 }
 
 body.dark-mode .card {
     background: var(--card-dark);
 }
 
-/* DISEÑO VERTICAL DE OPCIONES */
+/* DISEÑO VERTICAL DE OPCIONES (Solución imagen 3 y 4) */
 #answer {
     display: flex !important;
     flex-direction: column !important;
@@ -96,7 +95,6 @@ body.dark-mode .option-container {
 
 .option-container:hover {
     border-color: var(--primary-color);
-    background: rgba(59, 130, 246, 0.08);
 }
 
 .option-text {
@@ -115,12 +113,6 @@ button {
     cursor: pointer;
 }
 
-.btn-restart {
-    background: var(--success-color);
-    padding: 15px 40px;
-    font-size: 1.1rem;
-}
-
 /* FOOTER */
 #footer {
     background: #1e293b;
@@ -133,4 +125,4 @@ button {
 .footer-item span { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; }
 .footer-item div { font-weight: bold; font-size: 1.2rem; }
 
-/* 20250105 */
+/* 20250105 - 10:05 */

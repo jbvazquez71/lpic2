@@ -5,20 +5,12 @@ let preguntas_hechas = [];
 let numCorrect = 0;
 let numIncorrect = 0;
 let totalSeconds = 0;
-let errorStats = {};
-
-const TEMAS = {
-    "Redes/IPv6": ["ipv6", "ip6tables", "router", "forwarding", "dhcp"],
-    "DNS/BIND": ["dns", "bind", "named", "dig", "ptr", "soa"],
-    "Servicios Web": ["httpd", "apache", "nginx", "ssl", "vhost"],
-    "Correo": ["postfix", "dovecot", "smtp", "imap", "mail"],
-    "Seguridad": ["pam", "ssh", "fail2ban", "iptables", "nmap"]
-};
 
 function switchExam(examKey) {
-    if(examKey === "LPIC2_1") arr = preguntasLPIC2_1;
-    else if(examKey === "LPIC2_2") arr = preguntasLPIC2_2;
-    else if(examKey === "LPIC1") arr = preguntasLPIC1;
+    if(examKey === "LPIC2_1") arr = (typeof preguntasLPIC2_1 !== 'undefined') ? preguntasLPIC2_1 : [];
+    else if(examKey === "LPIC2_2") arr = (typeof preguntasLPIC2_2 !== 'undefined') ? preguntasLPIC2_2 : [];
+    else if(examKey === "LPIC1") arr = (typeof preguntasLPIC1 !== 'undefined') ? preguntasLPIC1 : [];
+    
     resetStats();
     nextQuestion();
 }
@@ -27,32 +19,46 @@ function resetStats() {
     preguntas_hechas = [];
     numCorrect = 0;
     numIncorrect = 0;
-    errorStats = {};
     $("#mainCard").show();
     $("#resultReport").hide();
     updatefooter();
 }
 
 function nextQuestion() {
-    if (preguntas_hechas.length >= arr.length) return showFinalReport();
+    // Si el array está vacío o no ha cargado, esperamos
+    if (!arr || arr.length === 0) {
+        $("#question").html("<h2>Cargando preguntas...</h2>");
+        return;
+    }
+
+    if (preguntas_hechas.length >= arr.length) {
+        $("#mainCard").hide();
+        $("#resultReport").show();
+        let perc = ((numCorrect / arr.length) * 100).toFixed(1);
+        $("#finalScore").text(perc + "%");
+        return;
+    }
 
     do {
         rand = Math.floor(Math.random() * arr.length);
     } while (preguntas_hechas.includes(rand));
 
     let q = arr[rand];
-    if (!q) return; 
-
     preguntas_hechas.push(rand);
+    
     $("#question").html(`<h2>${q.question}</h2>`);
     $("#answer").html(generateOptions(q));
-    $("#buttons").html("<button onclick='checkAnswer()'>Verificar Respuesta</button>");
+    $("#buttons").html("<button onclick='checkAnswer()'>Verificar</button>");
 }
 
 function generateOptions(q) {
+    // Protección extra contra q.answer undefined
+    if (!q || !q.answer) return "";
+    
     let splited = q.answer.split(", ");
     let type = (q.options) ? (splited.length === 1 ? 1 : 2) : 3;
-    if (type === 3) return '<input type="text" id="text" style="width:100%; padding:12px; border-radius:8px; border:1px solid #ccc;" placeholder="Escribe el comando...">';
+
+    if (type === 3) return '<input type="text" id="text" style="width:100%; padding:12px;" placeholder="Comando...">';
     
     return q.options.map((opt, i) => `
         <div class="option-row">
@@ -84,23 +90,9 @@ function checkAnswer() {
     let isCorrect = userAnswer.sort().toString().toLowerCase() === splited.sort().toString().toLowerCase();
     if (isCorrect) numCorrect++; else numIncorrect++;
 
-    let color = isCorrect ? "#10b981" : "#ef4444";
-    $("#answer").append(`
-        <div style="margin-top:20px; padding:15px; border-radius:8px; background:rgba(0,0,0,0.03); border-left:5px solid ${color}">
-            <strong>${isCorrect ? '✅ Correcto' : '❌ Incorrecto'}</strong><br>
-            <p style="margin: 10px 0; font-size: 0.9rem;">${question.explicacion}</p>
-        </div>
-    `);
-
-    $("#buttons").html("<button onclick='nextQuestion()'>Siguiente Pregunta</button>");
+    $("#answer").append(`<div style="margin-top:20px; padding:15px; background:rgba(0,0,0,0.03); border-radius:8px;"><strong>Respuesta correcta:</strong> ${question.answer}<br><br>${question.explicacion}</div>`);
+    $("#buttons").html("<button onclick='nextQuestion()'>Siguiente</button>");
     updatefooter();
-}
-
-function showFinalReport() {
-    $("#mainCard").hide();
-    $("#resultReport").show();
-    let perc = ((numCorrect / arr.length) * 100).toFixed(1);
-    $("#finalScore").text(perc + "%");
 }
 
 function updatefooter() {
@@ -125,7 +117,9 @@ $(document).ready(() => {
     }
 
     $("#examSelect").on('change', function() { switchExam($(this).val()); });
-    switchExam($("#examSelect").val());
+    
+    // Pequeño retraso para asegurar que los scripts de datos han cargado
+    setTimeout(() => { switchExam($("#examSelect").val()); }, 500);
     
     setInterval(() => {
         totalSeconds++;
@@ -133,3 +127,6 @@ $(document).ready(() => {
         $("#timer").text(`${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`);
     }, 1000);
 });
+
+
+/* 20250105 - 10:05 */
