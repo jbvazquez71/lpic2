@@ -1,5 +1,4 @@
-// --- ÚNICO SITIO DONDE CAMBIAR LA VERSIÓN VISUAL ---
-const APP_VERSION = "2.5"; 
+const APP_VERSION = "2.6"; 
 
 let arr = []; 
 let arrOpt = ["A", "B", "C", "D", "E"];
@@ -43,6 +42,7 @@ function nextQuestion() {
         $("#buttons").html("<button id='actionBtn' onclick='checkAnswer()'>Verificar Respuesta (Intro)</button>");
         $(this).show();
         updateProgressBar();
+        // Foco automático para comandos
         if ($("#cmdInput").length > 0) $("#cmdInput").focus();
     });
 }
@@ -50,8 +50,11 @@ function nextQuestion() {
 function generateOptions(q) {
     if (!q || !q.answer) return "";
     let splitedLetters = q.answer.split(", ");
+    // CORRECCIÓN: Comprobar que options tenga longitud mayor a 0
     let type = (q.options && q.options.length > 0) ? (splitedLetters.length === 1 ? 1 : 2) : 3;
-    if (type === 3) return '<input type="text" id="cmdInput" placeholder="Escribe el comando..." autocomplete="off">';
+    
+    if (type === 3) return '<input type="text" id="cmdInput" placeholder="Escribe el comando..." autocomplete="off" spellcheck="false">';
+    
     return q.options.map((opt, i) => `
         <div class="option-row" style="width:100%;">
             <label class="option-container">
@@ -64,7 +67,7 @@ function generateOptions(q) {
 
 function checkAnswer() {
     let question = arr[rand];
-    let splitedLetters = question.answer.split(", ");
+    let splitedLetters = question.answer.split(",").map(s => s.trim());
     let userAnswer = [];
     let type = (question.options && question.options.length > 0) ? (splitedLetters.length === 1 ? 1 : 2) : 3;
     
@@ -81,18 +84,11 @@ function checkAnswer() {
         userAnswer.push(texto);
     }
 
-    let isCorrect = userAnswer.sort().toString().toLowerCase() === splitedLetters.sort().toString().toLowerCase();
+    // Comparación blindada (trim y minúsculas en ambos lados)
+    let isCorrect = userAnswer.map(s => s.trim().toLowerCase()).sort().toString() === 
+                    splitedLetters.map(s => s.trim().toLowerCase()).sort().toString();
+    
     if (isCorrect) numCorrect++; else numIncorrect++;
-
-    let correctTexts = [];
-    if (question.options) {
-        splitedLetters.forEach(letter => {
-            let idx = arrOpt.indexOf(letter.toUpperCase());
-            if (idx !== -1) correctTexts.push(question.options[idx]);
-        });
-    } else {
-        correctTexts.push(question.answer);
-    }
 
     let color = isCorrect ? "#10b981" : "#ef4444";
     let message = isCorrect ? '✅ ¡Correcto!' : '❌ ¡Incorrecto!';
@@ -100,7 +96,7 @@ function checkAnswer() {
     $("#answer").append(`
         <div style="margin-top:20px; padding:15px; background:rgba(0,0,0,0.03); border-radius:8px; border-left:5px solid ${color}">
             <p><strong>${message}</strong></p>
-            <p><strong>Respuesta correcta:</strong> ${question.answer} (${correctTexts.join(", ")})</p>
+            <p><strong>Respuesta correcta:</strong> ${question.answer}</p>
             <hr style="opacity:0.1">
             <p style="font-size:0.9rem;">${question.explicacion}</p>
         </div>
@@ -119,7 +115,6 @@ function updatefooter() {
 }
 
 $(document).ready(() => {
-    // INYECTAR LA VERSIÓN EN EL TÍTULO
     $(".version-badge").text("v=" + APP_VERSION);
 
     $(document).on('keydown', function(e) {
