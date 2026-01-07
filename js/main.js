@@ -1,3 +1,6 @@
+// --- ÚNICO SITIO DONDE CAMBIAR LA VERSIÓN VISUAL ---
+const APP_VERSION = "2.5"; 
+
 let arr = []; 
 let arrOpt = ["A", "B", "C", "D", "E"];
 let rand = 0;
@@ -40,7 +43,6 @@ function nextQuestion() {
         $("#buttons").html("<button id='actionBtn' onclick='checkAnswer()'>Verificar Respuesta (Intro)</button>");
         $(this).show();
         updateProgressBar();
-        // Autofoco automático en el cuadro de comando
         if ($("#cmdInput").length > 0) $("#cmdInput").focus();
     });
 }
@@ -49,11 +51,7 @@ function generateOptions(q) {
     if (!q || !q.answer) return "";
     let splitedLetters = q.answer.split(", ");
     let type = (q.options && q.options.length > 0) ? (splitedLetters.length === 1 ? 1 : 2) : 3;
-    
-    // CASO COMANDO ESCRITO
-    if (type === 3) return '<input type="text" id="cmdInput" placeholder="Escribe el comando completo..." autocomplete="off">';
-    
-    // CASO MULTIOPCIÓN
+    if (type === 3) return '<input type="text" id="cmdInput" placeholder="Escribe el comando..." autocomplete="off">';
     return q.options.map((opt, i) => `
         <div class="option-row" style="width:100%;">
             <label class="option-container">
@@ -78,15 +76,23 @@ function checkAnswer() {
         $("input[name='answer']:checked").each(function() { userAnswer.push(arrOpt[$(this).val()]); });
         if(userAnswer.length === 0) return alert("Selecciona al menos una");
     } else {
-        // Validación de comando (limpia espacios y convierte a minúsculas)
         let texto = $("#cmdInput").val().trim();
-        if(texto === "") return alert("Escribe el comando solicitado");
+        if(texto === "") return alert("Escribe el comando");
         userAnswer.push(texto);
     }
 
-    // Comparación robusta
     let isCorrect = userAnswer.sort().toString().toLowerCase() === splitedLetters.sort().toString().toLowerCase();
     if (isCorrect) numCorrect++; else numIncorrect++;
+
+    let correctTexts = [];
+    if (question.options) {
+        splitedLetters.forEach(letter => {
+            let idx = arrOpt.indexOf(letter.toUpperCase());
+            if (idx !== -1) correctTexts.push(question.options[idx]);
+        });
+    } else {
+        correctTexts.push(question.answer);
+    }
 
     let color = isCorrect ? "#10b981" : "#ef4444";
     let message = isCorrect ? '✅ ¡Correcto!' : '❌ ¡Incorrecto!';
@@ -94,7 +100,7 @@ function checkAnswer() {
     $("#answer").append(`
         <div style="margin-top:20px; padding:15px; background:rgba(0,0,0,0.03); border-radius:8px; border-left:5px solid ${color}">
             <p><strong>${message}</strong></p>
-            <p><strong>Respuesta esperada:</strong> ${question.answer}</p>
+            <p><strong>Respuesta correcta:</strong> ${question.answer} (${correctTexts.join(", ")})</p>
             <hr style="opacity:0.1">
             <p style="font-size:0.9rem;">${question.explicacion}</p>
         </div>
@@ -102,7 +108,6 @@ function checkAnswer() {
 
     if ($("#cmdInput").length > 0) $("#cmdInput").prop("disabled", true);
     $("input[name='answer']").prop("disabled", true);
-    
     $("#buttons").html("<button id='actionBtn' onclick='nextQuestion()'>Siguiente Pregunta (Intro)</button>");
     updatefooter();
 }
@@ -114,23 +119,18 @@ function updatefooter() {
 }
 
 $(document).ready(() => {
-    $(document).on('keydown', function(e) {
-        // SI ESTAMOS EN UN CUADRO DE TEXTO, EL ENTER VALIDA PERO LOS NÚMEROS ESCRIBEN
-        if ($(e.target).is("#cmdInput")) {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                $("#actionBtn").click();
-            }
-            return; // Salimos para que los números no seleccionen opciones
-        }
+    // INYECTAR LA VERSIÓN EN EL TÍTULO
+    $(".version-badge").text("v=" + APP_VERSION);
 
-        // TECLA ENTER GLOBAL
+    $(document).on('keydown', function(e) {
+        if ($(e.target).is("#cmdInput")) {
+            if (e.key === "Enter") { e.preventDefault(); $("#actionBtn").click(); }
+            return;
+        }
         if (e.key === "Enter") {
             if ($("#resultReport").is(":visible")) $("#restartBtn").click();
             else if ($("#actionBtn").length > 0) $("#actionBtn").click();
         }
-
-        // ATAJOS 1-5 (SOLO SI NO ESTAMOS ESCRIBIENDO)
         if (e.key >= "1" && e.key <= "5") {
             let index = parseInt(e.key) - 1;
             let input = $("input[name='answer']").eq(index);
