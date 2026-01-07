@@ -1,5 +1,5 @@
 const preguntasLPIC2_2 = [
-  {
+    {
     "question": "1. En un router Linux, se ha habilitado el reenvío de paquetes para IPv4. Tras un reinicio, la máquina ya no reenvía paquetes IP de otros hosts. El comando 'echo 1 > /proc/sys/net/ipv4/ip_forward' resuelve el problema temporalmente. ¿Cuál de las siguientes opciones es la mejor manera de asegurar que este ajuste se mantenga tras los reinicios?",
     "options": [
       "A. Añadir echo 1 > /proc/sys/net/ipv4/ip_forward al script de inicio de sesión del usuario root",
@@ -1428,5 +1428,4 @@ const preguntasLPIC2_2 = [
     "explicacion": "Los backends comunes incluyen bdb (o hdb), ldap (proxy) y text (LDIF).",
     "pista": "Base de datos Berkeley, LDAP y archivos de texto."
   }
-  
 ];
