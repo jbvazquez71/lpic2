@@ -1,5 +1,5 @@
 const preguntasLPIC2_2 = [
-    {
+  {
     "question": "1. En un router Linux, se ha habilitado el reenvío de paquetes para IPv4. Tras un reinicio, la máquina ya no reenvía paquetes IP de otros hosts. El comando 'echo 1 > /proc/sys/net/ipv4/ip_forward' resuelve el problema temporalmente. ¿Cuál de las siguientes opciones es la mejor manera de asegurar que este ajuste se mantenga tras los reinicios?",
     "options": [
       "A. Añadir echo 1 > /proc/sys/net/ipv4/ip_forward al script de inicio de sesión del usuario root",
@@ -75,7 +75,7 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "D",
     "explicacion": "La directiva 'nobind' evita que el cliente se vincule a un puerto local específico, permitiendo uno dinámico.",
-    "pista": "Indica que 'no se vincule'."
+    "pista": "Asignar puerto dinámico."
   },
   {
     "question": "7. ¿Qué usuario de Linux utiliza vsftpd para realizar operaciones en el sistema de archivos para los usuarios FTP anónimos?",
@@ -196,7 +196,7 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "D",
     "explicacion": "Debido a que CIFS usa hashes de contraseña diferentes (NTLM), Samba no puede validar contraseñas cifradas de Linux directamente.",
-    "pista": "Linux y Samba usan métodos de cifrado de contraseñas distintos."
+    "pista": "Linux y Samba usan métodos de cifrado distintos."
   },
   {
     "question": "17. ¿En qué recurso compartido CIFS deben colocarse los controladores de impresora para permitir el despliegue Point'n'Print en Windows?",
@@ -222,7 +222,7 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "E",
     "explicacion": "En versiones modernas de Samba (Samba 4), el proceso 'samba' gestiona la integración con AD.",
-    "pista": "El nombre del propio paquete/servicio principal."
+    "pista": "El nombre del propio paquete principal."
   },
   {
     "question": "19. ¿Qué afirmación es verdadera respecto al sistema de archivos pseudo NFSv4 en el servidor NFS?",
@@ -287,7 +287,7 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "A",
     "explicacion": "dig (Domain Information Groper) ofrece por defecto una salida mucho más detallada que host o nslookup.",
-    "pista": "La herramienta favorita para depuración DNS."
+    "pista": "A ferramenta favorita para depuração DNS."
   },
   {
     "question": "24. Al hacer un DNS lookup con 'dig', el registro PTR parece estar mal configurado en la zona inversa. ¿Cuál es el error común?",
@@ -299,7 +299,7 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "C",
     "explicacion": "En los archivos de zona de BIND, los nombres FQDN deben terminar con un punto (.) o se les añade el origen automáticamente.",
-    "pista": "El punto final es crucial en los archivos de zona."
+    "pista": "O ponto final é crucial."
   },
   {
     "question": "25. ¿Qué opción para BIND es necesaria en las opciones globales para desactivar las consultas recursivas por defecto?",
@@ -312,7 +312,7 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "E",
     "explicacion": "La directiva 'recursion no;' desactiva la recursividad en el servidor DNS.",
-    "pista": "Recursión no."
+    "pista": "Recursão não."
   },
   {
     "question": "26. ¿Cuál de los siguientes registros DNS podría ser un 'glue record' (registro de pegamento)?",
@@ -325,7 +325,7 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "A",
     "explicacion": "Un registro de pegamento es un registro A que proporciona la IP de un servidor de nombres mencionado en un registro NS.",
-    "pista": "Registro A para un servidor de nombres."
+    "pista": "Registo A para um servidor de nomes."
   },
   {
     "question": "27. ¿Para qué se utiliza DNSSEC?",
@@ -338,7 +338,7 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "B",
     "explicacion": "DNSSEC añade firmas digitales a los registros DNS para asegurar que la información no ha sido alterada.",
-    "pista": "Seguridad y autenticación de registros."
+    "pista": "Segurança e autenticação de registos."
   },
   {
     "question": "28. ¿Qué palabra falta en el siguiente extracto de un archivo named.conf?\nfriends {\n 10.10.0.0/24; 192.168.1.0/24;\n};",
@@ -363,7 +363,7 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "C",
     "explicacion": "El símbolo @ representa el origen (ORIGIN) actual, que suele ser el nombre de la zona.",
-    "pista": "Representa el origen de la zona."
+    "pista": "Representa a origem da zona."
   },
   {
     "question": "30. ¿Qué opción de BIND debe usarse para limitar las direcciones IP desde las cuales los servidores esclavos pueden conectarse?",
@@ -376,8 +376,8 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "B",
     "explicacion": "'allow-transfer' especifica qué hosts tienen permiso para solicitar una transferencia de zona.",
-    "pista": "Permitir la transferencia."
-  }
+    "pista": "Permitir transferência."
+  },
   {
     "question": "31. Para proteger un directorio en un servidor Apache con contraseña, se añadió esta configuración a un archivo .htaccess: \nAuthType Basic\nAuthName \"Protected Directory\"\nAuthUserFile /var/www/dir/.htpasswd\nRequire valid-user\nAdemás, se creó el archivo /var/www/dir/.htpasswd con el contenido 'usera: S3cr3t'. ¿Cuál de las siguientes afirmaciones es cierta?",
     "options": [
@@ -388,8 +388,8 @@ const preguntasLPIC2_2 = [
       "E. El servidor web entrega el contenido del directorio sin solicitar autenticación"
     ],
     "answer": "A",
-    "explicacion": "Si los archivos están configurados correctamente, Apache procesará la autenticación básica. Nota: En algunos sistemas, la distinción entre mayúsculas depende del hash, pero la respuesta oficial indica que el acceso es válido.",
-    "pista": "La configuración de AuthType Basic es la estándar para protección por contraseña."
+    "explicacion": "Si los archivos están configurados correctamente, Apache procesará la autenticación básica.",
+    "pista": "A configuração padrão para proteção por senha."
   },
   {
     "question": "32. ¿Qué directiva de Apache HTTPD habilita el soporte para el protocolo HTTPS?",
@@ -402,14 +402,14 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "B",
     "explicacion": "SSLEngine es la directiva principal del módulo mod_ssl para activar el motor de cifrado SSL/TLS.",
-    "pista": "Relacionado con SSL Engine."
+    "pista": "Relacionado com SSL Engine."
   },
   {
     "question": "33. ¿Qué directiva de configuración del servidor Apache HTTPD define dónde se almacenan los archivos de registro (logs)? (Especifica SOLO la directiva)",
     "options": [],
     "answer": "ErrorLog",
     "explicacion": "La directiva ErrorLog establece el nombre del archivo donde el servidor registra cualquier error que encuentre.",
-    "pista": "Directiva para el log de errores."
+    "pista": "Directiva para o log de erros."
   },
   {
     "question": "34. ¿Qué afirmaciones sobre las directivas Alias y Redirect en Apache son ciertas? (Elige dos)",
@@ -421,8 +421,8 @@ const preguntasLPIC2_2 = [
       "E. Alias no es una directiva de configuración válida"
     ],
     "answer": "C, D",
-    "explicacion": "Alias mapea URLs a rutas locales del servidor de forma interna, mientras que Redirect envía un código de estado al cliente para que este realice una nueva petición.",
-    "pista": "Uno es un mapeo interno y otro una instrucción al navegador."
+    "explicacion": "Alias mapea URLs a rutas locales del servidor de forma interna, mientras que Redirect envía un código de estado al cliente.",
+    "pista": "Um é interno e outro é instrução para o navegador."
   },
   {
     "question": "35. ¿Qué directiva http_access para Squid permite a los usuarios en la ACL 'sales_net' acceder a Internet solo en los horarios especificados en la ACL 'sales_time'?",
@@ -435,10 +435,10 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "B",
     "explicacion": "Squid requiere que ambas ACLs se listen en la misma línea para que se aplique un 'AND' lógico.",
-    "pista": "Lista ambas ACLs en la misma línea de permiso."
+    "pista": "Lista ambas as ACLs na mesma linha."
   },
   {
-    "question": "36. ¿Qué opción global en squid.conf establece el número de puerto que Squid usará para escuchar peticiones de clientes?",
+    "question": "36. ¿Qué opción en squid.conf establece el número de puerto que Squid usará para escuchar peticiones de clientes?",
     "options": [
       "A. port",
       "B. client_port",
@@ -447,8 +447,8 @@ const preguntasLPIC2_2 = [
       "E. squid_port"
     ],
     "answer": "C",
-    "explicacion": "http_port es la directiva que define la dirección y puerto de escucha para las conexiones de los clientes.",
-    "pista": "Puerto para el protocolo HTTP."
+    "explicacion": "http_port es la directiva que define la dirección y puerto de escucha.",
+    "pista": "Porta para HTTP."
   },
   {
     "question": "37. Al usar mod_authz_core, ¿cuáles de los siguientes argumentos pueden usarse con 'Require' para especificar el proveedor de autenticación? (Elige tres)",
@@ -460,8 +460,8 @@ const preguntasLPIC2_2 = [
       "E. expr"
     ],
     "answer": "A, B, E",
-    "explicacion": "Require permite usar 'all' (para garantizar o denegar acceso global), 'method' y 'expr' (expresiones) entre otros proveedores.",
-    "pista": "Piensa en 'all granted', métodos HTTP y expresiones."
+    "explicacion": "Require permite usar 'all', 'method' y 'expr' (expresiones) entre otros proveedores.",
+    "pista": "Métodos HTTP e expressões."
   },
   {
     "question": "38. ¿Qué herramienta crea una Solicitud de Firma de Certificado (CSR) para servir HTTPS con Apache?",
@@ -474,7 +474,7 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "E",
     "explicacion": "openssl es la herramienta estándar para generar llaves y solicitudes de certificados (CSR).",
-    "pista": "La herramienta de línea de comandos para SSL/TLS por excelencia."
+    "pista": "A ferramenta padrão para SSL/TLS."
   },
   {
     "question": "39. En respuesta a una solicitud de firma de certificado, una CA envió el certificado del servidor web junto con el certificado de una CA intermedia. ¿Qué se debe hacer con el certificado intermedio en Apache?",
@@ -487,14 +487,14 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "A",
     "explicacion": "En versiones modernas de Apache, se recomienda incluir la cadena de certificados (chain) en el mismo archivo del certificado del host.",
-    "pista": "Se combinan en el archivo del certificado principal."
+    "pista": "Combinam-se num único ficheiro."
   },
   {
     "question": "40. ¿Qué directiva en un bloque de configuración de Nginx define los puertos TCP y protocolos que usará el host virtual? (Solo el nombre)",
     "options": [],
     "answer": "listen",
-    "explicacion": "La directiva listen indica a Nginx en qué puerto y dirección debe aceptar conexiones para ese servidor.",
-    "pista": "Nginx 'escucha' en..."
+    "explicacion": "La directiva listen indica a Nginx en qué puerto y dirección debe aceptar conexiones.",
+    "pista": "O Nginx 'escuta' em..."
   },
   {
     "question": "41. Al intentar configurar un proxy inverso a través de Nginx, ¿qué palabra clave falta en el siguiente ejemplo? \nlocation / { \n_______ http://proxiedserver:8080; \n}",
@@ -506,8 +506,8 @@ const preguntasLPIC2_2 = [
       "E. forward_to"
     ],
     "answer": "D",
-    "explicacion": "proxy_pass es la directiva encargada de pasar la petición al servidor backend especificado.",
-    "pista": "Directiva para 'pasar el proxy'."
+    "explicacion": "proxy_pass es la directiva encargada de pasar la petición al servidor backend.",
+    "pista": "Directiva para passar o proxy."
   },
   {
     "question": "42. Si no hay una directiva de acceso (access directive), ¿cuál es la configuración por defecto para OpenLDAP?",
@@ -518,8 +518,8 @@ const preguntasLPIC2_2 = [
       "D. access to * by anonymous write by * read"
     ],
     "answer": "B",
-    "explicacion": "Por defecto, OpenLDAP restringe el acceso anónimo y permite la lectura a usuarios autenticados si no se especifica otra cosa.",
-    "pista": "Los anónimos no tienen acceso (none) por defecto."
+    "explicacion": "Por defecto, OpenLDAP restringe el acceso anónimo y permite la lectura a usuarios autenticados.",
+    "pista": "Anónimos não têm acesso por defeito."
   },
   {
     "question": "43. Un host llamado 'lpi' con MAC 08:00:26:4c:59:23 debe recibir siempre la IP 192.168.1.2 de un servidor ISC DHCPD. ¿Qué configuración lo logra?",
@@ -532,7 +532,7 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "D",
     "explicacion": "La sintaxis correcta en dhcpd.conf utiliza 'hardware ethernet' (separado) y 'fixed-address'.",
-    "pista": "Fíjate en el espacio entre 'hardware' y 'ethernet'."
+    "pista": "Espaço entre 'hardware' e 'ethernet'."
   },
   {
     "question": "44. ¿Cómo se configura la cuenta del administrador de LDAP cuando las directivas rootdn y rootpw no están presentes en el archivo slapd.conf?",
@@ -544,8 +544,8 @@ const preguntasLPIC2_2 = [
       "E. La cuenta se define en el archivo /etc/ldap.root.conf"
     ],
     "answer": "B",
-    "explicacion": "Sin las directivas rootdn/rootpw, los privilegios administrativos deben otorgarse explícitamente mediante reglas de control de acceso (ACLs).",
-    "pista": "Se controla mediante Access Control Lists."
+    "explicacion": "Sin las directivas rootdn/rootpw, los privilegios administrativos deben otorgarse mediante ACLs.",
+    "pista": "Controlado por ACLs."
   },
   {
     "question": "45. ¿Qué módulo PAM permite al administrador usar un archivo arbitrario con una lista de usuarios y grupos para aplicar restricciones sobre los recursos del sistema?",
@@ -556,15 +556,15 @@ const preguntasLPIC2_2 = [
       "D. pam_unix"
     ],
     "answer": "B",
-    "explicacion": "pam_limits es el módulo encargado de aplicar límites de recursos (como los definidos en /etc/security/limits.conf).",
-    "pista": "Módulo de límites."
+    "explicacion": "pam_limits es el módulo encargado de aplicar límites de recursos.",
+    "pista": "Módulo de limites."
   },
   {
     "question": "46. Según este extracto de LDIF, ¿a qué unidad organizativa (ou) pertenece Robert Smith? \ndn: cn=Robert Smith, ou=people, dc=example, dc=com",
     "options": [],
     "answer": "people",
     "explicacion": "El Distinguished Name (dn) muestra claramente que Robert Smith está dentro de 'ou=people'.",
-    "pista": "Observa el valor del campo 'ou'."
+    "pista": "Observa o campo 'ou'."
   },
   {
     "question": "47. En un archivo de configuración de PAM, ¿qué es cierto sobre el flag de control 'required'?",
@@ -576,15 +576,15 @@ const preguntasLPIC2_2 = [
       "E. Si el módulo falla, no se invocarán más módulos del mismo tipo"
     ],
     "answer": "C",
-    "explicacion": "Required obliga al éxito, pero por seguridad oculta qué módulo falló ejecutando el resto de la pila antes de denegar el acceso.",
-    "pista": "Es obligatorio pero 'silencioso' hasta el final de la pila."
+    "explicacion": "Required obliga al éxito, pero oculta qué módulo falló ejecutando el resto de la pila.",
+    "pista": "Obrigatório mas silencioso até ao fim."
   },
   {
     "question": "48. ¿Cuál es el nombre del elemento raíz del árbol LDAP que contiene la configuración de un servidor OpenLDAP que usa configuración basada en directorio (RTC)? (Solo el nombre)",
     "options": [],
     "answer": "slapd",
-    "explicacion": "En el sistema OLC (On-Line Configuration), la base suele ser cn=config, pero el elemento raíz de la estructura de configuración es slapd.",
-    "pista": "El nombre del demonio de LDAP."
+    "explicacion": "En el sistema OLC (On-Line Configuration), el elemento raíz de la estructura de configuración es slapd.",
+    "pista": "Nome do daemon LDAP."
   },
   {
     "question": "49. ¿Cómo se organizan y almacenan los módulos PAM?",
@@ -596,8 +596,8 @@ const preguntasLPIC2_2 = [
       "E. Como binarios enlazados dinámicamente en /usr/lib/pam/sbin/"
     ],
     "answer": "E",
-    "explicacion": "Los módulos PAM son bibliotecas dinámicas (.so) que se cargan según sea necesario, normalmente ubicadas en directorios de bibliotecas de sistema.",
-    "pista": "Son objetos compartidos dinámicos."
+    "explicacion": "Los módulos PAM son bibliotecas dinámicas (.so) ubicadas en directorios de bibliotecas de sistema.",
+    "pista": "Objectos partilhados dinâmicos."
   },
   {
     "question": "50. ¿Qué sentencia en la configuración de ISC DHCPD se utiliza para especificar si un pool de direcciones puede ser usado por nodos que tienen una sección 'host' correspondiente?",
@@ -609,22 +609,22 @@ const preguntasLPIC2_2 = [
       "E. unknown-clients"
     ],
     "answer": "E",
-    "explicacion": "unknown-clients permite distinguir entre clientes definidos en la configuración y aquellos que no lo están.",
-    "pista": "Clientes desconocidos."
+    "explicacion": "unknown-clients permite distinguir entre clientes definidos en la configuración y aquellos que no.",
+    "pista": "Clientes desconhecidos."
   },
   {
     "question": "51. Para especificar alteraciones en una entrada LDAP, ¿qué palabra clave falta en este extracto? \ndn: cn=Some Person, dc=example, dc=com \nchangetype: _______",
     "options": [],
     "answer": "add",
-    "explicacion": "Para añadir nuevos atributos o entradas, el tipo de cambio es 'add'. (También puede ser modify o delete según el contexto).",
-    "pista": "Añadir en inglés."
+    "explicacion": "Para añadir nuevos atributos o entradas, el tipo de cambio es 'add'.",
+    "pista": "Adicionar em inglês."
   },
   {
     "question": "52. ¿Qué comando de cliente OpenLDAP puede usarse para cambiar la contraseña de una entrada LDAP? (Solo el comando)",
     "options": [],
     "answer": "ldappasswd",
-    "explicacion": "ldappasswd es la herramienta específica para cambiar contraseñas de usuarios en el directorio.",
-    "pista": "Comando para contraseñas de LDAP."
+    "explicacion": "ldappasswd es la herramienta específica para cambiar contraseñas en el directorio.",
+    "pista": "ldappasswd."
   },
   {
     "question": "53. Una empresa cambia de dominio DNS y quiere aceptar correos para ambos dominios en su servidor Postfix. ¿Qué opción debe actualizarse?",
@@ -637,14 +637,14 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "C",
     "explicacion": "mydestination define la lista de dominios para los cuales el servidor se considera el destino final.",
-    "pista": "Mi destino."
+    "pista": "Meu destino."
   },
   {
     "question": "54. ¿Cuál es la ruta al archivo de configuración global de Postfix? (Ruta completa)",
     "options": [],
     "answer": "/etc/postfix/main.cf",
     "explicacion": "main.cf es el archivo principal donde se configuran la mayoría de los parámetros de Postfix.",
-    "pista": "Archivo principal en /etc/postfix/."
+    "pista": "Ficheiro principal."
   },
   {
     "question": "55. ¿Cuándo se aplican normalmente los filtros Sieve a un correo electrónico?",
@@ -656,8 +656,8 @@ const preguntasLPIC2_2 = [
       "E. Cuando el correo es recuperado por un MUA"
     ],
     "answer": "A",
-    "explicacion": "Sieve es un lenguaje de filtrado que actúa durante la fase de entrega final (Local Delivery Agent).",
-    "pista": "En el momento de la entrega al buzón."
+    "explicacion": "Sieve es un lenguaje de filtrado que actúa durante la fase de entrega final.",
+    "pista": "Na entrega à caixa de correio."
   },
   {
     "question": "56. Se descubre que el servidor de correo es un 'open relay'. ¿Qué acciones ayudan a prevenirlo manteniendo la recepción de correos de la empresa? (Elige dos)",
@@ -669,8 +669,8 @@ const preguntasLPIC2_2 = [
       "E. Actualizar el formato de buzón de mbox a maildir"
     ],
     "answer": "A, D",
-    "explicacion": "Un servidor seguro solo debe aceptar correos para sus propios dominios y solo permitir el reenvío (relay) a usuarios de confianza o redes internas.",
-    "pista": "Limita los destinos aceptados y el origen del tráfico saliente."
+    "explicacion": "Un servidor seguro solo debe aceptar correos para sus propios dominios y restringir el relay.",
+    "pista": "Limita destinos e origem."
   },
   {
     "question": "57. Tras instalar Dovecot, se observa que los procesos en 'ps ax' aparecen como 'dovecot/imap'. ¿Qué opción debe activarse para ver el nombre de usuario e IP en el título del proceso?",
@@ -682,8 +682,8 @@ const preguntasLPIC2_2 = [
       "E. process_format = \"%u %I %s\" en la configuración de Dovecot"
     ],
     "answer": "D",
-    "explicacion": "verbose_proctitle permite que Dovecot actualice el nombre del proceso con información detallada de la conexión.",
-    "pista": "Título de proceso detallado (verbose)."
+    "explicacion": "verbose_proctitle permite que Dovecot actualice el nombre del proceso con información detallada.",
+    "pista": "Título detalhado."
   },
   {
     "question": "58. ¿Qué comando de Postfix se usa para reconstruir todas las bases de datos de alias con una sola invocación y sin parámetros adicionales?",
@@ -694,15 +694,15 @@ const preguntasLPIC2_2 = [
       "D. postmapbuild"
     ],
     "answer": "B",
-    "explicacion": "newaliases lee el archivo /etc/aliases y actualiza la base de datos indexada que usa Postfix.",
-    "pista": "Nuevos alias."
+    "explicacion": "newaliases lee el archivo /etc/aliases y actualiza la base de datos indexada.",
+    "pista": "Novos aliases."
   },
   {
     "question": "59. ¿Qué acción en un filtro Sieve reenvía un mensaje a otra dirección de correo sin cambiar el mensaje original? (Solo el nombre)",
     "options": [],
     "answer": "redirect",
     "explicacion": "La acción 'redirect' envía el mensaje tal cual a un nuevo destinatario.",
-    "pista": "Redirigir en inglés."
+    "pista": "Redireccionar em inglês."
   },
   {
     "question": "60. ¿Qué mecanismos de autenticación son soportados por Dovecot? (Elige tres)",
@@ -714,9 +714,9 @@ const preguntasLPIC2_2 = [
       "E. krb5"
     ],
     "answer": "B, C, D",
-    "explicacion": "Dovecot soporta varios mecanismos de autenticación SASL, siendo PLAIN, CRAM-MD5 y DIGEST-MD5 los más comunes en los exámenes.",
-    "pista": "Métodos clásicos de intercambio de contraseñas."
-  }
+    "explicacion": "Dovecot soporta varios mecanismos de autenticación SASL como PLAIN, CRAM-MD5 y DIGEST-MD5.",
+    "pista": "Métodos clássicos."
+  },
   {
     "question": "61. ¿Cuál de los siguientes servicios pertenece a NFSv4 y no existe en NFSv3?",
     "options": [
@@ -726,8 +726,8 @@ const preguntasLPIC2_2 = [
       "D. rpc.mountd"
     ],
     "answer": "A",
-    "explicacion": "rpc.idmapd es el demonio encargado del mapeo de nombres de usuario y grupos en NFSv4, una funcionalidad que no estaba presente en versiones anteriores.",
-    "pista": "Busca el servicio encargado del mapeo de IDs (ID Mapping)."
+    "explicacion": "rpc.idmapd es el demonio encargado del mapeo de nombres de usuario y grupos en NFSv4.",
+    "pista": "Mapeamento de IDs."
   },
   {
     "question": "62. ¿Qué acción sincroniza las contraseñas de UNIX con las de Samba cuando la contraseña cifrada de Samba se cambia usando smbpasswd?",
@@ -739,8 +739,8 @@ const preguntasLPIC2_2 = [
       "E. Añadir 'smb unix password' al archivo smb.conf"
     ],
     "answer": "D",
-    "explicacion": "La directiva 'unix password sync' permite que Samba intente actualizar la contraseña del sistema local cuando el usuario cambia su contraseña de Samba.",
-    "pista": "Sincronización de contraseñas Unix."
+    "explicacion": "La directiva 'unix password sync' permite que Samba actualice la contraseña del sistema local.",
+    "pista": "Sincronização Unix."
   },
   {
     "question": "63. Para unir un servidor de archivos al dominio de Active Directory 'intra.example.com', el comando 'net ads join' devuelve un error. ¿Qué debe hacerse según la configuración de smb.conf proporcionada?",
@@ -752,15 +752,15 @@ const preguntasLPIC2_2 = [
       "E. Eliminar todas las estrofas de configuración de idmap ya que se definen globalmente en AD"
     ],
     "answer": "E",
-    "explicacion": "En ciertos escenarios de integración con AD, la configuración manual de idmap puede entrar en conflicto con la gestión global del dominio.",
-    "pista": "Elimina la configuración de mapeo de IDs (idmap)."
+    "explicacion": "En ciertos escenarios, la configuración manual de idmap puede entrar en conflicto con la gestión global.",
+    "pista": "Remove idmap."
   },
   {
     "question": "64. Al montar un cliente NFSv4, el punto de montaje /mnt muestra el contenido de /usr en lugar de la raíz. ¿Qué opción en /etc/exports debe cambiarse o eliminarse para que aparezca la raíz de NFSv4? (Solo el nombre)",
     "options": [],
     "answer": "mount",
-    "explicacion": "El problema suele residir en cómo se define el punto de anclaje de la exportación en el archivo /etc/exports.",
-    "pista": "Revisa la opción relacionada con el montaje."
+    "explicacion": "El problema suele residir en cómo se define el punto de anclaje de la exportación.",
+    "pista": "Revisar opção de montagem."
   },
   {
     "question": "65. ¿Qué confirma el comando 'samba-tool testparm' respecto a la configuración de Samba?",
@@ -772,8 +772,8 @@ const preguntasLPIC2_2 = [
       "E. Todos los procesos usan la versión de configuración más reciente"
     ],
     "answer": "A",
-    "explicacion": "testparm verifica la sintaxis y la validez del archivo smb.conf, asegurando que Samba pueda cargarlo sin errores.",
-    "pista": "Prueba de parámetros (test parameters)."
+    "explicacion": "testparm verifica la sintaxis y la validez del archivo smb.conf.",
+    "pista": "Teste de parâmetros."
   },
   {
     "question": "66. ¿Qué opción de Samba debe usarse para configurar un servicio de impresora para invitados (guest)?",
@@ -785,8 +785,8 @@ const preguntasLPIC2_2 = [
       "E. security = printing"
     ],
     "answer": "D",
-    "explicacion": "Tradicionalmente, 'security = share' se utilizaba para permitir accesos basados en recursos sin requerir una cuenta de usuario previa, ideal para servicios abiertos.",
-    "pista": "Seguridad a nivel de recurso compartido."
+    "explicacion": "Tradicionalmente, 'security = share' se utilizaba para permitir accesos basados en recursos sin requerir cuenta.",
+    "pista": "Segurança por partilha."
   },
   {
     "question": "67. ¿Qué declaración de 'host allow' permitirá a las estaciones cableadas (192.168.1.0/24) conectar al servidor Samba sin denegar el acceso a nadie más?",
@@ -798,15 +798,15 @@ const preguntasLPIC2_2 = [
       "E. host allow localhost"
     ],
     "answer": "D, E",
-    "explicacion": "Se deben listar ambos rangos de red (cableada e inalámbrica) junto con la interfaz local para asegurar la conectividad total.",
-    "pista": "Incluye ambas subredes y el localhost."
+    "explicacion": "Se deben listar ambos rangos de red junto con la interfaz local.",
+    "pista": "Inclui sub-redes e localhost."
   },
   {
     "question": "68. ¿Qué comando muestra las estadísticas del kernel para NFS? (Solo el comando)",
     "options": [],
     "answer": "nfsstat",
     "explicacion": "nfsstat muestra información estadística sobre la actividad del cliente y servidor NFS.",
-    "pista": "Estadísticas de NFS."
+    "pista": "nfsstat."
   },
   {
     "question": "69. ¿Qué palabra clave se usa en la configuración de Squid para definir redes y horarios con el fin de limitar el acceso?",
@@ -817,8 +817,8 @@ const preguntasLPIC2_2 = [
       "D. permit"
     ],
     "answer": "A",
-    "explicacion": "Las ACL (Access Control Lists) son la base de la configuración de Squid para identificar tráfico.",
-    "pista": "Lista de Control de Acceso."
+    "explicacion": "Las ACL (Access Control Lists) son la base de la configuración de Squid.",
+    "pista": "Lista de Controlo de Acesso."
   },
   {
     "question": "70. En la configuración de Apache para www y www2, las solicitudes no se manejan correctamente. ¿Qué debe cambiarse?",
@@ -830,8 +830,8 @@ const preguntasLPIC2_2 = [
       "E. Usar una declaración ServerName y las adicionales en ServerAlias"
     ],
     "answer": "C",
-    "explicacion": "Aunque técnicamente se recomienda ServerAlias, el examen especifica que la corrección para este error en particular reside en cómo se listan los nombres.",
-    "pista": "Busca la opción que une ambos nombres en una sola línea."
+    "explicacion": "El examen especifica que la corrección para este error reside en cómo se listan los nombres.",
+    "pista": "Nomes na mesma linha."
   },
   {
     "question": "71. Dado 'cache_dir ufs /var/spool/squid3/ 1024 16 256', ¿qué directorios existirán directamente dentro de /var/spool/squid3/? (Elige dos)",
@@ -843,8 +843,8 @@ const preguntasLPIC2_2 = [
       "E. 00"
     ],
     "answer": "A, E",
-    "explicacion": "Squid crea una estructura hexadecimal (de 00 a 0F para 16 directorios de primer nivel).",
-    "pista": "Primer y último directorio hexadecimal para 16 niveles."
+    "explicacion": "Squid crea una estructura hexadecimal (de 00 a 0F para 16 directorios).",
+    "pista": "Estrutura hexadecimal."
   },
   {
     "question": "72. ¿Qué afirmaciones son ciertas respecto a Server Name Indication (SNI)? (Elige dos)",
@@ -856,8 +856,8 @@ const preguntasLPIC2_2 = [
       "E. Envía el nombre de host de la URL solicitada durante el handshake TLS"
     ],
     "answer": "B, E",
-    "explicacion": "SNI permite al cliente indicar el nombre del servidor al que intenta conectarse al inicio del protocolo TLS, permitiendo servir múltiples certificados en una misma IP.",
-    "pista": "Múltiples certificados en una IP y envío del nombre de host."
+    "explicacion": "SNI permite al cliente indicar el nombre del servidor al inicio del protocolo TLS.",
+    "pista": "Múltiplos certificados e nome de host."
   },
   {
     "question": "73. ¿Qué directiva de Apache especifica la clave privada RSA usada para generar el certificado SSL?",
@@ -868,8 +868,8 @@ const preguntasLPIC2_2 = [
       "D. SSLRSAKeyFile"
     ],
     "answer": "A",
-    "explicacion": "SSLCertificateKeyFile apunta al archivo de la clave privada que corresponde al certificado público.",
-    "pista": "Archivo de la clave del certificado SSL."
+    "explicacion": "SSLCertificateKeyFile apunta al archivo de la clave privada.",
+    "pista": "Chave do certificado SSL."
   },
   {
     "question": "74. ¿Qué comando se usa para CAMBIAR la contraseña de usuarios existentes en Apache sin perder datos?",
@@ -880,8 +880,8 @@ const preguntasLPIC2_2 = [
       "D. htpasswd -D /srv/www/security/sitepasswd user"
     ],
     "answer": "B",
-    "explicacion": "Si el archivo ya existe, ejecutar htpasswd sin la opción '-c' (create) permite actualizar o añadir usuarios sin borrar el contenido actual.",
-    "pista": "No uses la opción de creación (-c)."
+    "explicacion": "Si el archivo ya existe, ejecutar htpasswd sin '-c' permite actualizar.",
+    "pista": "Sem -c."
   },
   {
     "question": "75. ¿Qué directiva de Apache se usa para especificar el método de autenticación (ej. None o Basic)?",
@@ -892,8 +892,8 @@ const preguntasLPIC2_2 = [
       "D. AllowAuth"
     ],
     "answer": "C",
-    "explicacion": "AuthType define el esquema de autenticación a utilizar para el directorio o localización.",
-    "pista": "Tipo de autenticación."
+    "explicacion": "AuthType define el esquema de autenticación a utilizar.",
+    "pista": "Tipo de autenticação."
   },
   {
     "question": "76. ¿Cuáles de las siguientes son directivas de registro (logging) en Apache? (Elige dos)",
@@ -905,8 +905,8 @@ const preguntasLPIC2_2 = [
       "E. VHostLog"
     ],
     "answer": "A, B",
-    "explicacion": "CustomLog y TransferLog se utilizan para definir el registro de acceso, mientras que ErrorLog (no seleccionada aquí según el dump) es para errores.",
-    "pista": "Logs de transferencia y personalizados."
+    "explicacion": "CustomLog y TransferLog se utilizan para definir el registro de acceso.",
+    "pista": "Transferência e logs personalizados."
   },
   {
     "question": "77. ¿Qué opción en la configuración de Nginx define la ruta del sistema de archivos donde se encuentra el contenido?",
@@ -918,8 +918,8 @@ const preguntasLPIC2_2 = [
       "E. base_dir"
     ],
     "answer": "D",
-    "explicacion": "A diferencia de Apache (DocumentRoot), Nginx utiliza la directiva 'root' para definir el directorio base de los archivos.",
-    "pista": "Directorio raíz."
+    "explicacion": "Nginx utiliza la directiva 'root' para definir el directorio base.",
+    "pista": "Directório raiz."
   },
   {
     "question": "78. ¿Qué directiva se usa en Nginx para pasar peticiones a una aplicación FastCGI?",
@@ -931,8 +931,8 @@ const preguntasLPIC2_2 = [
       "E. fastcgi_forward"
     ],
     "answer": "A",
-    "explicacion": "fastcgi_pass conecta Nginx con un servidor FastCGI externo o local.",
-    "pista": "Paso a FastCGI."
+    "explicacion": "fastcgi_pass conecta Nginx con un servidor FastCGI.",
+    "pista": "Passagem a FastCGI."
   },
   {
     "question": "79. ¿Qué información debe enviarse a una autoridad de certificación para solicitar un certificado de servidor web?",
@@ -944,8 +944,8 @@ const preguntasLPIC2_2 = [
       "E. La solicitud de firma de certificado (CSR)"
     ],
     "answer": "E",
-    "explicacion": "El CSR (Certificate Signing Request) contiene la clave pública y la información de identidad necesaria para que la CA firme el certificado.",
-    "pista": "Solicitud de firma."
+    "explicacion": "El CSR contiene la clave pública y la información de identidad necesaria.",
+    "pista": "CSR."
   },
   {
     "question": "80. ¿Para qué utiliza nmap el 'fingerprinting' de la pila TCP/IP?",
@@ -957,8 +957,8 @@ const preguntasLPIC2_2 = [
       "E. Para identificar servidores para análisis forense"
     ],
     "answer": "A",
-    "explicacion": "Cada sistema operativo responde de forma ligeramente diferente a ciertos paquetes; nmap analiza estas sutiles diferencias para identificar el SO.",
-    "pista": "Identificación de SO."
+    "explicacion": "Nmap analiza las sutiles diferencias de respuesta para identificar el SO.",
+    "pista": "Identificação de SO."
   },
   {
     "question": "81. Para permitir el reenvío de conexiones X11 a través de un servidor SSH, ¿qué palabra clave debe estar en 'yes' en sshd_config?",
@@ -969,8 +969,8 @@ const preguntasLPIC2_2 = [
       "D. X11Forwarding"
     ],
     "answer": "D",
-    "explicacion": "X11Forwarding habilita la capacidad de tunelizar aplicaciones gráficas sobre la conexión SSH.",
-    "pista": "Reenvío X11."
+    "explicacion": "X11Forwarding habilita la tunelización de aplicaciones gráficas.",
+    "pista": "Reenvio X11."
   },
   {
     "question": "82. ¿Cuál es el puerto estándar utilizado por OpenVPN?",
@@ -981,15 +981,15 @@ const preguntasLPIC2_2 = [
       "D. 1194"
     ],
     "answer": "D",
-    "explicacion": "El puerto 1194 UDP es el puerto registrado oficialmente para el protocolo OpenVPN.",
-    "pista": "Puerto clásico de VPN."
+    "explicacion": "El puerto 1194 UDP es el oficial para OpenVPN.",
+    "pista": "1194."
   },
   {
     "question": "83. ¿Qué opción en el archivo sshd_config instruye al demonio a permitir solo nombres de usuario específicos? (Solo el nombre)",
     "options": [],
     "answer": "AllowUsers",
-    "explicacion": "La directiva AllowUsers crea una lista blanca de usuarios permitidos para iniciar sesión.",
-    "pista": "Permitir usuarios."
+    "explicacion": "La directiva AllowUsers crea una lista blanca de usuarios permitidos.",
+    "pista": "Permitir utilizadores."
   },
   {
     "question": "84. Usando su configuración estándar, ¿cómo bloquea fail2ban a los clientes SSH ofensivos?",
@@ -1001,8 +1001,8 @@ const preguntasLPIC2_2 = [
       "E. Modificando la configuración de TCP Wrapper"
     ],
     "answer": "C",
-    "explicacion": "fail2ban interactúa dinámicamente con iptables o nftables para bloquear direcciones IP.",
-    "pista": "Usa el firewall del kernel."
+    "explicacion": "fail2ban interactúa dinámicamente con iptables o nftables.",
+    "pista": "Usa o firewall do kernel."
   },
   {
     "question": "85. ¿Qué nombres FTP se reconocen como usuarios anónimos en vsftpd si 'anonymous_enable=yes'?",
@@ -1014,8 +1014,8 @@ const preguntasLPIC2_2 = [
       "E. guest"
     ],
     "answer": "A, B",
-    "explicacion": "Tanto el nombre 'anonymous' como su alias 'ftp' son aceptados para sesiones anónimas.",
-    "pista": "Anónimo y el nombre del protocolo."
+    "explicacion": "Tanto el nombre 'anonymous' como su alias 'ftp' son aceptados.",
+    "pista": "Anónimo e nome do protocolo."
   },
   {
     "question": "86. ¿Qué comandos pueden usarse para conectar e interactuar con servicios de red TCP remotos? (Elige dos)",
@@ -1027,8 +1027,8 @@ const preguntasLPIC2_2 = [
       "E. netmap"
     ],
     "answer": "B, C",
-    "explicacion": "netcat (nc) y telnet son herramientas versátiles para probar conectividad y enviar datos a puertos TCP.",
-    "pista": "La 'navaja suiza' de la red y el protocolo de terminal clásico."
+    "explicacion": "netcat (nc) y telnet son herramientas versátiles para probar conectividad.",
+    "pista": "nc e telnet."
   },
   {
     "question": "87. ¿A qué destino aparecerá una ruta tras activar IPv6 en una interfaz, incluso sin asignar direcciones globales?",
@@ -1040,8 +1040,8 @@ const preguntasLPIC2_2 = [
       "E. 2000::/3"
     ],
     "answer": "A",
-    "explicacion": "Al activar IPv6, el sistema genera automáticamente una dirección de enlace local (link-local) en el rango fe80::/10.",
-    "pista": "Direccionamiento Link-Local."
+    "explicacion": "Al activar IPv6, se genera automáticamente una dirección link-local.",
+    "pista": "Link-Local."
   },
   {
     "question": "88. Para evitar que usuarios anónimos listen archivos subidos, ¿qué permiso debe quitarse al directorio?",
@@ -1053,8 +1053,8 @@ const preguntasLPIC2_2 = [
       "E. No debe contener otros directorios"
     ],
     "answer": "B",
-    "explicacion": "Quitar el permiso de lectura (r) impide listar el contenido, mientras que el de ejecución (x) permite acceder a un archivo si se conoce su nombre exacto.",
-    "pista": "Si no puedes leer el directorio, no puedes listar archivos."
+    "explicacion": "Quitar el permiso de lectura (r) impide listar el contenido.",
+    "pista": "Retirar leitura."
   },
   {
     "question": "89. ¿Qué comando se usa para administrar las reglas de netfilter para IPv6?",
@@ -1066,8 +1066,8 @@ const preguntasLPIC2_2 = [
       "E. ipv6tables"
     ],
     "answer": "D",
-    "explicacion": "ip6tables es el homólogo de iptables diseñado específicamente para el protocolo IPv6.",
-    "pista": "iptables para el protocolo 6."
+    "explicacion": "ip6tables es el homólogo de iptables diseñado para IPv6.",
+    "pista": "ip6tables."
   },
   {
     "question": "90. ¿Qué tabla de netfilter contiene las cadenas integradas INPUT, OUTPUT y FORWARD?",
@@ -1079,9 +1079,9 @@ const preguntasLPIC2_2 = [
       "E. masq"
     ],
     "answer": "B",
-    "explicacion": "La tabla 'filter' es la tabla por defecto para el filtrado de paquetes y contiene estas tres cadenas fundamentales.",
-    "pista": "Tabla para filtrar."
-  }
+    "explicacion": "La tabla 'filter' es la tabla por defecto para el filtrado.",
+    "pista": "Filtro."
+  },
   {
     "question": "91. Tras ejecutar ssh-keygen y aceptar los valores por defecto, ¿qué archivos se crean o modifican? (Elige dos)",
     "options": [
@@ -1092,11 +1092,11 @@ const preguntasLPIC2_2 = [
       "E. ~/.ssh/id_rsa"
     ],
     "answer": "B, E",
-    "explicacion": "Por defecto, se crea la clave privada (id_rsa) y la clave pública (id_rsa.pub).",
-    "pista": "La clave pública termina en .pub y la privada no tiene extensión."
+    "explicacion": "Por defecto, se crea la clave privada y la pública.",
+    "pista": "Privada e .pub."
   },
   {
-    "question": "92. ¿Qué opción de configuración de OpenVPN hace que el servidor reenvíe paquetes entre clientes VPN por sí mismo en lugar de pasarlos al host Linux?",
+    "question": "92. ¿Qué opción de configuración de OpenVPN hace que el servidor reenvíe paquetes entre clientes VPN por sí mismo?",
     "options": [
       "A. inter-client-traffic",
       "B. client-to-client",
@@ -1105,11 +1105,11 @@ const preguntasLPIC2_2 = [
       "E. grant-client-traffic"
     ],
     "answer": "B",
-    "explicacion": "La directiva 'client-to-client' permite que los clientes se vean entre sí internamente a través de OpenVPN.",
-    "pista": "De cliente a cliente."
+    "explicacion": "La directiva 'client-to-client' permite que los clientes se vean internamente.",
+    "pista": "De cliente para cliente."
   },
   {
-    "question": "93. ¿Cuál de estas herramientas proporciona información DNS en el formato: 'www.example.com has address 172.25.25.55'?",
+    "question": "93. ¿Cuál de estas herramientas proporciona información DNS en el formato legible?",
     "options": [
       "A. dig",
       "B. nslookup",
@@ -1118,11 +1118,11 @@ const preguntasLPIC2_2 = [
       "E. named-checkzone"
     ],
     "answer": "C",
-    "explicacion": "El comando 'host' produce una salida simplificada y legible en lenguaje natural.",
-    "pista": "Es el comando más corto para consultar hosts."
+    "explicacion": "El comando 'host' produce una salida simplificada.",
+    "pista": "host."
   },
   {
-    "question": "94. ¿Qué subcomando de 'rndc' puede usarse junto con el nombre de una zona para que BIND vuelva a leer solo ese archivo de zona específico?",
+    "question": "94. ¿Qué subcomando de 'rndc' puede usarse para que BIND vuelva a leer solo ese archivo de zona?",
     "options": [
       "A. lookup",
       "B. reload",
@@ -1131,11 +1131,11 @@ const preguntasLPIC2_2 = [
       "E. zoneupdate"
     ],
     "answer": "B",
-    "explicacion": "Ejecutar 'rndc reload [nombre_zona]' recarga únicamente la zona indicada sin afectar al resto.",
-    "pista": "Recargar en inglés."
+    "explicacion": "Ejecutar 'rndc reload [nombre_zona]' recarga únicamente esa zona.",
+    "pista": "Recarregar."
   },
   {
-    "question": "95. Un archivo de zona contiene: '$ORIGIN example.com' y una línea para 'host2.example.org.'. ¿Qué problema presenta esta configuración?",
+    "question": "95. Un archivo de zona contiene: '$ORIGIN example.com' y una línea para 'host2.example.org.'. ¿Qué problema presenta?",
     "options": [
       "A. La sentencia zone debe contener 'cross-zone-data yes'",
       "B. La zona no puede contener registros fuera de su jerarquía",
@@ -1144,8 +1144,8 @@ const preguntasLPIC2_2 = [
       "E. Los nombres no pueden ser FQDN"
     ],
     "answer": "C",
-    "explicacion": "Si el archivo de zona se carga mediante una sentencia 'zone' específica, el origen ya está definido por BIND.",
-    "pista": "$ORIGIN suele entrar en conflicto con la definición del named.conf."
+    "explicacion": "Si el archivo se carga mediante 'zone', el origen ya está definido.",
+    "pista": "$ORIGIN em ficheiro específico."
   },
   {
     "question": "96. ¿Cuál de los siguientes tipos de registro DNS se utiliza para consultas DNS inversas?",
@@ -1157,15 +1157,15 @@ const preguntasLPIC2_2 = [
       "E. RIN"
     ],
     "answer": "C",
-    "explicacion": "El registro PTR (Pointer) apunta una dirección IP a un nombre de dominio.",
-    "pista": "Registro puntero."
+    "explicacion": "El registro PTR apunta una dirección IP a un nombre.",
+    "pista": "Ponteiro."
   },
   {
-    "question": "97. Según la configuración: '$ORIGIN example.com | @ IN SOA mars.example.com pluto.example.com (...)', ¿cuál es el email del administrador?",
+    "question": "97. Según el SOA extracto, ¿cuál es el email del administrador?",
     "options": [],
     "answer": "pluto@example.com",
-    "explicacion": "En el registro SOA, el segundo campo es el email del administrador, sustituyendo el primer punto por una arroba.",
-    "pista": "El nombre tras el servidor primario es el email (puntos por arrobas)."
+    "explicacion": "En el SOA, el segundo campo es el email, sustituyendo el primer punto por @.",
+    "pista": "Segundo campo do SOA."
   },
   {
     "question": "98. ¿Cuál es el propósito de DANE?",
@@ -1177,11 +1177,11 @@ const preguntasLPIC2_2 = [
       "E. Verificar la asociación de certificados X.509 a nombres de host DNS"
     ],
     "answer": "E",
-    "explicacion": "DANE utiliza DNSSEC para vincular certificados TLS a nombres de dominio de forma segura.",
-    "pista": "Relaciona certificados SSL/TLS con DNS."
+    "explicacion": "DANE utiliza DNSSEC para vincular certificados TLS a nombres de host.",
+    "pista": "Vincular certificados a hosts."
   },
   {
-    "question": "99. ¿Qué parámetros deben añadirse a BIND para usar TSIG con el algoritmo hmac-md5 y la clave proporcionada?",
+    "question": "99. ¿Qué parámetros deben añadirse a BIND para usar TSIG?",
     "options": [
       "A. key.server.example.com { algorithm hmac-md5; secret ...; }",
       "B. TSIG server.example.com { algorithm hmac-md5; secret ...; }",
@@ -1189,11 +1189,11 @@ const preguntasLPIC2_2 = [
       "D. key.server.example.com { algorithm hmac-md5; secret=...; }"
     ],
     "answer": "C",
-    "explicacion": "La sintaxis correcta requiere la palabra clave 'key' y las comillas para el nombre y el secreto.",
-    "pista": "Usa la palabra clave 'key'."
+    "explicacion": "La sintaxis correcta requiere 'key' y comillas.",
+    "pista": "Palavra chave 'key'."
   },
   {
-    "question": "100. ¿Qué opción en named.conf especifica qué hosts tienen permiso para consultar información de nombres al servidor?",
+    "question": "100. ¿Qué opción en named.conf especifica qué hosts tienen permiso para consultar?",
     "options": [
       "A. allowed-hosts",
       "B. accept-query",
@@ -1202,15 +1202,15 @@ const preguntasLPIC2_2 = [
       "E. query-group"
     ],
     "answer": "D",
-    "explicacion": "'allow-query' define una ACL o lista de IPs que pueden realizar consultas.",
+    "explicacion": "'allow-query' define una ACL o lista de IPs.",
     "pista": "Permitir consulta."
   },
   {
-    "question": "101. ¿Qué subcomando de 'doveadm' muestra una lista de conexiones actuales de Dovecot? (Solo el subcomando)",
+    "question": "101. ¿Qué subcomando de 'doveadm' muestra una lista de conexiones actuales? (Solo el subcomando)",
     "options": [],
     "answer": "who",
-    "explicacion": "El comando 'doveadm who' lista los usuarios conectados y sus conexiones.",
-    "pista": "¿Quién está conectado?"
+    "explicacion": "El comando 'doveadm who' lista los usuarios conectados.",
+    "pista": "Quem?"
   },
   {
     "question": "102. ¿Qué acciones están disponibles en los filtros de núcleo (core) de Sieve? (Elige tres)",
@@ -1222,8 +1222,8 @@ const preguntasLPIC2_2 = [
       "E. keep"
     ],
     "answer": "B, C, E",
-    "explicacion": "Las acciones básicas incluyen descartar (discard), guardar en carpeta (fileinto) y mantener (keep).",
-    "pista": "Acciones de descartar, archivar y mantener."
+    "explicacion": "Las acciones básicas incluyen discard, fileinto y keep.",
+    "pista": "Descartar, arquivar e manter."
   },
   {
     "question": "103. ¿Qué sentencias permiten combinaciones lógicas de condiciones en filtros Sieve? (Elige dos)",
@@ -1235,11 +1235,11 @@ const preguntasLPIC2_2 = [
       "E. or"
     ],
     "answer": "A, B",
-    "explicacion": "Sieve utiliza 'allof' (equivalente a AND) y 'anyof' (equivalente a OR) para agrupar condiciones.",
-    "pista": "Todos o cualquiera."
+    "explicacion": "Sieve utiliza 'allof' (AND) y 'anyof' (OR).",
+    "pista": "Todos ou qualquer."
   },
   {
-    "question": "104. ¿Qué parámetro de Postfix modifica solo la dirección del remitente (sender) y no la del destinatario?",
+    "question": "104. ¿Qué parámetro de Postfix modifica solo la dirección del remitente (sender)?",
     "options": [
       "A. alias_maps",
       "B. alias_rewrite_maps",
@@ -1247,18 +1247,18 @@ const preguntasLPIC2_2 = [
       "D. sender_rewrite_maps"
     ],
     "answer": "C",
-    "explicacion": "sender_canonical_maps permite reescribir la dirección 'From' de forma persistente.",
-    "pista": "Mapas canónicos de remitente."
+    "explicacion": "sender_canonical_maps permite reescribir la dirección 'From'.",
+    "pista": "Mapas canónicos de remetente."
   },
   {
     "question": "105. ¿Qué opción en Postfix hace que los correos externos se pasen a otro servidor SMTP? (Solo el nombre)",
     "options": [],
     "answer": "relayhost",
-    "explicacion": "relayhost define el servidor de retransmisión al que se envían todos los correos que no son locales.",
-    "pista": "Host de retransmisión."
+    "explicacion": "relayhost define el servidor de retransmisión.",
+    "pista": "Relay."
   },
   {
-    "question": "106. ¿Cómo se llama la variable de Dovecot que especifica la ubicación del correo del usuario?",
+    "question": "106. ¿Cómo se llama la variable de Dovecot que especifica la ubicación del correo?",
     "options": [
       "A. mbox",
       "B. mail_location",
@@ -1267,8 +1267,8 @@ const preguntasLPIC2_2 = [
       "E. user_mail_dir"
     ],
     "answer": "B",
-    "explicacion": "mail_location define el formato y la ruta (ej. maildir:~/Maildir).",
-    "pista": "Ubicación del correo."
+    "explicacion": "mail_location define el formato y la ruta.",
+    "pista": "Localização."
   },
   {
     "question": "107. En main.cf de Postfix, ¿cómo se continúan las definiciones en la siguiente línea?",
@@ -1280,11 +1280,11 @@ const preguntasLPIC2_2 = [
       "E. Se continúa hasta que se especifiquen todos los campos"
     ],
     "answer": "D",
-    "explicacion": "Cualquier línea que empiece con espacios en blanco se considera continuación de la anterior.",
-    "pista": "Uso de sangría o indentación."
+    "explicacion": "Cualquier línea que empiece con espacios se considera continuación.",
+    "pista": "Espaços em branco."
   },
   {
-    "question": "108. ¿Qué comando de Postfix muestra un resumen del contenido de la cola para identificar tráfico excesivo?",
+    "question": "108. ¿Qué comando de Postfix muestra un resumen del contenido de la cola?",
     "options": [
       "A. mailtraf",
       "B. queuequery",
@@ -1293,11 +1293,11 @@ const preguntasLPIC2_2 = [
       "E. poststats"
     ],
     "answer": "C",
-    "explicacion": "qshape analiza las colas de Postfix y las desglosa por dominios.",
-    "pista": "Forma de la cola (Queue shape)."
+    "explicacion": "qshape analiza las colas de Postfix.",
+    "pista": "Forma da fila."
   },
   {
-    "question": "109. ¿Qué entradas devuelve: ldapsearch -x \"(|(cn=marie) (!(telephoneNumber=9*)))\"?",
+    "question": "109. ¿Qué entradas devuelve el filtro ldapsearch con OR e NOT?",
     "options": [
       "A. Entradas que no se llamen marie o con número que no empiece por 9",
       "B. Entradas que se llamen marie o con número que no empiece por 9",
@@ -1305,8 +1305,8 @@ const preguntasLPIC2_2 = [
       "D. Entradas que no se llamen marie y no empiecen por 9"
     ],
     "answer": "B",
-    "explicacion": "El filtro usa OR (|) entre 'cn=marie' y el NOT (!) de números que empiezan por 9.",
-    "pista": "Es una unión (OR) con una negación (NOT)."
+    "explicacion": "El filtro usa OR entre 'marie' y el NOT de números que empiezan por 9.",
+    "pista": "OR con NOT."
   },
   {
     "question": "110. ¿Qué tipos de asignación de direcciones IPv6 soporta DHCPv6? (Elige tres)",
@@ -1318,15 +1318,15 @@ const preguntasLPIC2_2 = [
       "E. Asignaciones anónimas no registradas"
     ],
     "answer": "A, B, D",
-    "explicacion": "DHCPv6 soporta IANA (Normal), IATA (Temporal) y Delegación de Prefijos (PD).",
-    "pista": "Direcciones normales, temporales y prefijos."
+    "explicacion": "Soporta IANA, IATA y Delegación de Prefijos.",
+    "pista": "Normal, temporal e prefixo."
   },
   {
-    "question": "111. ¿Qué atributo de un objeto LDAP define qué otros atributos se pueden establecer para dicho objeto? (Solo el nombre)",
+    "question": "111. ¿Qué atributo define qué otros atributos se pueden establecer? (Solo el nombre)",
     "options": [],
     "answer": "objectClass",
-    "explicacion": "objectClass define el esquema y los atributos permitidos/requeridos para una entrada.",
-    "pista": "Clase de objeto."
+    "explicacion": "objectClass define el esquema y los atributos permitidos.",
+    "pista": "Classe de objecto."
   },
   {
     "question": "112. ¿Cuál de los siguientes comandos se utiliza para cambiar contraseñas de usuario en un directorio OpenLDAP?",
@@ -1338,11 +1338,11 @@ const preguntasLPIC2_2 = [
       "E. ldapchpw"
     ],
     "answer": "D",
-    "explicacion": "ldappasswd es la herramienta específica para gestionar contraseñas en LDAP.",
+    "explicacion": "ldappasswd es la herramienta específica.",
     "pista": "ldappasswd."
   },
   {
-    "question": "113. Según: 'dn: cn=PrintOperators, ou=Groups, o=IT, dc=mycompany, dc=com', ¿qué es 'dn'?",
+    "question": "113. Según el dn extracto, ¿qué es 'dn'?",
     "options": [
       "A. El nombre de dominio",
       "B. El nombre del operador",
@@ -1351,7 +1351,7 @@ const preguntasLPIC2_2 = [
       "E. El contenedor de delegación"
     ],
     "answer": "D",
-    "explicacion": "DN (Distinguished Name) es la ruta completa y única de una entrada en el directorio.",
+    "explicacion": "DN (Distinguished Name) es la ruta única.",
     "pista": "Distinguished Name."
   },
   {
@@ -1363,11 +1363,11 @@ const preguntasLPIC2_2 = [
       "D. El archivo LDIF acepta cualquier tipo de codificación"
     ],
     "answer": "D",
-    "explicacion": "LDIF debe seguir codificaciones específicas (usualmente UTF-8 o base64 para binarios), no acepta 'cualquiera'.",
-    "pista": "Busca la afirmación que dice que acepta 'cualquier' codificación."
+    "explicacion": "LDIF debe seguir codificaciones específicas, no acepta 'cualquiera'.",
+    "pista": "Não aceita qualquer codificação."
   },
   {
-    "question": "115. ¿Qué opción en DHCPD define los servidores DNS que se envían a los clientes?",
+    "question": "115. ¿Qué opción en DHCPD define los servidores DNS?",
     "options": [
       "A. domain-name-servers",
       "B. domain-server",
@@ -1375,8 +1375,8 @@ const preguntasLPIC2_2 = [
       "D. servers"
     ],
     "answer": "A",
-    "explicacion": "La opción 'option domain-name-servers' lista las IPs de los resolutores DNS.",
-    "pista": "Servidores de nombres de dominio."
+    "explicacion": "La opción 'option domain-name-servers' lista las IPs.",
+    "pista": "Servidores de nomes."
   },
   {
     "question": "116. ¿Qué módulo PAM gestiona las variables de entorno?",
@@ -1388,8 +1388,8 @@ const preguntasLPIC2_2 = [
       "E. pam_export"
     ],
     "answer": "D",
-    "explicacion": "pam_env lee archivos como /etc/security/pam_env.conf para establecer el entorno.",
-    "pista": "Environment (Entorno)."
+    "explicacion": "pam_env lee archivos para establecer el entorno.",
+    "pista": "Environment."
   },
   {
     "question": "117. ¿Qué línea es válida en un archivo de /etc/pam.d/?",
@@ -1401,7 +1401,7 @@ const preguntasLPIC2_2 = [
     ],
     "answer": "A",
     "explicacion": "La sintaxis es: tipo | control | módulo | argumentos.",
-    "pista": "Sigue el orden estándar: auth | required | módulo | argumentos."
+    "pista": "auth required módulo."
   },
   {
     "question": "118. ¿Cómo desactivar el login para todos los usuarios excepto root?",
@@ -1412,11 +1412,11 @@ const preguntasLPIC2_2 = [
       "D. Usar pam_nologin con /etc/nologin"
     ],
     "answer": "D",
-    "explicacion": "Si existe el archivo /etc/nologin, el módulo pam_nologin impide el acceso a usuarios no-root.",
+    "explicacion": "Si existe /etc/nologin, pam_nologin impide el acceso.",
     "pista": "Nologin."
   },
   {
-    "question": "119. ¿Qué valores pueden usarse en 'olcBackend' para especificar un motor de base de datos? (Elige tres)",
+    "question": "119. ¿Qué valores pueden usarse en 'olcBackend'? (Elige tres)",
     "options": [
       "A. xml",
       "B. bdb",
@@ -1425,7 +1425,7 @@ const preguntasLPIC2_2 = [
       "E. text"
     ],
     "answer": "B, D, E",
-    "explicacion": "Los backends comunes incluyen bdb (o hdb), ldap (proxy) y text (LDIF).",
-    "pista": "Base de datos Berkeley, LDAP y archivos de texto."
+    "explicacion": "Los backends comunes incluyen bdb, ldap y text.",
+    "pista": "bdb, ldap, text."
   }
 ];
