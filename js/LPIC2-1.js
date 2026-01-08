@@ -131,7 +131,7 @@ const preguntasLPIC2_1 = [
   "answer": "A, C",
   "explicacion": "(S) indica que sdb1 es un disco spare. [UU] indica que todos los discos activos del array están en estado correcto y sincronizados.",
   "pista": ""
- }
+ },
   {
     "question": "13. ¿Comando para eliminar un PV de un VG? (Solo el comando)",
     "options": [],

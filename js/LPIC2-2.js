@@ -555,9 +555,9 @@ const preguntasLPIC2_2 = [
       "C. pam_listfile",
       "D. pam_unix"
     ],
-    "answer": "B",
-    "explicacion": "pam_limits es el módulo encargado de aplicar límites de recursos.",
-    "pista": "Módulo de limites."
+    "answer": "C",
+    "explicacion": "pam_listfile permite usar un archivo arbitrario con listas de usuarios o grupos para permitir o denegar acceso y aplicar restricciones.",
+    "pista": "Lista en fichero (users/grupos)."
   },
   {
     "question": "46. Según este extracto de LDIF, ¿a qué unidad organizativa (ou) pertenece Robert Smith? \ndn: cn=Robert Smith, ou=people, dc=example, dc=com",
@@ -582,9 +582,9 @@ const preguntasLPIC2_2 = [
   {
     "question": "48. ¿Cuál es el nombre del elemento raíz del árbol LDAP que contiene la configuración de un servidor OpenLDAP que usa configuración basada en directorio (RTC)? (Solo el nombre)",
     "options": [],
-    "answer": "slapd",
-    "explicacion": "En el sistema OLC (On-Line Configuration), el elemento raíz de la estructura de configuración es slapd.",
-    "pista": "Nome do daemon LDAP."
+    "answer": "cn=config",
+    "explicacion": "En OpenLDAP con OLC (cn=config), la raíz del árbol de configuración es cn=config.",
+    "pista": "Raíz OLC: cn=config."
   },
   {
     "question": "49. ¿Cómo se organizan y almacenan los módulos PAM?",
@@ -595,9 +595,9 @@ const preguntasLPIC2_2 = [
       "D. Como archivos de objeto compartido dentro de la jerarquía /lib/",
       "E. Como binarios enlazados dinámicamente en /usr/lib/pam/sbin/"
     ],
-    "answer": "E",
-    "explicacion": "Los módulos PAM son bibliotecas dinámicas (.so) ubicadas en directorios de bibliotecas de sistema.",
-    "pista": "Objectos partilhados dinâmicos."
+    "answer": "D",
+    "explicacion": "Los módulos PAM son bibliotecas compartidas (.so) ubicadas en directorios de librerías del sistema (p. ej., /lib/security, /usr/lib/security).",
+    "pista": "Bibliotecas .so en /lib*/security."
   },
   {
     "question": "50. ¿Qué sentencia en la configuración de ISC DHCPD se utiliza para especificar si un pool de direcciones puede ser usado por nodos que tienen una sección 'host' correspondiente?",
@@ -758,9 +758,9 @@ const preguntasLPIC2_2 = [
   {
     "question": "64. Al montar un cliente NFSv4, el punto de montaje /mnt muestra el contenido de /usr en lugar de la raíz. ¿Qué opción en /etc/exports debe cambiarse o eliminarse para que aparezca la raíz de NFSv4? (Solo el nombre)",
     "options": [],
-    "answer": "mount",
-    "explicacion": "El problema suele residir en cómo se define el punto de anclaje de la exportación.",
-    "pista": "Revisar opção de montagem."
+    "answer": "fsid=0",
+    "explicacion": "En NFSv4, la exportación que actúa como pseudo-raíz debe marcarse con fsid=0; si no, el cliente puede ver un subárbol (p. ej. /usr) como raíz.",
+    "pista": "Pseudo-root: fsid=0."
   },
   {
     "question": "65. ¿Qué confirma el comando 'samba-tool testparm' respecto a la configuración de Samba?",
@@ -785,8 +785,8 @@ const preguntasLPIC2_2 = [
       "E. security = printing"
     ],
     "answer": "D",
-    "explicacion": "Tradicionalmente, 'security = share' se utilizaba para permitir accesos basados en recursos sin requerir cuenta.",
-    "pista": "Segurança por partilha."
+    "explicacion": "'security = share' fue un modo histórico para acceso por recurso, pero está obsoleto en Samba moderno; hoy se usa 'guest ok = yes' (y normalmente 'map to guest = Bad User') en el recurso de impresión.",
+    "pista": "Guest ok / map to guest."
   },
   {
     "question": "67. ¿Qué declaración de 'host allow' permitirá a las estaciones cableadas (192.168.1.0/24) conectar al servidor Samba sin denegar el acceso a nadie más?",
@@ -797,9 +797,9 @@ const preguntasLPIC2_2 = [
       "D. host allow 192.168.1.0/255.255.255.0 192.168.2.0/255.255.255.0",
       "E. host allow localhost"
     ],
-    "answer": "D, E",
-    "explicacion": "Se deben listar ambos rangos de red junto con la interfaz local.",
-    "pista": "Inclui sub-redes e localhost."
+    "answer": "D",
+    "explicacion": "Para permitir esas subredes, se listan en 'hosts allow'. Añadir localhost no es necesario para cumplir el requisito y, en este caso, la opción E no añade la red 192.168.1.0/24.",
+    "pista": "Permite subredes; E no sirve."
   },
   {
     "question": "68. ¿Qué comando muestra las estadísticas del kernel para NFS? (Solo el comando)",
@@ -829,9 +829,9 @@ const preguntasLPIC2_2 = [
       "D. Mencionar ambos nombres en la etiqueta de apertura VirtualHost",
       "E. Usar una declaración ServerName y las adicionales en ServerAlias"
     ],
-    "answer": "C",
-    "explicacion": "El examen especifica que la corrección para este error reside en cómo se listan los nombres.",
-    "pista": "Nomes na mesma linha."
+    "answer": "E",
+    "explicacion": "Apache solo admite un nombre en ServerName; los nombres adicionales deben ir en ServerAlias para que el vhost responda a ambos.",
+    "pista": "ServerName + ServerAlias."
   },
   {
     "question": "71. Dado 'cache_dir ufs /var/spool/squid3/ 1024 16 256', ¿qué directorios existirán directamente dentro de /var/spool/squid3/? (Elige dos)",
@@ -1039,9 +1039,9 @@ const preguntasLPIC2_2 = [
       "D. fe80::/64",
       "E. 2000::/3"
     ],
-    "answer": "A",
-    "explicacion": "Al activar IPv6, se genera automáticamente una dirección link-local.",
-    "pista": "Link-Local."
+    "answer": "D",
+    "explicacion": "Al activar IPv6, cada interfaz obtiene una dirección link-local (fe80::/64) y aparece la ruta correspondiente aunque no haya direcciones globales.",
+    "pista": "Ruta link-local fe80::/64."
   },
   {
     "question": "88. Para evitar que usuarios anónimos listen archivos subidos, ¿qué permiso debe quitarse al directorio?",
@@ -1143,9 +1143,9 @@ const preguntasLPIC2_2 = [
       "D. Un registro A no puede contener una IPv4",
       "E. Los nombres no pueden ser FQDN"
     ],
-    "answer": "C",
-    "explicacion": "Si el archivo se carga mediante 'zone', el origen ya está definido.",
-    "pista": "$ORIGIN em ficheiro específico."
+    "answer": "B",
+    "explicacion": "Un archivo de zona no debe contener registros fuera de la jerarquía del propio dominio de la zona; 'host2.example.org.' quedaría fuera si la zona es otra.",
+    "pista": "Registro fuera de la zona."
   },
   {
     "question": "96. ¿Cuál de los siguientes tipos de registro DNS se utiliza para consultas DNS inversas?",
