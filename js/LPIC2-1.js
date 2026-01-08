@@ -66,7 +66,7 @@ const preguntasLPIC2_1 = [
       "D. Se añade contenido desde el siguiente archivo de la cinta"
     ],
     "answer": "D",
-    "explicacion": "El dispositivo 'nst0' no rebobina la cinta, quedando al inicio del siguiente archivo.",
+    "explicacion": "Al usar /dev/nst0 (no-rewind), la segunda extracción continúa desde la posición actual de la cinta y extrae el siguiente archivo almacenado.",
     "pista": "La 'n' en nst0 significa 'no-rewind'."
   },
   {
@@ -119,19 +119,19 @@ const preguntasLPIC2_1 = [
     "explicacion": "Ampliar el LV no amplía automáticamente los datos que contiene.",
     "pista": "El contenedor creció, ahora falta el contenido."
   },
-  {
-    "question": "12. Según /proc/mdstat, ¿qué es correcto? (Elige dos)\nmd0: active raid5 sdb1[3](S)... [UU]",
-    "options": [
-      "A. Un disco falló y se usa un spare",
-      "B. /dev/sda1 restaura la redundancia",
-      "C. [UU] indica que falta un disco",
-      "D. Usa metadatos 1.2 para LILO",
-      "E. [3/2] indica 3 discos y 2 spares"
-    ],
-    "answer": "A, B",
-    "explicacion": "El RAID tuvo un fallo de disco, entró el spare automáticamente y ahora la redundancia está restaurada, por eso aparece (S) y [UU]..",
-    "pista": ""
-  },
+ {
+  "question": "12. Según /proc/mdstat, ¿qué es correcto? (Elige dos)\nmd0: active raid5 sdb1[3](S)... [UU]",
+  "options": [
+    "A. sdb1 está marcado como spare",
+    "B. El array está degradado",
+    "C. [UU] indica que todos los discos activos están en estado correcto",
+    "D. Se está realizando una reconstrucción",
+    "E. Falta un disco del RAID"
+  ],
+  "answer": "A, C",
+  "explicacion": "(S) indica que sdb1 es un disco spare. [UU] indica que todos los discos activos del array están en estado correcto y sincronizados.",
+  "pista": ""
+ }
   {
     "question": "13. ¿Comando para eliminar un PV de un VG? (Solo el comando)",
     "options": [],
@@ -284,7 +284,7 @@ const preguntasLPIC2_1 = [
   {
     "question": "28. ¿Directorio con archivos de unidad systemd del sistema? (Ruta completa)",
     "options": [],
-    "answer": "/lib/systemd/system",
+    "answer": "/lib/systemd/system, /usr/lib/systemd/system",
     "explicacion": "Ubicación estándar para unidades instaladas por el sistema.",
     "pista": "Ubicación en /lib."
   },
@@ -397,7 +397,7 @@ const preguntasLPIC2_1 = [
 	  "E. modshow -p dummy"
     ],
     "answer": "B",
-    "explicacion": "a opción -n (o --filename) muestra la ruta exacta del fichero .ko en el sistema.",
+    "explicacion": "la opción -n (o --filename) muestra la ruta exacta del fichero .ko en el sistema.",
     "pista": "Comando para cargar módulos con opción de info."
   },
   {
@@ -611,9 +611,9 @@ const preguntasLPIC2_1 = [
       "D. iw phy wlan0 show",
       "E. iw phy0 show"
     ],
-    "answer": "B",
-    "explicacion": "Para ver capacidades y frecuencias de una interfaz concreta como wlan0 se usa iw dev wlan0 info, porque dev trabaja a nivel de interfaz.",
-    "pista": "iw dev."
+    "answer": "A",
+    "explicacion": "Muestra bandas, frecuencias y capacidades soportadas por el dispositivo físico.",
+    "pista": "iw phy"
   },
   {
     "question": "60. Listar IPs v4 y MACs vistas por el sistema:",
