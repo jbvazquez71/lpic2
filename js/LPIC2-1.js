@@ -560,7 +560,7 @@ const preguntasLPIC2_1 = [
       "A. ip add addr",
       "B. ip 6 add addr",
       "C. ip addr add",
-      "D. ip 6 addr add new 2001:db8::1337/64 dev eth0",
+      "D. ip 6 addr add new 2001:db8::1337/64 dev eth0 (mal escrita, es: ip -6 addr add 2001:db8::1337/64 dev eth0)",
       "E. ip addr add 6"
     ],
     "answer": "D",
