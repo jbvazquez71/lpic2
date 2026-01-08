@@ -128,9 +128,9 @@ const preguntasLPIC2_1 = [
       "D. Usa metadatos 1.2 para LILO",
       "E. [3/2] indica 3 discos y 2 spares"
     ],
-    "answer": "A, C",
-    "explicacion": "El estado [UU] en un RAID de 3 discos muestra que uno no está activo.",
-    "pista": "Busca la 'U' que falta y el significado de (S)."
+    "answer": "A, B",
+    "explicacion": "El RAID tuvo un fallo de disco, entró el spare automáticamente y ahora la redundancia está restaurada, por eso aparece (S) y [UU]..",
+    "pista": ""
   },
   {
     "question": "13. ¿Comando para eliminar un PV de un VG? (Solo el comando)",
@@ -189,8 +189,8 @@ const preguntasLPIC2_1 = [
       "C. Creada por fstab-generator para el arranque",
       "D. Usada por el comando mount tradicional"
     ],
-    "answer": "A",
-    "explicacion": "Define cómo systemd gestiona un punto de montaje específico.",
+    "answer": "C",
+    "explicacion": "Representar los montajes definidos en fstab durante el arranque.",
     "pista": "Integración de montajes en el gestor de servicios."
   },
   {
@@ -297,7 +297,7 @@ const preguntasLPIC2_1 = [
       "D. systemctl emergency",
       "E. systemctl reboot"
     ],
-    "answer": "A, B",
+    "answer": "B, E",
     "explicacion": "systemctl default carga el target predeterminado.",
     "pista": "Volver al 'default'."
   },
@@ -371,9 +371,9 @@ const preguntasLPIC2_1 = [
       "D. Descomprimir con xz",
       "E. Aplicar a cualquier versión anterior"
     ],
-    "answer": "D, E",
-    "explicacion": "Se debe extraer y luego usar el comando 'patch'.",
-    "pista": "Extraer y parchar."
+    "answer": "C, D",
+    "explicacion": "Se trata de un parche incremental que se extrae primero y luego se aplica a la versión inmediatamente anterior.",
+    "pista": "Extraer y parchear."
   },
   {
     "question": "37. Tras compilar un kernel, ¿qué pasa con el initramfs?",
@@ -383,17 +383,21 @@ const preguntasLPIC2_1 = [
       "C. Se crea automáticamente, solo hay que instalarlo",
       "D. Se reconfigura solo"
     ],
-    "answer": "C",
-    "explicacion": "El proceso de build suele generar la imagen necesaria para ese kernel específico.",
+    "answer": "B",
+    "explicacion": "Cuando compilas e instalas un kernel nuevo, debes generar un initramfs nuevo para ese kernel.",
     "pista": "Viene con la compilación."
   },
   {
     "question": "38. ¿Comando para ver la ruta física del módulo 'dummy'?",
     "options": [
-      "A. modprobe i dummy", "B. modinfo -n dummy", "C. modpath -v dummy", "D. depmod -n dummy", "E. modshow -p dummy"
+      "A. modprobe i dummy", 
+	  "B. modinfo -n dummy", 
+	  "C. modpath -v dummy", 
+	  "D. depmod -n dummy", 
+	  "E. modshow -p dummy"
     ],
-    "answer": "A",
-    "explicacion": "Informa sobre la ubicación del archivo .ko.",
+    "answer": "B",
+    "explicacion": "a opción -n (o --filename) muestra la ruta exacta del fichero .ko en el sistema.",
     "pista": "Comando para cargar módulos con opción de info."
   },
   {
@@ -607,9 +611,9 @@ const preguntasLPIC2_1 = [
       "D. iw phy wlan0 show",
       "E. iw phy0 show"
     ],
-    "answer": "A",
-    "explicacion": "Información de la capa física inalámbrica.",
-    "pista": "iw phy."
+    "answer": "B",
+    "explicacion": "Para ver capacidades y frecuencias de una interfaz concreta como wlan0 se usa iw dev wlan0 info, porque dev trabaja a nivel de interfaz.",
+    "pista": "iw dev."
   },
   {
     "question": "60. Listar IPs v4 y MACs vistas por el sistema:",
