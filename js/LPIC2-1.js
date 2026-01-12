@@ -563,7 +563,7 @@ const preguntasLPIC2_1 = [
       "D. ip 6 addr add new 2001:db8::1337/64 dev eth0 (mal escrita, es: ip -6 addr add 2001:db8::1337/64 dev eth0)",
       "E. ip addr add 6"
     ],
-    "answer": "D",
+    "answer": "C",
     "explicacion": "Uso del comando ip para direccionamiento v6.",
     "pista": "ip 6."
   },
