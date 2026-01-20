@@ -1,4 +1,4 @@
-const APP_VERSION = "2.6"; 
+const APP_VERSION = "2.6.6"; 
 
 let arr = []; 
 let arrOpt = ["A", "B", "C", "D", "E"];
@@ -34,23 +34,27 @@ function nextQuestion() {
         $("#finalScore").text(((numCorrect / arr.length) * 100).toFixed(1) + "%");
         return;
     }
-    $("#mainCard").hide(0, function() {
+
+    $("#mainCard").css("opacity", "0");
+
+    setTimeout(function() {
         do { rand = Math.floor(Math.random() * arr.length); } while (preguntas_hechas.includes(rand));
         let q = arr[rand]; preguntas_hechas.push(rand);
+        
         $("#question").html(`<h2>${q.question}</h2>`);
         $("#answer").html(generateOptions(q));
         $("#buttons").html("<button id='actionBtn' onclick='checkAnswer()'>Verificar Respuesta (Intro)</button>");
-        $(this).show();
+        
         updateProgressBar();
-        // Foco automático para comandos
+        $("#mainCard").css("opacity", "1");
+
         if ($("#cmdInput").length > 0) $("#cmdInput").focus();
-    });
+    }, 300);
 }
 
 function generateOptions(q) {
     if (!q || !q.answer) return "";
     let splitedLetters = q.answer.split(", ");
-    // CORRECCIÓN: Comprobar que options tenga longitud mayor a 0
     let type = (q.options && q.options.length > 0) ? (splitedLetters.length === 1 ? 1 : 2) : 3;
     
     if (type === 3) return '<input type="text" id="cmdInput" placeholder="Escribe el comando..." autocomplete="off" spellcheck="false">';
@@ -84,28 +88,32 @@ function checkAnswer() {
         userAnswer.push(texto);
     }
 
-    // Comparación blindada (trim y minúsculas en ambos lados)
-    let isCorrect = userAnswer.map(s => s.trim().toLowerCase()).sort().toString() === 
-                    splitedLetters.map(s => s.trim().toLowerCase()).sort().toString();
-    
-    if (isCorrect) numCorrect++; else numIncorrect++;
+    $("#actionBtn").prop("disabled", true).css("opacity", "0.7");
 
-    let color = isCorrect ? "#10b981" : "#ef4444";
-    let message = isCorrect ? '✅ ¡Correcto!' : '❌ ¡Incorrecto!';
+    setTimeout(function() {
+        let isCorrect = userAnswer.map(s => s.trim().toLowerCase()).sort().toString() === 
+                        splitedLetters.map(s => s.trim().toLowerCase()).sort().toString();
+        
+        if (isCorrect) numCorrect++; else numIncorrect++;
 
-    $("#answer").append(`
-        <div style="margin-top:20px; padding:15px; background:rgba(0,0,0,0.03); border-radius:8px; border-left:5px solid ${color}">
-            <p><strong>${message}</strong></p>
-            <p><strong>Respuesta correcta:</strong> ${question.answer}</p>
-            <hr style="opacity:0.1">
-            <p style="font-size:0.9rem;">${question.explicacion}</p>
-        </div>
-    `);
+        let color = isCorrect ? "#10b981" : "#ef4444";
+        let message = isCorrect ? '✅ ¡Correcto!' : '❌ ¡Incorrecto!';
 
-    if ($("#cmdInput").length > 0) $("#cmdInput").prop("disabled", true);
-    $("input[name='answer']").prop("disabled", true);
-    $("#buttons").html("<button id='actionBtn' onclick='nextQuestion()'>Siguiente Pregunta (Intro)</button>");
-    updatefooter();
+        $("#answer").append(`
+            <div style="margin-top:20px; padding:15px; background:rgba(0,0,0,0.03); border-radius:8px; border-left:5px solid ${color}">
+                <p><strong>${message}</strong></p>
+                <p><strong>Respuesta correcta:</strong> ${question.answer}</p>
+                <hr style="opacity:0.1">
+                <p style="font-size:0.9rem;">${question.explicacion}</p>
+            </div>
+        `);
+
+        if ($("#cmdInput").length > 0) $("#cmdInput").prop("disabled", true);
+        $("input[name='answer']").prop("disabled", true);
+        
+        $("#buttons").html("<button id='actionBtn' onclick='nextQuestion()'>Siguiente Pregunta (Intro)</button>");
+        updatefooter();
+    }, 250); 
 }
 
 function updatefooter() {
