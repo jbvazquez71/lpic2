@@ -284,7 +284,7 @@ const preguntasLPIC2_1 = [
   {
     "question": "28. ¿Directorio con archivos de unidad systemd del sistema? (Ruta completa)",
     "options": [],
-    "answer": "/lib/systemd/system, /usr/lib/systemd/system",
+    "answer": "/lib/systemd/system",
     "explicacion": "Ubicación estándar para unidades instaladas por el sistema.",
     "pista": "Ubicación en /lib."
   },
