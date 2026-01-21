@@ -1,4 +1,4 @@
-const APP_VERSION = "2.6.9"; 
+const APP_VERSION = "2.7.0"; 
 
 let arr = []; 
 let arrOpt = ["A", "B", "C", "D", "E"];
@@ -69,20 +69,19 @@ function generateOptions(q) {
 
 function checkAnswer() {
     let question = arr[rand];
-    let splitedLetters = question.answer.split(",").map(s => s.trim());
+    let splitedLetters = question.answer.split(",").map(s => s.trim().toLowerCase()); // Normalizamos a minúsculas
     let userAnswer = [];
     let type = (question.options && question.options.length > 0) ? (splitedLetters.length === 1 ? 1 : 2) : 3;
     
-    // VALIDACIÓN VISUAL (Sin alert)
     if (type === 1) {
         let val = $("input[name='answer']:checked").val();
         if(val === undefined) return $("#warning-msg").text("⚠️ Por favor, selecciona una opción").fadeIn();
-        userAnswer.push(arrOpt[val]);
+        userAnswer.push(arrOpt[val].toLowerCase());
     } else if (type === 2) {
-        $("input[name='answer']:checked").each(function() { userAnswer.push(arrOpt[$(this).val()]); });
+        $("input[name='answer']:checked").each(function() { userAnswer.push(arrOpt[$(this).val()].toLowerCase()); });
         if(userAnswer.length === 0) return $("#warning-msg").text("⚠️ Selecciona al menos una respuesta").fadeIn();
     } else {
-        let texto = $("#cmdInput").val().trim();
+        let texto = $("#cmdInput").val().trim().toLowerCase(); // Normalizamos input del usuario
         if(texto === "") return $("#warning-msg").text("⚠️ Debes escribir el comando solicitado").fadeIn();
         userAnswer.push(texto);
     }
@@ -91,8 +90,8 @@ function checkAnswer() {
     $("#actionBtn").prop("disabled", true).css("opacity", "0.7");
 
     setTimeout(function() {
-        let isCorrect = userAnswer.map(s => s.trim().toLowerCase()).sort().toString() === 
-                        splitedLetters.map(s => s.trim().toLowerCase()).sort().toString();
+        // Comparación blindada: todo a minúsculas, sin espacios y ordenado
+        let isCorrect = userAnswer.sort().toString() === splitedLetters.sort().toString();
         
         if (isCorrect) numCorrect++; else numIncorrect++;
 
