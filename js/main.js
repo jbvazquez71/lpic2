@@ -1,4 +1,4 @@
-const APP_VERSION = "2.6.6"; 
+const APP_VERSION = "2.6.9"; 
 
 let arr = []; 
 let arrOpt = ["A", "B", "C", "D", "E"];
@@ -28,7 +28,7 @@ function updateProgressBar() {
 }
 
 function nextQuestion() {
-    if (!arr || arr.length === 0) return $("#question").html("<h2>Cargando...</h2>");
+    if (!arr || arr.length === 0) return;
     if (preguntas_hechas.length >= arr.length) {
         $("#mainCard").hide(); $("#resultReport").show();
         $("#finalScore").text(((numCorrect / arr.length) * 100).toFixed(1) + "%");
@@ -36,6 +36,7 @@ function nextQuestion() {
     }
 
     $("#mainCard").css("opacity", "0");
+    $("#warning-msg").hide();
 
     setTimeout(function() {
         do { rand = Math.floor(Math.random() * arr.length); } while (preguntas_hechas.includes(rand));
@@ -47,16 +48,13 @@ function nextQuestion() {
         
         updateProgressBar();
         $("#mainCard").css("opacity", "1");
-
         if ($("#cmdInput").length > 0) $("#cmdInput").focus();
     }, 300);
 }
 
 function generateOptions(q) {
-    if (!q || !q.answer) return "";
     let splitedLetters = q.answer.split(", ");
     let type = (q.options && q.options.length > 0) ? (splitedLetters.length === 1 ? 1 : 2) : 3;
-    
     if (type === 3) return '<input type="text" id="cmdInput" placeholder="Escribe el comando..." autocomplete="off" spellcheck="false">';
     
     return q.options.map((opt, i) => `
@@ -75,19 +73,21 @@ function checkAnswer() {
     let userAnswer = [];
     let type = (question.options && question.options.length > 0) ? (splitedLetters.length === 1 ? 1 : 2) : 3;
     
+    // VALIDACIÓN VISUAL (Sin alert)
     if (type === 1) {
         let val = $("input[name='answer']:checked").val();
-        if(val === undefined) return alert("Selecciona una opción");
+        if(val === undefined) return $("#warning-msg").text("⚠️ Por favor, selecciona una opción").fadeIn();
         userAnswer.push(arrOpt[val]);
     } else if (type === 2) {
         $("input[name='answer']:checked").each(function() { userAnswer.push(arrOpt[$(this).val()]); });
-        if(userAnswer.length === 0) return alert("Selecciona al menos una");
+        if(userAnswer.length === 0) return $("#warning-msg").text("⚠️ Selecciona al menos una respuesta").fadeIn();
     } else {
         let texto = $("#cmdInput").val().trim();
-        if(texto === "") return alert("Escribe el comando");
+        if(texto === "") return $("#warning-msg").text("⚠️ Debes escribir el comando solicitado").fadeIn();
         userAnswer.push(texto);
     }
 
+    $("#warning-msg").hide();
     $("#actionBtn").prop("disabled", true).css("opacity", "0.7");
 
     setTimeout(function() {
@@ -110,7 +110,6 @@ function checkAnswer() {
 
         if ($("#cmdInput").length > 0) $("#cmdInput").prop("disabled", true);
         $("input[name='answer']").prop("disabled", true);
-        
         $("#buttons").html("<button id='actionBtn' onclick='nextQuestion()'>Siguiente Pregunta (Intro)</button>");
         updatefooter();
     }, 250); 
@@ -124,22 +123,16 @@ function updatefooter() {
 
 $(document).ready(() => {
     $(".version-badge").text("v=" + APP_VERSION);
-
     $(document).on('keydown', function(e) {
-        if ($(e.target).is("#cmdInput")) {
-            if (e.key === "Enter") { e.preventDefault(); $("#actionBtn").click(); }
-            return;
-        }
+        if ($(e.target).is("#cmdInput") && e.key === "Enter") { e.preventDefault(); $("#actionBtn").click(); return; }
         if (e.key === "Enter") {
-            if ($("#resultReport").is(":visible")) $("#restartBtn").click();
+            if ($("#resultReport").is(":visible")) window.location.reload();
             else if ($("#actionBtn").length > 0) $("#actionBtn").click();
         }
-        if (e.key >= "1" && e.key <= "5") {
+        if (e.key >= "1" && e.key <= "5" && !$("#cmdInput").is(":focus")) {
             let index = parseInt(e.key) - 1;
             let input = $("input[name='answer']").eq(index);
-            if (input.length > 0 && !input.prop("disabled")) {
-                input.prop("checked", !input.prop("checked")).change();
-            }
+            if (input.length > 0 && !input.prop("disabled")) input.prop("checked", !input.prop("checked")).change();
         }
     });
 

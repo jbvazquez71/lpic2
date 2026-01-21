@@ -6,11 +6,11 @@
     <title>Simulador LPIC-2 Pro</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
-    <script src="js/LPIC1.js?v=2.6.6"></script>
-    <script src="js/LPIC2-1.js?v=2.6.6"></script>
-    <script src="js/LPIC2-2.js?v=2.6.6"></script>
-    <script src="js/main.js?v=2.6.6"></script>
-    <link rel="stylesheet" type="text/css" href="css/main.css?v=2.6.6">
+    <script src="js/LPIC1.js?v=2.6.9"></script>
+    <script src="js/LPIC2-1.js?v=2.6.9"></script>
+    <script src="js/LPIC2-2.js?v=2.6.9"></script>
+    <script src="js/main.js?v=2.6.9"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=2.6.9">
 </head>
 <body>
     <div id="header">
@@ -33,6 +33,7 @@
         <div class="card" id="mainCard">
             <div id="question" class="question"></div>
             <div id="answer" class="answer"></div>
+            <div id="warning-msg" style="color: var(--error-color); margin-top: 10px; font-weight: bold; display: none;"></div>
             <div id="buttons" class="buttons"></div>
         </div>
 
@@ -44,26 +45,11 @@
     </div>
 
     <div id="footer">
-        <div class="footer-item">
-            <span>🕒 Tiempo</span>
-            <div class="footer-box" id="timer">00:00</div>
-        </div>
-        <div class="footer-item">
-            <span>📝 Preguntas</span>
-            <div class="footer-box" id="number">0</div>
-        </div>
-        <div class="footer-item">
-            <span>✅ Correctas</span>
-            <div class="footer-box" id="correct">0</div>
-        </div>
-        <div class="footer-item">
-            <span>❌ Fallos</span>
-            <div class="footer-box" id="incorrect">0</div>
-        </div>
-        <div class="footer-item">
-            <span>📊 %</span>
-            <div class="footer-box" id="percentage">0%</div>
-        </div>
+        <div class="footer-item"><span>🕒 Tiempo</span><div class="footer-box" id="timer">00:00</div></div>
+        <div class="footer-item"><span>📝 Preguntas</span><div class="footer-box" id="number">0</div></div>
+        <div class="footer-item"><span>✅ Correctas</span><div class="footer-box" id="correct">0</div></div>
+        <div class="footer-item"><span>❌ Fallos</span><div class="footer-box" id="incorrect">0</div></div>
+        <div class="footer-item"><span>📊 %</span><div class="footer-box" id="percentage">0%</div></div>
     </div>
 </body>
 </html>
