@@ -1,4 +1,4 @@
-const APP_VERSION = "2.7.0"; 
+const APP_VERSION = "2.7.2"; 
 
 let arr = []; 
 let arrOpt = ["A", "B", "C", "D", "E"];
@@ -37,6 +37,9 @@ function nextQuestion() {
 
     $("#mainCard").css("opacity", "0");
     $("#warning-msg").hide();
+    
+    // LIMPIAMOS LOS BORDES DE LA PREGUNTA ANTERIOR
+    $("#mainCard").removeClass("correct-border incorrect-border");
 
     setTimeout(function() {
         do { rand = Math.floor(Math.random() * arr.length); } while (preguntas_hechas.includes(rand));
@@ -69,19 +72,19 @@ function generateOptions(q) {
 
 function checkAnswer() {
     let question = arr[rand];
-    let splitedLetters = question.answer.split(",").map(s => s.trim().toLowerCase()); // Normalizamos a minúsculas
+    let splitedLetters = question.answer.split(",").map(s => s.trim());
     let userAnswer = [];
     let type = (question.options && question.options.length > 0) ? (splitedLetters.length === 1 ? 1 : 2) : 3;
     
     if (type === 1) {
         let val = $("input[name='answer']:checked").val();
         if(val === undefined) return $("#warning-msg").text("⚠️ Por favor, selecciona una opción").fadeIn();
-        userAnswer.push(arrOpt[val].toLowerCase());
+        userAnswer.push(arrOpt[val]);
     } else if (type === 2) {
-        $("input[name='answer']:checked").each(function() { userAnswer.push(arrOpt[$(this).val()].toLowerCase()); });
+        $("input[name='answer']:checked").each(function() { userAnswer.push(arrOpt[$(this).val()]); });
         if(userAnswer.length === 0) return $("#warning-msg").text("⚠️ Selecciona al menos una respuesta").fadeIn();
     } else {
-        let texto = $("#cmdInput").val().trim().toLowerCase(); // Normalizamos input del usuario
+        let texto = $("#cmdInput").val().trim();
         if(texto === "") return $("#warning-msg").text("⚠️ Debes escribir el comando solicitado").fadeIn();
         userAnswer.push(texto);
     }
@@ -90,10 +93,16 @@ function checkAnswer() {
     $("#actionBtn").prop("disabled", true).css("opacity", "0.7");
 
     setTimeout(function() {
-        // Comparación blindada: todo a minúsculas, sin espacios y ordenado
-        let isCorrect = userAnswer.sort().toString() === splitedLetters.sort().toString();
+        let isCorrect = userAnswer.map(s => s.trim().toLowerCase()).sort().toString() === 
+                        splitedLetters.map(s => s.trim().toLowerCase()).sort().toString();
         
-        if (isCorrect) numCorrect++; else numIncorrect++;
+        if (isCorrect) {
+            numCorrect++; 
+            $("#mainCard").addClass("correct-border"); // Borde verde
+        } else {
+            numIncorrect++;
+            $("#mainCard").addClass("incorrect-border"); // Borde rojo
+        }
 
         let color = isCorrect ? "#10b981" : "#ef4444";
         let message = isCorrect ? '✅ ¡Correcto!' : '❌ ¡Incorrecto!';
