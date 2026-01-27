@@ -18,10 +18,16 @@
         <h1>Test LPIC-2 <span class="version-badge"></span></h1>
         <div class="header-right">
             <select id="examSelect">
-                <option value="LPIC2_1">LPIC-2 (101-500)</option>
-                <option value="LPIC2_1_201_400_V12_25">LPIC-2-1-201-400-V12.25</option>
-                <option value="LPIC2_2">LPIC-2 (102-500)</option>
-                <option value="LPIC1">LPIC-1</option>
+                <optgroup label="LPIC1">
+                    <option value="LPIC1">LPIC-1</option>
+                </optgroup>
+                <optgroup label="LPIC2 - 201">
+                    <option value="LPIC2_1">LPIC-2 (101-500)</option>
+                    <option value="LPIC2_1_201_400_V12_25">LPIC-2-1-201-400-V12.25</option>
+                </optgroup>
+                <optgroup label="LPIC1">
+                    <option value="LPIC2_2">LPIC-2 (102-500)</option>
+                </optgroup>
             </select>
             <button id="toggleDarkMode">🌙</button>
         </div>
