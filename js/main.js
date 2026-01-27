@@ -11,6 +11,7 @@ let totalSeconds = 0;
 function switchExam(examKey) {
     if(examKey === "LPIC2_1") arr = (typeof preguntasLPIC2_1 !== 'undefined') ? preguntasLPIC2_1 : [];
     else if(examKey === "LPIC2_1_201_400_V12_25") arr = (typeof preguntasLPIC2_2 !== 'undefined') ? preguntasLPIC2_1_201_400_V12_25 : [];
+    else if(examKey === "LPIC2_1_201_2025") arr = (typeof preguntasLPIC2_2 !== 'undefined') ? preguntasLPIC2_1_201_2025 : [];
     else if(examKey === "LPIC2_2") arr = (typeof preguntasLPIC2_2 !== 'undefined') ? preguntasLPIC2_2 : [];
     else if(examKey === "LPIC1") arr = (typeof preguntasLPIC1 !== 'undefined') ? preguntasLPIC1 : [];
     resetStats();
