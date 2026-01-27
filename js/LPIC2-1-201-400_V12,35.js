@@ -683,5 +683,806 @@ const preguntasLPIC2_1_201_400_V12_25 = [
     "answer": "B",
     "explicacion": "Tras redimensionar el volumen lógico, es necesario ampliar el sistema de archivos subyacente para que reconozca el nuevo espacio.",
     "pista": "Acción post-lvresize."
+    },
+    {
+    "question": "61. Después de instalar un kernel compilado, el sistema no encuentra los módulos necesarios para cargarse. ¿Qué objetivo de 'make' probablemente se omitió durante la instalación del kernel?",
+    "options": [],
+    "answer": "make modules_install",
+    "explicacion": "El comando 'make modules_install' copia los módulos compilados al directorio /lib/modules correspondiente para que el kernel pueda encontrarlos.",
+    "pista": "Objetivo de instalación de módulos."
+    },
+    {
+    "question": "62. ¿Cuál es el parámetro correcto para pasar al kernel en el momento del arranque para forzarlo a usar solo uno de los procesadores disponibles?",
+    "options": [
+      "A. maxcpus=1",
+      "B. usecpus=1",
+      "C. smpcpus=1",
+      "D. vcpumx=1"
+    ],
+    "answer": "A",
+    "explicacion": "El parámetro 'maxcpus' limita el número de núcleos de CPU que el kernel activará durante el inicio.",
+    "pista": "Limitación de CPUs."
+    },
+    {
+    "question": "63. ¿Qué comando se utiliza para crear un sistema de archivos ISO9660? (Especifique SOLO el comando sin ninguna ruta o parámetros).",
+    "options": [],
+    "answer": "mkisofs",
+    "explicacion": "mkisofs (o genisoimage) es la utilidad estándar para generar imágenes de sistemas de archivos ISO9660, comúnmente usadas en CD-ROMs.",
+    "pista": "Creación de imágenes de CD."
+    },
+    {
+    "question": "64. ¿Qué comando se utiliza para realizar una copia exacta, en un momento determinado, de un volumen lógico para fines de respaldo?",
+    "options": [
+      "A. lvsnap",
+      "B. lvsnapshot",
+      "C. lvcreate",
+      "D. lvcopy",
+      "E. lvclone"
+    ],
+    "answer": "C",
+    "explicacion": "Para crear una instantánea (snapshot) en LVM se utiliza el comando 'lvcreate' con la opción '-s'.",
+    "pista": "Creación de instantáneas."
+    },
+    {
+    "question": "65. ¿Cuál de las siguientes herramientas inalámbricas se puede utilizar para verificar la calidad del enlace de la red inalámbrica? (Elija DOS respuestas correctas).",
+    "options": [
+      "A. iwconfig",
+      "B. iwlink",
+      "C. iwscan",
+      "D. iwifi",
+      "E. iw"
+    ],
+    "answer": "A, E",
+    "explicacion": "'iwconfig' es la herramienta clásica e 'iw' es la moderna para consultar y configurar parámetros de red inalámbrica.",
+    "pista": "Herramientas de red inalámbrica."
+    },
+    {
+    "question": "66. ¿Qué dos comandos de LVM faltan en la siguiente secuencia que se utiliza para crear un volumen lógico y hacer uso de él en un sistema Linux? pvcreate, ____, ____, mkfs, mount",
+    "options": [
+      "A. lvcreate, mdadm",
+      "B. lvcreate, vgcreate",
+      "C. lvmcreate, vgcreate",
+      "D. vgcreate, lvcreate",
+      "E. vgcreate, mdadm"
+    ],
+    "answer": "D",
+    "explicacion": "El flujo de trabajo correcto de LVM es: inicializar discos (pvcreate), agruparlos (vgcreate) y luego crear el volumen lógico (lvcreate).",
+    "pista": "Secuencia de LVM."
+    },
+    {
+    "question": "67. Al ejecutar tcpdump -nli eth1 'tcp' se muestra la siguiente salida:\n1 4:41:53.694538 IP 10.1.52.145.51738 > 24.215.7.162.143: Flags [.], ack 33051, win 1002, options [nop,nop,TS val 36789130 ecr 1746004159], length 0\n¿Cuál es la dirección IP de origen de este paquete? (Por favor, especifique la respuesta SOLO en dígitos y puntos).",
+    "options": [],
+    "answer": "10.1.52.145",
+    "explicacion": "En la salida de tcpdump, la dirección IP de origen aparece antes del símbolo '>' (excluyendo el número de puerto final tras el último punto).",
+    "pista": "IP antes del símbolo mayor que."
+    },
+    {
+    "question": "68. ¿Qué hace la opción -p3 del comando patch?",
+    "options": [
+      "A. Eliminará la información de la ruta de cada archivo mencionado en el archivo patch hasta e incluyendo el tercer carácter de barra (/).",
+      "B. patch continúa la ejecución mientras haya tres o menos errores.",
+      "C. Indica a patch que busque hasta tres líneas de contexto antes o después de la línea declarada en el archivo original para encontrar una coincidencia.",
+      "D. patch mantendrá tres versiones anteriores de cada archivo en la salida para evitar la pérdida del historial de cambios.",
+      "E. Indica a patch que se ajuste más estrictamente al estándar POSIX."
+    ],
+    "answer": "A",
+    "explicacion": "La opción '-pN' de patch indica cuántos niveles de directorios (separados por barras) se deben ignorar de la ruta original del archivo.",
+    "pista": "Niveles de directorios a ignorar."
+    },
+    {
+    "question": "69. ¿Cuál es la funcionalidad que proporciona PXE?",
+    "options": [
+      "A. La capacidad de arrancar una computadora utilizando su interfaz de red.",
+      "B. La capacidad de lanzar un escritorio X11 remoto en una computadora.",
+      "C. La capacidad de verificar la configuración de un sistema después de completar el proceso de arranque.",
+      "D. La capacidad de verificar la configuración de un sistema antes de completar el proceso de arranque."
+    ],
+    "answer": "A",
+    "explicacion": "PXE (Preboot Execution Environment) es un estándar industrial que permite a las estaciones de trabajo arrancar desde un servidor de red.",
+    "pista": "Arranque por red."
+    },
+    {
+    "question": "70. ¿Qué mecanismo utiliza collectd para recopilar información de monitoreo en los sistemas?",
+    "options": [
+      "A. Utiliza una biblioteca de complementos (plugins).",
+      "B. Un servidor maestro se conecta a un servicio collectd en cada máquina para recuperar la información.",
+      "C. Recopila su propia información en cada servidor y la envía a un servidor maestro.",
+      "D. Realiza consultas SNMP a los clientes que están siendo monitoreados."
+    ],
+    "answer": "A",
+    "explicacion": "collectd es un demonio que recopila estadísticas de rendimiento del sistema periódicamente y utiliza un sistema basado en plugins para extender su funcionalidad.",
+    "pista": "Extensibilidad mediante plugins."
+    },
+    {
+    "question": "71. ¿Cuáles de las siguientes palabras clave de filtro para tcpdump especifican la dirección de transferencia para los paquetes de red? (Elija DOS respuestas correctas).",
+    "options": [
+      "A. source",
+      "B. src",
+      "C. dest",
+      "D. src or dst",
+      "E. both"
+    ],
+    "answer": "B, D",
+    "explicacion": "En tcpdump, 'src' especifica el origen, 'dst' el destino, y 'src or dst' captura paquetes en ambas direcciones que involucren al host especificado.",
+    "pista": "Filtros de dirección en captura de paquetes."
+    },
+    {
+    "question": "72. Después de cambiar el nivel de ejecución (runlevel) predeterminado en el archivo de configuración de SysV-init, el sistema arranca en un nivel de ejecución diferente al previsto. ¿En qué otro lugar podría estar definido este nivel de ejecución diferente?",
+    "options": [
+      "A. En el archivo /etc/sysctl.conf",
+      "B. En el archivo de configuración del gestor de arranque (boot loader)",
+      "C. En el archivo /etc/runlevel",
+      "D. En el archivo /boot/initramfs",
+      "E. En el archivo /etc/rc.d/rc.local"
+    ],
+    "answer": "B",
+    "explicacion": "Los parámetros pasados al kernel a través del gestor de arranque (como GRUB) pueden anular el nivel de ejecución predeterminado configurado en el sistema.",
+    "pista": "Parámetros del gestor de arranque."
+    },
+    {
+    "question": "73. Un sistema con SysV-init tiene un servicio instalado llamado apache2. ¿Qué archivo controla el inicio y la parada de este servicio y es referenciado por los diversos directorios de niveles de ejecución?",
+    "options": [
+      "A. /etc/init.d/apache2",
+      "B. /etc/rc2.d/70apache2",
+      "C. /etc/rc2.d/apache2",
+      "D. /etc/rc2.d/apache2.start"
+    ],
+    "answer": "A",
+    "explicacion": "En SysV-init, los scripts maestros de los servicios se encuentran en /etc/init.d/, y los directorios de niveles de ejecución (rcN.d) contienen enlaces simbólicos hacia ellos.",
+    "pista": "Ubicación de scripts maestros en SysV-init."
+    },
+    {
+    "question": "74. Cuando se incluye un archivo 'makefile' en un paquete de código fuente, ¿cuáles son los objetivos (targets) comúnmente definidos en el archivo?",
+    "options": [
+      "A. CFLAGS, CPPFLAGS, LIBS, LDFLAGS",
+      "B. clean, install, uninstall",
+      "C. PATHS, DESTDIR, LIBS, LDFLAGS",
+      "D. prefix, exec_prefix, bindir, mandir"
+    ],
+    "answer": "B",
+    "explicacion": "Los 'targets' de un makefile son acciones; 'clean', 'install' y 'uninstall' son los estándares para gestionar el ciclo de vida de la compilación e instalación.",
+    "pista": "Acciones de mantenimiento del software."
+    },
+    {
+    "question": "75. ¿Cómo se puede añadir la etiqueta (label) 'root' al sistema de archivos ext2 en /dev/sda1?",
+    "options": [
+      "A. relabel /dev/sda1 root",
+      "B. tune2fs -L root /dev/sda1",
+      "C. echo 'root' > /proc/fs/sda1/label",
+      "D. labelfs --device /dev/sda1 root"
+    ],
+    "answer": "B",
+    "explicacion": "El comando tune2fs permite ajustar parámetros en sistemas de archivos ext2/ext3/ext4; la opción -L define la etiqueta del volumen.",
+    "pista": "Utilidad de ajuste para ext2/3/4."
+    },
+    {
+    "question": "76. Es necesario compilar una nueva versión del kernel para usar una función nueva. Si el archivo de configuración del kernel antiguo está disponible, ¿qué objetivo de 'make' crea un archivo de configuración para el nuevo kernel basado en la configuración del antiguo?",
+    "options": [],
+    "answer": "oldconfig, make oldconfig",
+    "explicacion": "El objetivo 'oldconfig' toma el archivo .config existente y solo pregunta por las opciones nuevas que no estaban presentes en la versión anterior.",
+    "pista": "Configuración basada en versión previa."
+    },
+    {
+    "question": "77. ¿Cuál de los siguientes comandos se puede utilizar para listar las direcciones IPv4 y las direcciones MAC de los dispositivos IP que el sistema ha detectado en la red local?",
+    "options": [
+      "A. arp",
+      "B. ifconfig",
+      "C. ipadm",
+      "D. iwlist"
+    ],
+    "answer": "A",
+    "explicacion": "El comando 'arp' (Address Resolution Protocol) muestra y manipula la tabla caché donde se vinculan las direcciones IP con las direcciones físicas (MAC) de la red local.",
+    "pista": "Protocolo de resolución de direcciones."
+    },
+    {
+    "question": "78. ¿Cuál de las siguientes secuencias de comandos se puede utilizar para extraer los archivos contenidos en un archivo initramfs (/boot/initramfs) que utiliza el kernel durante el arranque?",
+    "options": [
+      "A. cp /boot/initramfs /tmp/initramfs.gz; gzip -c /tmp/initramfs.gz; mkdir /tmp/initramfs.dir ; cd /tmp/initramfs.dir; cpio -i < /tmp/initramfs",
+      "B. cp /boot/initramfs /tmp/initramfs.gz; gunzip /tmp/initramfs.gz; mkdir /tmp/initramfs.dir ; cd /tmp/initramfs.dir; cpio -i < /tmp/initramfs",
+      "C. cp /boot/initramfs /tmp/initramfs.gz; gunzip /tmp/initramfs.gz; mount /tmp/initramfs/mnt/ -o loop -t initramfs",
+      "D. cp /boot/initramfs /tmp/initramfs.gz; gunzip /tmp/initramfs.gz; mkdir /tmp/initramfs.dir ; cd /tmp/initramfs.dir; cpio -e /tmp/initramfs",
+      "E. cp /boot/initramfs /tmp/initramfs.gz; gunzip /tmp/initramfs.gz; mount /tmp/initramfs/mnt/ -o loop -t initrd"
+    ],
+    "answer": "B",
+    "explicacion": "Un archivo initramfs suele ser un archivo cpio comprimido con gzip. La secuencia correcta implica descomprimirlo con gunzip y luego extraer el contenido con cpio -i.",
+    "pista": "Descompresión y extracción de cpio."
+    },
+    {
+    "question": "79. Una aplicación de base de datos requiere un segmento de memoria compartida máximo (shmmax) de 2GB (2147483648 Bytes). ¿Qué archivo de configuración debe modificarse para establecer este parámetro del kernel de forma permanente? (Especifique el nombre completo del archivo, incluyendo la ruta).",
+    "options": [],
+    "answer": "/etc/sysctl.conf",
+    "explicacion": "El archivo /etc/sysctl.conf se utiliza para configurar parámetros del kernel en tiempo de ejecución que persisten después de un reinicio.",
+    "pista": "Configuración persistente del kernel."
+    },
+    {
+    "question": "80. Se ha añadido una entrada correctamente formateada a /etc/hosts.deny para evitar que ciertos clientes se conecten a un servicio, pero esto no está surtiendo efecto. ¿Cuál podría ser la causa? (Elija DOS respuestas correctas).",
+    "options": [
+      "A. Se debe enviar la señal HUP a tcpd.",
+      "B. Es necesario reiniciar el servicio.",
+      "C. Es necesario reiniciar la máquina.",
+      "D. Hay una entrada conflictiva en /etc/hosts.allow.",
+      "E. El servicio no es compatible con tcpwrapper."
+    ],
+    "answer": "D, E",
+    "explicacion": "Los tcpwrappers verifican primero /etc/hosts.allow; si hay una coincidencia allí, se permite el acceso y se ignora hosts.deny. Además, el servicio debe estar compilado con soporte para libwrap para que estos archivos funcionen.",
+    "pista": "Orden de prioridad y soporte de libwrap."
+    },
+    {
+    "question": "81. ¿Cuándo son importantes los datos históricos de uso de recursos? (Seleccione TRES respuestas correctas).",
+    "options": [
+      "A. Para predecir cuándo será necesario aumentar los recursos.",
+      "B. Para seleccionar un proveedor de computadoras.",
+      "C. Para identificar procesos eliminados durante eventos de falta de memoria (out of memory).",
+      "D. Para diagnosticar problemas de capacidad.",
+      "E. Para solucionar un problema de software."
+    ],
+    "answer": "A, D, E",
+    "explicacion": "Los datos históricos permiten realizar proyecciones de crecimiento (capacidad), identificar cuellos de botella recurrentes y analizar el comportamiento previo de una aplicación antes de un fallo.",
+    "pista": "Planificación y diagnóstico basado en el pasado."
+    },
+    {
+    "question": "82. En la siguiente salida, ¿qué porcentaje de tiempo estuvo la CPU esperando por E/S (I/O) pendientes?\n# vmstat 1 100\n(Salida con columna 'wa' en 0)",
+    "options": [
+      "A. 0",
+      "B. 100",
+      "C. 35.9",
+      "D. 57.7",
+      "E. 36.6"
+    ],
+    "answer": "A",
+    "explicacion": "En el comando vmstat, el tiempo de espera de E/S se muestra bajo la columna 'wa' (wait). En la salida proporcionada, el valor de 'wa' es consistentemente 0.",
+    "pista": "Columna 'wa' en vmstat."
+    },
+    {
+    "question": "83. En ejercicios de planificación de capacidad, ¿qué herramientas ayudan a listar e identificar procesos de interés? (Elija DOS respuestas correctas).",
+    "options": [
+      "A. acpid",
+      "B. lsof",
+      "C. pstree",
+      "D. telinit"
+    ],
+    "answer": "B, C",
+    "explicacion": "lsof identifica qué archivos y puertos tienen abiertos los procesos, mientras que pstree muestra la jerarquía de procesos, facilitando la identificación de servicios y sus procesos hijos.",
+    "pista": "Visualización y archivos abiertos por procesos."
+    },
+    {
+    "question": "84. ¿Cuál de los siguientes comandos se puede utilizar para programar interacciones (scripting) con varios servicios TCP o UDP?",
+    "options": [
+      "A. ftp",
+      "B. nc",
+      "C. tcpdump",
+      "D. strings",
+      "E. wget"
+    ],
+    "answer": "B",
+    "explicacion": "El comando 'nc' (Netcat) es conocido como la 'navaja suiza de TCP/IP'. Permite leer y escribir datos a través de conexiones de red, lo que lo hace ideal para scripts que interactúan con servicios.",
+    "pista": "La navaja suiza de las redes."
+    },
+    {
+    "question": "85. Los usuarios de la red local se quejan de que la resolución de nombres no es lo suficientemente rápida. Ingrese el comando, sin la ruta ni ninguna opción, que muestre el tiempo necesario para resolver una consulta DNS.",
+    "options": [],
+    "answer": "dig",
+    "explicacion": "El comando 'dig' (Domain Information Groper) proporciona información detallada sobre las consultas DNS, incluyendo una sección 'Query time' que indica exactamente cuánto tardó la resolución.",
+    "pista": "Herramienta principal de diagnóstico DNS."
+    },
+    {
+    "question": "86. Teniendo en cuenta la tabla de enrutamiento (está en el pdf) IP del kernel a continuación, ¿cuáles de los siguientes comandos deben usarse para eliminar la ruta a la red 10.10.1.0/24? (Seleccione DOS respuestas).",
+    "options": [
+      "A. ip net delete 10.10.1.0/24",
+      "B. route del 10.10.1.0/24",
+      "C. route del -net 10.10.1.0/24",
+      "D. route del 10.10.1.0/24 gw 192.168.246.11",
+      "E. ip route delete 10.10.1.0/24"
+    ],
+    "answer": "C, E",
+    "explicacion": "Para eliminar una ruta de red, se puede usar el comando clásico 'route del -net' o el comando moderno 'ip route delete'.",
+    "pista": "Comandos clásico y moderno para gestión de rutas."
+    },
+    {
+    "question": "87. ¿Qué palabra clave falta en la siguiente línea de /etc/fstab para que el usuario 'fred' pueda escribir en un dispositivo flash USB al ser montado?\n/dev/sda1 /mnt/usbflash vfat defaults,users,____=fred,umask=022, 0 0\n(Proporcione solo el nombre de la opción sin ningún ajuste).",
+    "options": [],
+    "answer": "uid",
+    "explicacion": "La opción 'uid' (User ID) en sistemas de archivos que no soportan permisos de Linux (como vfat) permite asignar la propiedad de todos los archivos a un usuario específico.",
+    "pista": "Identificador de usuario."
+    },
+    {
+    "question": "88. El siguiente comando se acaba de ejecutar con éxito: [Comando de restauración de cinta]. ¿Qué sucederá si la secuencia de comandos se ejecuta de nuevo?",
+    "options": [
+      "A. Se generará un error indicando que no hay cinta presente porque la cinta ha sido expulsada después de ser usada.",
+      "B. El contenido de /opt se restaurará de nuevo.",
+      "C. Todo el contenido de /opt será reemplazado por el contenido del siguiente archivo en la cinta.",
+      "D. El contenido de /opt tendrá contenido adicional añadido desde el siguiente archivo en la cinta."
+    ],
+    "answer": "D",
+    "explicacion": "Al trabajar con dispositivos de cinta de no rebobinado (como /dev/nst0), el cabezal se queda al final del archivo recién leído. Ejecutar el comando de nuevo leerá el siguiente bloque de datos disponible en la cinta.",
+    "pista": "Comportamiento de dispositivos de cinta no-rewind."
+    },
+    {
+    "question": "89. ¿Qué archivo en /proc contiene información sobre el estado de los dispositivos RAID de software local?",
+    "options": [
+      "A. /proc/raidstat",
+      "B. /proc/mdstat",
+      "C. /proc/raidstatus",
+      "D. /proc/mdstatus",
+      "E. /proc/raid/status"
+    ],
+    "answer": "B",
+    "explicacion": "El archivo /proc/mdstat es la interfaz del kernel para mostrar el estado actual de todos los dispositivos RAID de software (Multiple Device) activos.",
+    "pista": "Estado de Multiple Devices."
+    },
+    {
+    "question": "90. ¿Cuál es una diferencia clave entre una imagen de kernel zImage y una bzImage?",
+    "options": [
+      "A. zImage se comprime usando gzip, bzImage se comprime usando bzip2.",
+      "B. zImage es para kernels de la serie 2.6, bzImage es para kernels de la serie 3.x.",
+      "C. zImage está limitada a 64k, bzImage no tiene tal restricción.",
+      "D. zImage se carga completamente en la memoria baja. bzImage se cargará en la memoria alta una vez que la memoria baja esté llena."
+    ],
+    "answer": "D",
+    "explicacion": "A diferencia de zImage, que tiene un límite estricto de tamaño para caber en la memoria baja (low memory), bzImage (big zImage) puede cargarse en la memoria alta (high memory), permitiendo kernels mucho más grandes.",
+    "pista": "Carga en memoria alta (Big zImage)."
+    },
+    {
+    "question": "91. Un servidor requiere una opción de arranque de GRUB2 que siempre inicie en el nivel de ejecución (runlevel) 1. ¿Qué línea de un archivo de configuración de GRUB2 inicia el comienzo de los ajustes necesarios para que esta nueva opción esté disponible?",
+    "options": [
+      "A. initrd",
+      "B. linux",
+      "C. menuentry",
+      "D. runlevel"
+    ],
+    "answer": "B",
+    "explicacion": "En la configuración de GRUB2, la línea que comienza con 'linux' especifica el kernel que se va a cargar y permite añadir parámetros de arranque, como el nivel de ejecución.",
+    "pista": "Línea que carga el kernel y sus parámetros."
+    },
+    {
+    "question": "92. ¿Qué comando informará sobre el uso de memoria, paginación y entrada/salida de bloques?",
+    "options": [
+      "A. free",
+      "B. memshow",
+      "C. ps",
+      "D. top",
+      "E. vmstat"
+    ],
+    "answer": "E",
+    "explicacion": "El comando 'vmstat' (virtual memory statistics) proporciona un resumen detallado de los procesos, memoria, paginación, E/S de bloques y actividad de la CPU.",
+    "pista": "Estadísticas de memoria virtual."
+    },
+    {
+    "question": "93. ¿Cuáles son las opciones para node.startup en el archivo iscsid.conf? (Elija DOS respuestas correctas).",
+    "options": [
+      "A. login",
+      "B. initiate",
+      "C. manual",
+      "D. discover",
+      "E. automatic"
+    ],
+    "answer": "C, E",
+    "explicacion": "En la configuración de iSCSI, 'node.startup' define si la sesión con el objetivo (target) se inicia manualmente o automáticamente al arrancar el sistema.",
+    "pista": "Modos de inicio manual o automático."
+    },
+    {
+    "question": "94. ¿Qué se debe hacer después de actualizar el archivo de configuración de syslogd para que los cambios surtan efecto? (Elija DOS respuestas correctas).",
+    "options": [
+      "A. No se requiere ninguna acción, syslogd notará el archivo actualizado después de unos minutos.",
+      "B. Enviar la señal HUP al proceso syslogd.",
+      "C. Reiniciar el servicio syslogd.",
+      "D. Ejecutar el comando syslogd -u."
+    ],
+    "answer": "B, C",
+    "explicacion": "Para que un demonio como syslogd relea su configuración, se puede enviar una señal SIGHUP (Hangup) al proceso o simplemente reiniciar el servicio completo.",
+    "pista": "Señal HUP o reinicio del servicio."
+    },
+    {
+    "question": "95. ¿Cómo se distribuye el código fuente de los módulos principales del kernel de Linux?",
+    "options": [
+      "A. Se incluye con el código fuente del kernel de Linux.",
+      "B. Los módulos del kernel se descargan bajo demanda a medida que se utilizan durante la compilación.",
+      "C. Los módulos del kernel tienen su propio ciclo de lanzamiento y pueden mantenerse por separado del código fuente de Linux.",
+      "D. Se proporciona como una descarga independiente junto al código fuente del kernel de Linux de la misma versión."
+    ],
+    "answer": "A",
+    "explicacion": "Los módulos estándar (drivers, sistemas de archivos, etc.) forman parte integral del árbol de fuentes del kernel de Linux y se distribuyen conjuntamente.",
+    "pista": "Integración en el árbol de fuentes."
+    },
+    {
+    "question": "96. ¿Qué palabra clave se utiliza en el archivo /etc/inittab para definir el nivel de ejecución (runlevel) predeterminado de SysV-init?",
+    "options": [],
+    "answer": "initdefault",
+    "explicacion": "La directiva 'initdefault' especifica en qué nivel de ejecución debe entrar el sistema una vez que el proceso init toma el control.",
+    "pista": "Palabra clave para el nivel inicial."
+    },
+    {
+    "question": "97. ¿Cuál de los siguientes comandos se utiliza para configurar un volumen RAID?",
+    "options": [
+      "A. makerd",
+      "B. mdadm",
+      "C. mkfs.raid",
+      "D. makeraid",
+      "E. rdconfig"
+    ],
+    "answer": "B",
+    "explicacion": "mdadm (Multiple Device Admin) es la herramienta moderna y estándar para gestionar dispositivos RAID de software en Linux.",
+    "pista": "Administrador de dispositivos múltiples."
+    },
+    {
+    "question": "98. ¿Cuáles de los siguientes archivos buscará y utilizará GNU make, si alguno de ellos existe, a menos que se especifique un archivo diferente en la línea de comandos al intentar compilar software desde el código fuente? (Elija DOS respuestas correctas).",
+    "options": [
+      "A. configure",
+      "B. config.h.in",
+      "C. makefile",
+      "D. Makefile",
+      "E. Makefile.in"
+    ],
+    "answer": "C, D",
+    "explicacion": "Por defecto, el comando 'make' busca archivos con los nombres 'GNUmakefile', 'makefile' o 'Makefile' (en ese orden) en el directorio actual.",
+    "pista": "Nombres estándar para archivos de instrucciones de compilación."
+    },
+    {
+    "question": "99. ¿Cuál de los siguientes es un estándar de sistema de archivos para CD-ROM?",
+    "options": [
+      "A. OSI9660",
+      "B. ISO9660",
+      "C. SROFS",
+      "D. ISO8859",
+      "E. ROM-EO"
+    ],
+    "answer": "B",
+    "explicacion": "ISO9660 es el estándar internacional que define la estructura de archivos para medios de disco óptico.",
+    "pista": "Estándar de discos ópticos."
+    },
+    {
+    "question": "100. ¿Dónde se instala normalmente el código del gestor de arranque LILO en un sistema con una sola instalación de Linux y ningún otro sistema operativo?",
+    "options": [
+      "A. En el Master Boot Record (MBR).",
+      "B. En el sector de arranque (boot sector).",
+      "C. En el directorio /boot.",
+      "D. Al inicio del kernel."
+    ],
+    "answer": "A",
+    "explicacion": "En sistemas con un solo sistema operativo, es común instalar el gestor de arranque directamente en el MBR (primer sector del disco duro) para que tome el control inmediatamente después de la BIOS.",
+    "pista": "Primer sector del disco duro."
+    },
+    {
+    "question": "101. ¿Cuáles de los siguientes comandos listarán los vecinos IPv4 del sistema actual? Esto incluye direcciones IP y MAC. (Elija DOS respuestas correctas).",
+    "options": [
+      "A. arp",
+      "B. ifconfig -lv eth0",
+      "C. netstat -al",
+      "D. ip neigh show"
+    ],
+    "answer": "A, D",
+    "explicacion": "Tanto el comando clásico 'arp' como el comando moderno 'ip neigh show' permiten visualizar la tabla de resolución de direcciones, vinculando IPs con direcciones MAC en la red local.",
+    "pista": "Protocolo de resolución de vecinos (ARP/Neighbor)."
+    },
+    {
+    "question": "102. ¿Qué comando convierte de forma no destructiva un sistema de archivos ext2 existente en un sistema de archivos ext3? (Especifique SOLO el comando sin ninguna ruta ni parámetros).",
+    "options": [],
+    "answer": "tune2fs",
+    "explicacion": "El comando 'tune2fs' con la opción '-j' añade un archivo de registro (journal) a una partición ext2, convirtiéndola efectivamente en ext3 sin perder los datos existentes.",
+    "pista": "Herramienta de ajuste para ext2/3/4."
+    },
+    {
+    "question": "103. ¿Qué comando eliminará un volumen físico de un grupo de volúmenes? (Especifique SOLO el comando sin ninguna ruta ni parámetros).",
+    "options": [],
+    "answer": "vgreduce",
+    "explicacion": "El comando 'vgreduce' se utiliza para reducir la capacidad de un grupo de volúmenes eliminando uno o más de sus volúmenes físicos subyacentes.",
+    "pista": "Reducción de grupo de volúmenes."
+    },
+    {
+    "question": "104. Al planificar un servidor web, ¿cuáles de las siguientes opciones afectarán al dimensionamiento del sistema? (Elija TRES respuestas correctas).",
+    "options": [
+      "A. Cuántos usuarios concurrentes se esperan.",
+      "B. Qué proveedor de hardware tiene mejor soporte para Linux.",
+      "C. Qué tipo de contenido se servirá.",
+      "D. Qué lenguajes de scripting soportará el servidor web.",
+      "E. Si la instalación del SO se basará en CD, DVD o red."
+    ],
+    "answer": "A, C, D",
+    "explicacion": "El número de usuarios (A) determina la carga de CPU/RAM, el tipo de contenido (C) afecta al ancho de banda y almacenamiento, y los lenguajes de scripting (D) definen el consumo de recursos de procesamiento por solicitud.",
+    "pista": "Carga de usuarios, datos y procesamiento."
+    },
+    {
+    "question": "105. ¿Qué es incorrecto en estas entradas en /etc/hosts que podría estar causando problemas de resolución de nombres con host2?\nHost1 192.168.1.12 host2 192.168.1.12",
+    "options": [
+      "A. Dos nombres de host están usando la misma dirección IP.",
+      "B. El servidor que realiza la consulta está en una subred diferente.",
+      "C. Los campos están fuera de orden.",
+      "D. host2 no es un nombre de dominio completamente calificado."
+    ],
+    "answer": "C",
+    "explicacion": "El formato estándar del archivo /etc/hosts requiere primero la dirección IP y luego el nombre del host (o nombres). En el ejemplo, el nombre aparece antes que la IP.",
+    "pista": "Formato: <IP> <Hostname>."
+    },
+    {
+    "question": "106. Después de configurar un nuevo kernel, ¿qué archivo bajo /usr/src/linux/ contiene la configuración?",
+    "options": [],
+    "answer": ".config",
+    "explicacion": "El archivo oculto '.config' en el directorio raíz de las fuentes del kernel almacena todas las opciones seleccionadas durante el proceso de configuración (make menuconfig, etc.).",
+    "pista": "Archivo oculto de configuración."
+    },
+    {
+    "question": "107. ¿Qué comando se utiliza para instalar un nuevo gestor de arranque LILO?",
+    "options": [
+      "A. lilo",
+      "B. lilo-config",
+      "C. lilo-install",
+      "D. install-lilo"
+    ],
+    "answer": "A",
+    "explicacion": "A diferencia de GRUB, que usa comandos de instalación específicos, para aplicar cambios en LILO o instalarlo en el MBR se ejecuta simplemente el comando 'lilo'.",
+    "pista": "Nombre corto del gestor."
+    },
+    {
+    "question": "108. ¿Cómo se puede añadir la etiqueta (label) 'root' al sistema de archivos ext2 en /dev/sda1?",
+    "options": [
+      "A. relabel /dev/sda1 root",
+      "B. tune2fs -L root /dev/sda1",
+      "C. echo 'root' > /proc/fs/sda1/label",
+      "D. labelfs --device /dev/sda1 root"
+    ],
+    "answer": "B",
+    "explicacion": "El comando tune2fs permite ajustar diversos parámetros en sistemas de archivos ext2/ext3/ext4; la opción -L se utiliza específicamente para definir la etiqueta del volumen.",
+    "pista": "Utilidad de ajuste para la familia ext."
+    },
+    {
+    "question": "109. El siguiente es un extracto de la salida de tcpdump -nli eth1 'udp':\n1 3:03:17.277327 IP 192.168.123.5.1065 > 192.168.5.112.53: 43653+ A? lpi.org. (25)\n1 3:03:17.598624 IP 192.168.5.112.53 > 192.168.123.5.1065: 43653 1/0/0 A 198.51.100.42 (41)\n¿Qué servicio de red o protocolo se estaba utilizando?",
+    "options": [
+      "A. FTP",
+      "B. HTTP",
+      "C. SSH",
+      "D. DNS",
+      "E. DHCP"
+    ],
+    "answer": "D",
+    "explicacion": "La salida muestra tráfico dirigido al puerto 53 (estándar para DNS) y una consulta de registro tipo 'A' para el dominio 'lpi.org', lo cual es característico del protocolo DNS.",
+    "pista": "Puerto 53 y consulta de dominio."
+    },
+    {
+    "question": "110. ¿Qué comandos de los siguientes son útiles para recopilar datos sobre conexiones de sistemas de archivos remotos? (Elija DOS respuestas correctas).",
+    "options": [
+      "A. pidstat",
+      "B. nfsiostat",
+      "C. sadf",
+      "D. cifsiostat"
+    ],
+    "answer": "B, D",
+    "explicacion": "nfsiostat se utiliza específicamente para monitorear el rendimiento de los montajes NFS, mientras que cifsiostat se emplea para conexiones de red basadas en el protocolo CIFS (Samba/Windows).",
+    "pista": "Estadísticas de E/S para protocolos de red (NFS y CIFS)."
+    },
+    {
+    "question": "111. ¿Qué valor de nivel RAID debe usarse con el software RAID de Linux para crear una matriz de dispositivos en espejo (mirrored)?",
+    "options": [
+      "A. 1",
+      "B. 5",
+      "C. 6",
+      "D. container",
+      "E. mirrorstripe"
+    ],
+    "answer": "A",
+    "explicacion": "RAID 1 es el estándar para el 'espejado' de datos, donde la información se duplica de forma idéntica en dos o más discos para garantizar la redundancia.",
+    "pista": "Nivel de redundancia por duplicación."
+    },
+    {
+    "question": "112. En la siguiente salida, ¿qué marcos de tiempo representan los promedios de carga (load averages)?\n# uptime\n12:10:05 up 18 days, 19:00, 2 users, load average: 0.47, 24.71, 35.31",
+    "options": [
+      "A. 1, 5 y 15 minutos",
+      "B. 1, 15 y 30 minutos",
+      "C. 1, 15 y 30 segundos",
+      "D. 15, 30 y 60 minutos",
+      "E. 15, 30 y 60 segundos"
+    ],
+    "answer": "A",
+    "explicacion": "En Linux, los tres valores de 'load average' representan el promedio de carga del sistema durante el último minuto, los últimos 5 minutos y los últimos 15 minutos, respectivamente.",
+    "pista": "Promedios estándar de 1, 5 y 15."
+    },
+    {
+    "question": "113. ¿Cuál es el propósito del comando udevadm monitor?",
+    "options": [
+      "A. Escucha los eventos del kernel producidos por una regla udev e imprime información en la consola.",
+      "B. Monitorea el directorio /dev en busca de nuevos dispositivos.",
+      "C. Monitorea el proceso udev e imprime estadísticas de rendimiento en la consola.",
+      "D. Se comunica con D-Bus para configurar nuevos dispositivos."
+    ],
+    "answer": "A",
+    "explicacion": "El comando 'udevadm monitor' permite ver en tiempo real los eventos que el kernel envía al demonio udev y los eventos que udev envía tras aplicar sus reglas.",
+    "pista": "Escucha eventos de dispositivos en tiempo real."
+    },
+    {
+    "question": "114. En caso de que se pierda el archivo que contiene el kernel de Linux, ¿qué sucede cuando el sistema está arrancando?",
+    "options": [
+      "A. El sistema arranca normalmente ya que el cargador de arranque copia el kernel al registro de arranque maestro del disco duro.",
+      "B. En lugar del kernel, se carga el initramfs y se le instruye para montar el sistema de archivos raíz y reinstalar el kernel.",
+      "C. El cargador de arranque monta el sistema de archivos raíz en modo lectura y lanza /bin/sh directamente para permitir al administrador reinstalar el kernel.",
+      "D. Sin un kernel, un sistema no puede arrancar y, dependiendo del cargador de arranque, se muestra un error."
+    ],
+    "answer": "D",
+    "explicacion": "El kernel es el corazón del sistema operativo; sin él, el cargador de arranque (como GRUB o LILO) no tiene nada que ejecutar y detendrá el proceso de inicio con un mensaje de error.",
+    "pista": "El kernel es indispensable para el arranque."
+    },
+    {
+    "question": "115. ¿Qué directorio contiene los archivos de reglas udev específicos del sistema? (Especifique la ruta absoluta incluyendo el nombre del directorio).",
+    "options": [],
+    "answer": "/etc/udev/rules.d",
+    "explicacion": "Mientras que las reglas por defecto del sistema suelen estar en /lib/udev/rules.d, las reglas personalizadas y específicas del administrador se colocan siempre en /etc/udev/rules.d.",
+    "pista": "Ruta de configuración de dispositivos."
+    },
+    {
+    "question": "116. ¿Dónde colocaría fsck cualquier archivo no referenciado o fragmentos de archivo en un sistema de archivos ext4?",
+    "options": [
+      "A. recover",
+      "B. lost+found",
+      "C. back",
+      "D. lost"
+    ],
+    "answer": "B",
+    "explicacion": "El directorio 'lost+found' es creado por el sistema en la raíz de cada partición ext para almacenar fragmentos de archivos recuperados tras una corrupción del sistema de archivos.",
+    "pista": "Directorio estándar de recuperación en ext2/3/4."
+    },
+    {
+    "question": "117. ¿Qué información proporciona el archivo modules.dep?",
+    "options": [
+      "A. Una lista de todos los módulos, compilados o no, que están disponibles para el kernel.",
+      "B. Una lista de módulos confiables para el kernel instalado.",
+      "C. Una lista de dispositivos y su nombre de módulo.",
+      "D. Una lista de todos los módulos compilados y sus dependencias.",
+      "E. Una lista de módulos que el kernel necesita para ejecutarse."
+    ],
+    "answer": "D",
+    "explicacion": "El archivo 'modules.dep', generado por el comando 'depmod', contiene un mapa de dependencias que permite a herramientas como 'modprobe' cargar automáticamente los módulos necesarios.",
+    "pista": "Mapa de dependencias para el kernel."
+    },
+    {
+    "question": "118. ¿Cuál es el número mínimo de discos requeridos en un arreglo RAID 5 totalmente redundante?",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4",
+      "E. 5"
+    ],
+    "answer": "C",
+    "explicacion": "RAID 5 requiere al menos tres discos para distribuir los datos y la paridad de manera que el arreglo pueda sobrevivir a la falla de una unidad.",
+    "pista": "Mínimo para paridad distribuida."
+    },
+    {
+    "question": "119. ¿Dónde se instala normalmente el código del cargador de arranque LILO en un sistema con una sola instalación de Linux y ningún otro sistema operativo?",
+    "options": [
+      "A. En el directorio /boot.",
+      "B. En el registro de arranque maestro (Master Boot Record).",
+      "C. En el sector de arranque (boot sector).",
+      "D. Al inicio del kernel."
+    ],
+    "answer": "B",
+    "explicacion": "Para sistemas de arranque único, el MBR es el lugar estándar para que LILO tome el control del proceso de inicio inmediatamente después del firmware del sistema.",
+    "pista": "Primer sector físico del disco duro."
+    },
+    {
+    "question": "120. ¿Qué opción en el archivo de configuración de collectd es necesaria para definir qué monitoreo iniciar?",
+    "options": [
+      "A. LoadModule",
+      "B. Module",
+      "C. Plugin",
+      "D. LoadPlugin"
+    ],
+    "answer": "D",
+    "explicacion": "En 'collectd', la directiva 'LoadPlugin' se utiliza para cargar los módulos específicos (como cpu, memory, df) que recolectarán los datos del sistema.",
+    "pista": "Carga de complementos en collectd."
+    },
+    {
+    "question": "121. Un sistema tiene un disco duro y una grabadora de CD, ambos conectados a controladores SATA. ¿Qué dispositivo representa la grabadora de CD?",
+    "options": [
+      "A. /dev/hdb",
+      "B. /dev/sdd",
+      "C. /dev/scd1",
+      "D. /dev/sr0",
+      "E. /dev/sr1"
+    ],
+    "answer": "D",
+    "explicacion": "En los kernels modernos de Linux, los dispositivos ópticos (CD/DVD) conectados vía SATA o SCSI se identifican universalmente como /dev/srX, comenzando por /dev/sr0 para el primer dispositivo.",
+    "pista": "Identificador estándar para dispositivos ópticos SCSI/SATA."
+    },
+    {
+    "question": "122. ¿Cuál de las siguientes opciones describe mejor el formato del archivo /etc/fstab?",
+    "options": [
+      "A. nombre del dispositivo; tipo de sistema de archivos; punto de montaje; opciones de montaje; volcado del sistema de archivos; orden de fsck",
+      "B. nombre del dispositivo; punto de montaje; tipo de sistema de archivos; opciones de montaje; volcado del sistema de archivos; orden de fsck",
+      "C. nombre del dispositivo; punto de montaje; opciones de montaje; tipo de sistema de archivos; volcado del sistema de archivos; orden de fsck",
+      "D. punto de montaje; tipo de sistema de archivos; nombre del dispositivo; opciones de montaje; volcado del sistema de archivos; orden de fsck",
+      "E. punto de montaje; nombre del dispositivo; tipo de sistema de archivos; opciones de montaje; volcado del sistema de archivos; orden de fsck"
+    ],
+    "answer": "B",
+    "explicacion": "El estándar de /etc/fstab sigue el orden: 1) Dispositivo (UUID/Etiqueta), 2) Punto de montaje, 3) Tipo de FS, 4) Opciones (rw, defaults), 5) Soporte para dump, y 6) Prioridad de fsck.",
+    "pista": "El punto de montaje va antes que el tipo de sistema de archivos."
+    },
+    {
+    "question": "123. ¿Qué opción del comando update-rc.d causará la eliminación de todos los enlaces simbólicos a /etc/rcX.d/*test2 incluso cuando el script /etc/init.d/test2 todavía existe?",
+    "options": [
+      "A. -d",
+      "B. -f",
+      "C. -n",
+      "D. -r"
+    ],
+    "answer": "B",
+    "explicacion": "La opción '-f' (force) obliga a eliminar los enlaces de inicio aunque el script original permanezca en init.d, lo cual es útil para desactivar servicios sin borrar sus binarios.",
+    "pista": "Opción de forzado."
+    },
+    {
+    "question": "124. ¿Qué indica un 0 en el último campo (orden de fsck) de /etc/fstab sobre el sistema de archivos?",
+    "options": [
+      "A. El sistema de archivos debe verificarse antes que los sistemas con valores más altos.",
+      "B. El sistema de archivos debe verificarse después que los sistemas con valores más altos.",
+      "C. El contador de verificación del sistema de archivos es ignorado.",
+      "D. El sistema de archivos ha sido deshabilitado para ser verificado y montado en el sistema.",
+      "E. El sistema de archivos no requiere una verificación de fsck al ser montado."
+    ],
+    "answer": "E",
+    "explicacion": "Un valor de 0 en el sexto campo de fstab indica al sistema que omita la verificación de integridad (fsck) para esa partición específica durante el arranque.",
+    "pista": "Valor para omitir la verificación."
+    },
+    {
+    "question": "125. ¿Cuál de las siguientes herramientas se utiliza para medir el uso de la memoria? (Elija TRES respuestas correctas).",
+    "options": [
+      "A. mpstat",
+      "B. pstree",
+      "C. sar",
+      "D. top",
+      "E. vmstat"
+    ],
+    "answer": "C, D, E",
+    "explicacion": "Mientras que 'sar' (System Activity Reporter), 'top' y 'vmstat' (Virtual Memory Statistics) informan detalladamente sobre el uso de la memoria física y swap, 'mpstat' se enfoca en la CPU y 'pstree' en la jerarquía de procesos.",
+    "pista": "Herramientas de estadísticas de memoria virtual y reporte de actividad."
+    },
+    {
+    "question": "126. ¿Qué archivo contiene el mensaje que se muestra encima del prompt de inicio de sesión de la consola del sistema? (Especifique el nombre completo del archivo, incluyendo la ruta).",
+    "options": [],
+    "answer": "/etc/issue",
+    "explicacion": "El archivo '/etc/issue' se utiliza para mostrar mensajes de identificación o avisos antes de que el usuario inicie sesión en la consola local.",
+    "pista": "Archivo de aviso previo al login local."
+    },
+    {
+    "question": "127. ¿Cuál es la ruta completa al directorio que contiene los scripts (o enlaces a los scripts originales) que se ejecutan mientras el sistema arranca en el nivel de ejecución (runlevel) 2 de SysV-init?",
+    "options": [],
+    "answer": "/etc/rc2.d",
+    "explicacion": "En el sistema de inicio SysV-init, cada nivel de ejecución tiene su propio directorio bajo /etc/ llamado rcX.d, donde X es el número del nivel (en este caso, 2).",
+    "pista": "Directorio de runlevel 2."
+    },
+    {
+    "question": "128. ¿Cuáles de los siguientes son tipos de sistemas de archivos comunes en Linux utilizados para particiones raíz? (Elija TRES respuestas correctas).",
+    "options": [
+      "A. ext4",
+      "B. VFAT",
+      "C. NTFS",
+      "D. XFS",
+      "E. Btrfs"
+    ],
+    "answer": "A, D, E",
+    "explicacion": "ext4, XFS y Btrfs son sistemas de archivos nativos de Linux con soporte para permisos POSIX, necesarios para la partición raíz. VFAT y NTFS son sistemas de archivos de Windows que no manejan correctamente los permisos de Linux.",
+    "pista": "Sistemas de archivos nativos y modernos de Linux."
+    },
+    {
+    "question": "129. ¿Qué comando se puede utilizar para escanear una red específica en busca de direcciones IP que parezcan estar en uso?",
+    "options": [
+      "A. nmap",
+      "B. tcpdump",
+      "C. ip",
+      "D. netscan",
+      "E. hostdiscover"
+    ],
+    "answer": "A",
+    "explicacion": "'nmap' es la herramienta estándar para el descubrimiento de redes y auditoría de seguridad, permitiendo identificar hosts activos en un rango de IPs.",
+    "pista": "Mapeador de redes."
+    },
+    {
+    "question": "130. Debido al uso extremo del sistema, un sistema Linux requiere espacio de intercambio (swap) adicional. Para inicializar 5GB de espacio de swap adicional, ¿qué combinación de comandos debe utilizarse?",
+    "options": [
+      "A. dd if=/dev/zero of=/tmp/swapfile bs=1024 count=5120000; mkswap /tmp/swapfile; mount/tmp/swapfile",
+      "B. dd if=/dev/zero of=/tmp/swapfile bs=1024 count=5120000; swapon /tmp/swapfile",
+      "C. dd if=/dev/zero of=/tmp/swapfile bs=1024 count=5120000; mkswap /tmp/swapfile; swapon/tmp/swapfile",
+      "D. touch -SG /tmp/swapfile; swapon /tmp/swapfile",
+      "E. mkswap /tmp/swapfile 512000; swapon /tmp/swapfile"
+    ],
+    "answer": "C",
+    "explicacion": "El proceso correcto es: 1) Crear el archivo con 'dd', 2) Formatearlo como swap con 'mkswap', y 3) Activarlo con 'swapon'.",
+    "pista": "Crear, formatear y activar."
     }
 ];
