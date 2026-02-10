@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador LPIC-2 Pro</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script src="js/LPIC2-2-450.js"></script>
+    <script src="js/LPIC2-2-450-EN.js"></script>
+    
+    <script src="js/main.js?v=2.7.3"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=2.7.3">
+</head>
+<body>
+    <div id="header">
+        <h1>Test LPIC-2 <span class="version-badge"></span></h1>
+        <div class="header-right">
+            <select id="examSelect">
+                <option value="LPIC2_2">LPIC-2 202 Castellano</option>
+                <option value="LPIC2_2_EN">LPIC-2 202 Inglés</option>
+            </select>
+            <button id="toggleDarkMode">🌙</button>
+        </div>
+    </div>
+
+    <div class="progress-container"><div id="progressBar" class="progress-bar"></div></div>
+
+    <div id="content">
+        <div class="card" id="mainCard">
+            <div id="question" class="question"></div>
+            <div id="answer" class="answer"></div>
+            <div id="buttons" class="buttons"></div>
+        </div>
+
+        <div class="card" id="resultReport" style="display:none; text-align:center;">
+            <h2>📊 Resultados Finales</h2>
+            <div id="finalScore" style="font-size: 3.5rem; margin: 20px 0; font-weight: bold; color: var(--primary-color);"></div>
+            <button id="restartBtn" onclick="window.location.reload();">Reiniciar</button>
+        </div>
+    </div>
+
+    <div id="footer">
+		<div class="footer-item"><span>🕒 Tiempo</span><div class="footer-box" id="timer">00:00</div></div>
+		<div class="footer-item"><span>📝 Preguntas</span><div class="footer-box" id="number">0</div></div>
+		<div class="footer-item"><span>✅ Correctas</span><div class="footer-box" id="correct">0</div></div>
+		<div class="footer-item"><span>❌ Fallos</span><div class="footer-box" id="incorrect" style="color: var(--error-color);">0</div></div>
+	</div>
+</body>
+</html>
