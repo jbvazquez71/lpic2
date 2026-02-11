@@ -8,19 +8,24 @@
     
     <script src="js/LPIC2-2-450.js"></script>
     <script src="js/LPIC2-2-450-EN.js"></script>
+    <script src="js/LPI-202-400-12.35.js"></script>
+    <script src="js/LPI-202-400-12.35-EN.js"></script>
     
-    <script src="js/main.js?v=2.7.3"></script>
-    <link rel="stylesheet" type="text/css" href="css/main.css?v=2.7.3">
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
     <div id="header">
         <h1>Test LPIC-2 <span class="version-badge"></span></h1>
         <div class="header-right">
             <select id="examSelect">
-                <option value="LPIC2_2">LPIC-2 202 Castellano</option>
-                <option value="LPIC2_2_EN">LPIC-2 202 Inglés</option>
+                <option value="LPIC2_2" selected>LPIC-2 202-450 (Castellano)</option>
+                <option value="LPIC2_2_EN">LPIC-2 202-450 (Inglés)</option>
+                <hr>
+                <option value="LPI_400">LPI-202-400 V12.35 (Castellano)</option>
+                <option value="LPI_400_EN">LPI-202-400 V12.35 (Inglés)</option>
             </select>
-            <button id="toggleDarkMode">🌙</button>
+            <button id="toggleDarkMode" title="Cambiar tema">🌙</button>
         </div>
     </div>
 
@@ -34,17 +39,19 @@
         </div>
 
         <div class="card" id="resultReport" style="display:none; text-align:center;">
-            <h2>📊 Resultados Finales</h2>
-            <div id="finalScore" style="font-size: 3.5rem; margin: 20px 0; font-weight: bold; color: var(--primary-color);"></div>
-            <button id="restartBtn" onclick="window.location.reload();">Reiniciar</button>
+            <h2>📊 Resultados del Examen</h2>
+            <div id="finalScore" style="font-size: 4rem; margin: 20px 0; font-weight: bold; color: var(--primary-color);"></div>
+            <p id="finalStatsText" style="font-size: 1.2rem; margin-bottom:20px;"></p>
+            <button id="restartBtn" onclick="window.location.reload();" style="padding: 15px 30px; font-size:1.1rem; cursor:pointer;">🔄 Realizar otro Test</button>
         </div>
     </div>
 
     <div id="footer">
-		<div class="footer-item"><span>🕒 Tiempo</span><div class="footer-box" id="timer">00:00</div></div>
-		<div class="footer-item"><span>📝 Preguntas</span><div class="footer-box" id="number">0</div></div>
-		<div class="footer-item"><span>✅ Correctas</span><div class="footer-box" id="correct">0</div></div>
-		<div class="footer-item"><span>❌ Fallos</span><div class="footer-box" id="incorrect" style="color: var(--error-color);">0</div></div>
-	</div>
+        <div class="footer-item"><span>🕒 Tiempo</span><div class="footer-box" id="timer">00:00</div></div>
+        <div class="footer-item"><span>📝 Progreso</span><div class="footer-box" id="number">0/60</div></div>
+        <div class="footer-item"><span>✅ Aciertos</span><div class="footer-box" id="hits" style="color:#10b981">0</div></div>
+        <div class="footer-item"><span>❌ Fallos</span><div class="footer-box" id="fails" style="color:#ef4444">0</div></div>
+        <div class="footer-item"><span>📈 Éxito</span><div class="footer-box" id="percent">0%</div></div>
+    </div>
 </body>
 </html>

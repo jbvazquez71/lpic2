@@ -1,5 +1,4 @@
 var preguntasLPIC2_2_EN = [
-  
   {
     "question": "1. On a Linux router, packet forwarding for IPv4 has been enabled. After a reboot, the machine no longer forwards IP packets from other hosts. The command: 'echo 1 > /proc/sys/net/ipv4/ip_forward' temporarily resolves this issue. Which is the best way to ensure this setting is saved across system restarts?",
     "options": [
@@ -250,7 +249,6 @@ var preguntasLPIC2_2_EN = [
     "explicacion": "Appending a '$' to the share name makes it hidden in browser lists.",
     "pista": "The dollar sign trick."
   },
-
   {
     "question": "21. Which of the following options are valid in /etc/exports? (Choose two.)",
     "options": [
@@ -495,7 +493,6 @@ var preguntasLPIC2_2_EN = [
     "explicacion": "The 'listen' directive defines the port and address the server block will respond to.",
     "pista": "Nginx port directive."
   },
-
   {
     "question": "41. When trying to reverse proxy a web server through Nginx, what keyword is missing from the following configuration sample? 'location / { ________ http://proxiedserver:8080; }'",
     "options": [
@@ -704,7 +701,6 @@ var preguntasLPIC2_2_EN = [
     "explicacion": "Dovecot supports SASL mechanisms like PLAIN, CRAM-MD5, and DIGEST-MD5.",
     "pista": "MD5 and cleartext."
   },
-  
   {
     "question": "61. Which of the following services belongs to NFSv4 and does not exist in NFSv3?",
     "options": [
@@ -784,7 +780,7 @@ var preguntasLPIC2_2_EN = [
       "D. host allow 192.168.1.0/255.255.255.0",
       "E. host allow localhost"
     ],
-    "answer": "D, E",
+    "answer": "D",
     "explicacion": "Defining the full subnet and enabling localhost are standard practices for allowing network access in Samba.",
     "pista": "Allow subnet and loopback."
   },
@@ -946,7 +942,6 @@ var preguntasLPIC2_2_EN = [
     "explicacion": "Stack fingerprinting identifies an OS by analyzing unique patterns in its TCP/IP implementation.",
     "pista": "OS identification."
   },
-  
   {
     "question": "81. To allow X connections to be forwarded from or through an SSH server, what configuration keyword must be set to yes in the sshd configuration file?",
     "options": [
@@ -1012,7 +1007,7 @@ var preguntasLPIC2_2_EN = [
       "D. cat",
       "E. netmap"
     ],
-    "answer": "B, C",
+    "answer": "B",
     "explicacion": "Netcat (nc) and Telnet are versatile tools that can open raw TCP connections to any port.",
     "pista": "The 'Swiss-army knife' and the classic remote console tool."
   },
@@ -1077,7 +1072,7 @@ var preguntasLPIC2_2_EN = [
       "D. ~/.ssh/id_rsa.crt",
       "E. ~/.ssh/id_rsa"
     ],
-    "answer": "B, E",
+    "answer": "B",
     "explicacion": "ssh-keygen generates the private key (id_rsa) and the public key (id_rsa.pub) in the .ssh directory.",
     "pista": "The public and private key files."
   },
@@ -1190,7 +1185,6 @@ var preguntasLPIC2_2_EN = [
     "explicacion": "The 'allow-query' directive defines an Access Control List (ACL) for which clients can query the DNS server.",
     "pista": "Directive to allow queries."
   },
-  
   {
     "question": "101. Which doveadm sub-command displays a list of connections of Dovecot? (Specify ONLY the command)",
     "answer": "who",
@@ -1409,8 +1403,5 @@ var preguntasLPIC2_2_EN = [
     "answer": "B, D, E",
     "explicacion": "OpenLDAP backends include bdb (Berkeley DB), ldap (proxy), and text.",
     "pista": "Standard database and proxy types."
-  },
-  
-  
-    
+  }
 ];

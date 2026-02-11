@@ -1,183 +1,243 @@
-const APP_VERSION = "2.7.3"; 
-let arr = []; 
+const APP_VERSION = "3.1.0"; 
+let arr = []; // Preguntas activas (las 60 seleccionadas)
+let fullPool = []; // Pool completo
 let arrOpt = ["A", "B", "C", "D", "E"];
 let preguntas_hechas = [];
 let numCorrect = 0;
 let numIncorrect = 0;
+let timerInterval;
+let seconds = 0;
 
+// --- MOTOR DE SELECCIÓN DE EXAMEN ---
 function switchExam(examKey) {
-    arr = [];
-    // Verificación robusta usando el objeto window
+    fullPool = [];
+    
+    // Mapeo de claves a variables globales
     if (examKey === "LPIC2_2") {
-        if (window.preguntasLPIC2_2) arr = window.preguntasLPIC2_2;
+        if (window.preguntasLPIC2_2) fullPool = window.preguntasLPIC2_2;
     } else if (examKey === "LPIC2_2_EN") {
-        if (window.preguntasLPIC2_2_EN) arr = window.preguntasLPIC2_2_EN;
+        if (window.preguntasLPIC2_2_EN) fullPool = window.preguntasLPIC2_2_EN;
+    } else if (examKey === "LPI_400") {
+        if (window.preguntas202_400) fullPool = window.preguntas202_400;
+    } else if (examKey === "LPI_400_EN") {
+        if (window.preguntas202_400_EN) fullPool = window.preguntas202_400_EN;
     }
 
-    if (!arr || arr.length === 0) {
-        $("#question").html(`<div style="color:red; text-align:center;">
-            <h2>Error: No se han podido cargar las preguntas.</h2>
-            <p>Verifica que los archivos JS están en la carpeta /js/ y que las variables existen.</p>
+    // Validación
+    if (!fullPool || fullPool.length === 0) {
+        $("#question").html(`<div style="color:var(--error-color); text-align:center; padding:20px;">
+            <h2>⚠️ Error de carga</h2>
+            <p>No se encontraron preguntas para: <b>${examKey}</b></p>
+            <p><small>Verifica los archivos .js</small></p>
         </div>`);
         $("#answer, #buttons").html("");
-    } else {
-        resetStats();
-        nextQuestion();
+        return;
     }
+
+    // PREPARAR EXAMEN: Mezclar y cortar a 60
+    let tempArr = [...fullPool];
+    shuffle(tempArr);
+    arr = tempArr.slice(0, 60);
+
+    // Reiniciar
+    resetStats();
+    startTimer();
+    nextQuestion();
 }
 
+// --- FUNCIONES DE ESTADO ---
 function resetStats() {
     preguntas_hechas = []; 
     numCorrect = 0; 
     numIncorrect = 0;
+    seconds = 0;
     $("#mainCard").show(); 
     $("#resultReport").hide();
+    updateFooter();
     updateProgressBar(); 
-    updatefooter();
 }
 
-function updatefooter() {
-    $("#number").text(preguntas_hechas.length + "/" + arr.length);
-    $("#correct").text(numCorrect);
-    $("#incorrect").text(numIncorrect); // Actualiza los fallos
+function startTimer() {
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        seconds++;
+        let m = Math.floor(seconds / 60).toString().padStart(2, '0');
+        let s = (seconds % 60).toString().padStart(2, '0');
+        $("#timer").text(`${m}:${s}`);
+    }, 1000);
 }
 
-function updateProgressBar() {
-    if (arr.length === 0) return;
-    let pct = (preguntas_hechas.length / arr.length) * 100;
-    $("#progressBar").css("width", pct + "%");
-}
-
+// --- MOTOR DE PREGUNTAS ---
 function nextQuestion() {
+    $("#mainCard").removeClass("correct-border incorrect-border");
+    
+    // Fin del examen
     if (preguntas_hechas.length >= arr.length) {
         showFinalResults();
         return;
     }
 
-    let r;
+    // Buscar siguiente pregunta no hecha
+    let n = 0;
     do {
-        r = Math.floor(Math.random() * arr.length);
-    } while (preguntas_hechas.includes(r));
+        n = Math.floor(Math.random() * arr.length);
+    } while (preguntas_hechas.includes(n) && preguntas_hechas.length < arr.length);
 
-    let q = arr[r];
-    renderQuestion(q, r);
-}
-
-function renderQuestion(q, index) {
-    $("#question").html(`<h3>${q.question}</h3>`);
-    let html = "";
+    let q = arr[n];
     
-    if (q.options && q.options.length > 0) {
-        // Si la respuesta contiene coma, es multiselección
-        const isMulti = q.answer.includes(","); 
-        const inputType = isMulti ? "checkbox" : "radio";
-        
-        q.options.forEach((opt, i) => {
-            html += `
-                <label class="option-container">
-                    <input type="${inputType}" name="answer" value="${arrOpt[i]}">
-                    <span><strong>${arrOpt[i]}:</strong> ${opt}</span>
-                </label>`;
+    // Renderizar Pregunta
+    let html = `<h3>${q.question}</h3>`;
+    if (q.explicacion_extra) html += `<div class="code-block" style="background:rgba(0,0,0,0.05); padding:10px; border-radius:5px; font-family:monospace;">${q.explicacion_extra}</div>`;
+    $("#question").html(html);
+
+    // Renderizar Opciones
+    let answersHtml = "";
+    let isMulti = q.answer.includes(",") || q.answer.length > 2; 
+    let inputType = isMulti ? "checkbox" : "radio";
+
+    if (q.options) {
+        q.options.forEach((opt, idx) => {
+            let letter = arrOpt[idx]; 
+            answersHtml += `
+                <label class="option-label" id="label-${letter}">
+                    <input type="${inputType}" name="opt" value="${letter}">
+                    <span style="font-weight:bold; color:var(--primary-color); margin-right:10px;">${letter}</span>
+                    <span>${opt.substring(2).trim()}</span> 
+                </label>
+            `;
         });
-        if(isMulti) html += `<p><small>ℹ️ Selecciona varias opciones</small></p>`;
     } else {
-        html = `<input type="text" id="cmdInput" placeholder="Escribe tu respuesta aquí..." style="width:100%; padding:10px;">`;
+        answersHtml = `<input type="text" id="textAnswer" placeholder="Escribe el comando..." class="text-input" autocomplete="off">`;
     }
-    $("#answer").html(html);
-    $("#buttons").html(`<button id="actionBtn" onclick="checkAnswer(${index})">Validar</button>`);
+    
+    $("#answer").html(answersHtml);
+    $("#buttons").html(`<button id="actionBtn" onclick="checkAnswer(${n})">Comprobar</button>`);
+    
+    if(!q.options) $("#textAnswer").focus();
 }
 
 function checkAnswer(index) {
     let q = arr[index];
-    let userAns = "";
+    let userAns = [];
     
-    // 1. Obtener respuesta (Soporte Multiselección)
-    if (q.options && q.options.length > 0) {
-        let selected = [];
-        $("input[name='answer']:checked").each(function() {
-            selected.push($(this).val());
-        });
-        userAns = selected.sort().join(", "); // Une respuestas: "A, B"
+    if (q.options) {
+        $("input[name='opt']:checked").each(function() { userAns.push($(this).val()); });
+        userAns = userAns.join(", "); 
     } else {
-        userAns = $("#cmdInput").val().trim();
+        userAns = $("#textAnswer").val().trim();
     }
 
-    if (!userAns) return;
+    if (!userAns) return; 
 
-    // 2. Validar y dar Feedback Visual
-    const isCorrect = userAns.toUpperCase() === q.answer.toUpperCase();
-    const card = $("#mainCard");
+    let correct = q.answer.trim();
+    let isCorrect = false;
 
+    if (q.options) {
+        let u = userAns.split(",").map(s=>s.trim()).sort().join(", ");
+        let c = correct.split(",").map(s=>s.trim()).sort().join(", ");
+        isCorrect = (u === c);
+    } else {
+        isCorrect = (userAns.toLowerCase() === correct.toLowerCase());
+    }
+
+    // Feedback Visual
     if (isCorrect) {
         numCorrect++;
-        card.addClass("correct-border"); // Verde (definido en tu CSS)
+        $("#mainCard").addClass("correct-border");
     } else {
         numIncorrect++;
-        card.addClass("incorrect-border"); // Rojo (definido en tu CSS)
+        $("#mainCard").addClass("incorrect-border");
     }
 
-    // 3. Mostrar Explicación y bloquear botón
     let feedbackHtml = `
-        <div class="feedback-box ${isCorrect ? 'text-success' : 'text-error'}">
-            <strong>${isCorrect ? '✅ ¡Correcto!' : '❌ Incorrecto'}</strong><br>
-            <p><strong>Tu respuesta:</strong> ${userAns}</p>
-            <p><strong>Respuesta correcta:</strong> ${q.answer}</p>
-            <hr>
-            <p><strong>Explicación:</strong> ${q.explicacion || "Sin explicación disponible."}</p>
+        <div class="feedback-box ${isCorrect ? 'fb-success' : 'fb-error'}">
+            <strong style="font-size:1.1rem;">${isCorrect ? '🎉 ¡Correcto!' : '❌ Incorrecto'}</strong>
+            <div style="margin-top:10px;">
+                ${!isCorrect ? `<p>Tu respuesta: <span style="text-decoration:line-through">${userAns}</span></p>` : ''}
+                <p>✅ Correcta: <strong>${correct}</strong></p>
+                <hr style="opacity:0.2; margin:15px 0;">
+                <p>ℹ️ ${q.explicacion || "Sin explicación adicional."}</p>
+            </div>
         </div>
     `;
     
     $("#answer").append(feedbackHtml);
-    $("#buttons").html(`<button id="nextBtn" onclick="processNext(${index})">Siguiente Pregunta</button>`);
-    
-    // Deshabilitar inputs para que no se cambie la respuesta
+    $("#buttons").html(`<button id="nextBtn" onclick="processNext(${index})">Siguiente ➡</button>`);
     $("input").prop("disabled", true);
+    $("#nextBtn").focus();
+
+    updateFooter();
 }
 
 function processNext(index) {
-    $("#mainCard").removeClass("correct-border incorrect-border");
     preguntas_hechas.push(index);
-    updatefooter();
     updateProgressBar();
     nextQuestion();
+}
+
+// --- UI & TOOLS ---
+function updateFooter() {
+    $("#number").text(`${preguntas_hechas.length} / ${arr.length}`);
+    $("#hits").text(numCorrect);
+    $("#fails").text(numIncorrect);
+    
+    let total = numCorrect + numIncorrect;
+    let pct = total === 0 ? 0 : Math.round((numCorrect / total) * 100);
+    $("#percent").text(pct + "%");
+}
+
+function updateProgressBar() {
+    let pct = (preguntas_hechas.length / 60) * 100; 
+    $("#progressBar").css("width", pct + "%");
 }
 
 function showFinalResults() {
     $("#mainCard").hide();
     $("#resultReport").show();
-    let score = Math.round((numCorrect / arr.length) * 100);
+    clearInterval(timerInterval);
+    
+    let score = Math.round((numCorrect / 60) * 100);
     $("#finalScore").text(score + "%");
+    $("#finalStatsText").html(`
+        Has acertado <b>${numCorrect}</b> de <b>60</b> preguntas.<br><br>
+        Tiempo total: <span style="font-family:monospace; background:#eee; padding:5px; border-radius:4px;">${$("#timer").text()}</span>
+    `);
 }
 
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+// --- INICIO ---
 $(document).ready(() => {
     $(".version-badge").text("v=" + APP_VERSION);
     
-    // Configuración del Selector de Examen
+    // Cambiar examen
     $("#examSelect").on('change', function() { 
         switchExam($(this).val()); 
     });
 
-    // Lógica del Modo Oscuro
+    // MODO OSCURO
     $("#toggleDarkMode").on('click', () => {
         $("body").toggleClass("dark-mode");
         const isDark = $("body").hasClass("dark-mode");
         $("#toggleDarkMode").text(isDark ? "☀️" : "🌙");
     });
 
-    // --- NUEVO: Control de teclado para Intro ---
+    // Tecla Enter
     $(document).on('keypress', function(e) {
-        if (e.which == 13) { // 13 es la tecla Enter
-            if ($("#actionBtn").length > 0) {
-                $("#actionBtn").click(); // Valida la respuesta
-            } else if ($("#nextBtn").length > 0) {
-                $("#nextBtn").click(); // Pasa a la siguiente
-            }
+        if (e.which == 13) {
+            if ($("#actionBtn").is(":visible")) $("#actionBtn").click();
+            else if ($("#nextBtn").is(":visible")) $("#nextBtn").click();
         }
     });
-    // --------------------------------------------
 
-    // Pequeño retardo para asegurar que los scripts de datos se han interpretado
+    // Carga inicial
     setTimeout(() => { 
-        switchExam($("#examSelect").val()); 
-    }, 100);
+        let def = $("#examSelect").val();
+        if(def) switchExam(def);
+    }, 500);
 });
