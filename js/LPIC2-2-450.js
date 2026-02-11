@@ -249,6 +249,254 @@ var preguntasLPIC2_2 = [
     "explicacion": "Añadir '$' al final del nombre hace que sea invisible en las listas de navegación.",
     "pista": "El truco del signo de dólar."
   },
+  
+  {
+    "question": "21. ¿Cuáles de las siguientes opciones son válidas en /etc/exports? (Elige dos)",
+    "options": [
+      "A. rw",
+      "B. ro",
+      "C. rootsquash",
+      "D. norootsquash",
+      "E. uid"
+    ],
+    "answer": "A, B",
+    "explicacion": "rw (lectura/escritura) y ro (solo lectura) son las opciones básicas de permisos en NFS. 'rootsquash' es incorrecto (es root_squash).",
+    "pista": "Permisos básicos de lectura/escritura."
+  },
+  {
+    "question": "22. ¿Qué comando se utiliza para configurar qué sistemas de archivos pone un servidor NFS a disposición de los clientes?",
+    "options": [
+      "A. exportfs",
+      "B. mkfs.nfs",
+      "C. mount",
+      "D. nfsservctl",
+      "E. telinit"
+    ],
+    "answer": "A",
+    "explicacion": "El comando exportfs administra la tabla de sistemas de archivos exportados por NFS sin necesidad de reiniciar el servicio.",
+    "pista": "Exportar sistemas de archivos."
+  },
+  {
+    "question": "23. ¿Cuál de estas herramientas, sin ninguna opción, proporciona la mayor cantidad de información al realizar consultas DNS?",
+    "options": [
+      "A. dig",
+      "B. nslookup",
+      "C. host",
+      "D. named-checkconf",
+      "E. named-checkzone"
+    ],
+    "answer": "A",
+    "explicacion": "dig es la herramienta más verbosa por defecto, mostrando las secciones de pregunta, respuesta, autoridad y adicionales.",
+    "pista": "Herramienta preferida para diagnósticos detallados."
+  },
+  {
+    "question": "24. Al realizar una búsqueda DNS con dig se obtiene una respuesta donde falta un punto final en un registro PTR. ¿Cuál es la causa más probable?",
+    "options": [
+      "A. No hay punto después del nombre en el registro PTR de la zona directa.",
+      "B. No hay punto después del nombre de host.",
+      "C. No hay punto después del nombre FQDN en el registro PTR en el archivo de zona inversa.",
+      "D. El punto en la definición NS debe ser eliminado."
+    ],
+    "answer": "C",
+    "explicacion": "En los archivos de zona BIND, si un FQDN no termina en punto, se le añade el dominio de origen ($ORIGIN), causando errores en registros PTR.",
+    "pista": "El punto final es crucial en FQDN."
+  },
+  {
+    "question": "25. ¿Qué opción para BIND se requiere en las opciones globales para deshabilitar las consultas recursivas en el servidor DNS por defecto?",
+    "options": [
+      "A. allow-recursive-query (none; );",
+      "B. allow-recursive-query off;",
+      "C. recursion { disabled; };",
+      "D. recursion { none; };",
+      "E. recursion no;"
+    ],
+    "answer": "E",
+    "explicacion": "La directiva 'recursion no;' en la sección options deshabilita la recursión globalmente.",
+    "pista": "Sintaxis simple: opción + no."
+  },
+  {
+    "question": "26. ¿Cuál de los siguientes registros DNS podría ser un 'glue record' (registro de pegamento)?",
+    "options": [
+      "A. ns1.lab A 198.51.100.53",
+      "B. lab NS 198.51.100.53",
+      "C. ns1.lab NS 198.51.100.53",
+      "D. ns1. A 198.51.100.53",
+      "E. ns1.lab GLUE 198.51.100.53"
+    ],
+    "answer": "A",
+    "explicacion": "Un glue record es un registro A simple que proporciona la IP de un servidor de nombres que está dentro del propio dominio que delega.",
+    "pista": "Es un registro tipo A."
+  },
+  {
+    "question": "27. ¿Para qué se utiliza DNSSEC?",
+    "options": [
+      "A. Consultas DNS cifradas entre servidores de nombres.",
+      "B. Autenticación criptográfica de zonas DNS.",
+      "C. Consultas DNS secundarias para zonas locales.",
+      "D. Autenticación del usuario que inició la consulta DNS.",
+      "E. Cifrado de consultas y respuestas DNS."
+    ],
+    "answer": "B",
+    "explicacion": "DNSSEC firma digitalmente los registros para asegurar que la información no ha sido alterada (integridad y autenticidad), pero no cifra el tráfico.",
+    "pista": "Seguridad mediante firmas, no cifrado."
+  },
+  {
+    "question": "28. ¿Qué palabra falta en el siguiente extracto de named.conf? '_______ friends { 10.10.0.0/24; 192.168.1.0/24; };'",
+    "options": [
+      "A. networks",
+      "B. net",
+      "C. list",
+      "D. acl",
+      "E. group"
+    ],
+    "answer": "D",
+    "explicacion": "La palabra clave 'acl' se usa para definir listas de control de acceso con alias nombrados para grupos de redes.",
+    "pista": "Lista de Control de Acceso."
+  },
+  {
+    "question": "29. En un archivo de zona BIND, ¿qué indica el carácter @?",
+    "options": [
+      "A. Es el nombre de host totalmente cualificado (FQDN) del servidor DNS.",
+      "B. Es un alias para la dirección de correo electrónico del maestro de zona.",
+      "C. Es el nombre de la zona tal como se define en la declaración zone en named.conf.",
+      "D. Se utiliza para crear un alias entre dos entradas CNAME."
+    ],
+    "answer": "C",
+    "explicacion": "El símbolo @ se expande al valor de $ORIGIN, que es el nombre de la zona definido en named.conf.",
+    "pista": "Sustituto del nombre de la zona."
+  },
+  {
+    "question": "30. ¿Qué opción de BIND se debe utilizar para limitar las direcciones IP desde las cuales se pueden conectar los servidores de nombres esclavos para descargar la zona?",
+    "options": [
+      "A. allow-zone-transfer",
+      "B. allow-transfer",
+      "C. allow-secondary",
+      "D. allow-slaves",
+      "E. allow-queries"
+    ],
+    "answer": "B",
+    "explicacion": "allow-transfer define qué IPs tienen permiso para solicitar una transferencia de zona (AXFR/IXFR).",
+    "pista": "Permitir transferencia."
+  },
+  {
+    "question": "31. Se ha protegido un directorio en Apache con .htaccess y AuthType Basic. Si el usuario y contraseña son correctos en .htpasswd, ¿qué sucede?",
+    "options": [
+      "A. El usuario puede acceder al sitio.",
+      "B. Se genera un código de error HTTP 442.",
+      "C. Se responde con código de error HTTP 500.",
+      "D. El navegador solicita credenciales pero el login falla.",
+      "E. El servidor entrega contenido sin pedir autenticación."
+    ],
+    "answer": "A",
+    "explicacion": "Si la configuración es correcta y las credenciales coinciden, Apache otorga acceso (código 200).",
+    "pista": "El comportamiento normal de éxito."
+  },
+  {
+    "question": "32. ¿Qué directiva de Apache HTTPD habilita el soporte del protocolo HTTPS?",
+    "options": [
+      "A. HTTPSEngine on",
+      "B. SSLEngine on",
+      "C. SSLEnable on",
+      "D. HTTPSEnable on",
+      "E. StartTLS on"
+    ],
+    "answer": "B",
+    "explicacion": "SSLEngine on es la directiva estándar dentro de un VirtualHost para activar el procesamiento SSL/TLS.",
+    "pista": "Motor SSL."
+  },
+  {
+    "question": "33. ¿Qué directiva de configuración del servidor Apache HTTPD define dónde se almacenan los archivos de registro de errores? (Especifica SOLO el nombre)",
+    "answer": "ErrorLog",
+    "explicacion": "ErrorLog define la ruta del archivo donde se guardarán los errores del servidor.",
+    "pista": "Registro de Errores."
+  },
+  {
+    "question": "34. ¿Qué afirmaciones sobre las directivas Alias y Redirect en Apache son verdaderas? (Elige dos)",
+    "options": [
+      "A. Alias solo puede referenciar archivos bajo DocumentRoot.",
+      "B. Redirect funciona con expresiones regulares.",
+      "C. Redirect se maneja en el lado del cliente (navegador).",
+      "D. Alias se maneja en el lado del servidor.",
+      "E. Alias no es una directiva válida."
+    ],
+    "answer": "C, D",
+    "explicacion": "Alias mapea una URL a una ruta de archivo interna (servidor), mientras que Redirect envía un código 3xx al navegador para que pida una nueva URL (cliente).",
+    "pista": "Uno es interno, el otro avisa al navegador."
+  },
+  {
+    "question": "35. ¿Qué directiva http_access para Squid permite a la ACL 'sales_net' acceder solo en el horario 'sales_time'?",
+    "options": [
+      "A. http_access deny sales_time sales_net",
+      "B. http_access allow sales_net sales_time",
+      "C. http_access allow sales_net and sales-time",
+      "D. allow http_access sales_net sales_time",
+      "E. http_access sales_net sales_time"
+    ],
+    "answer": "B",
+    "explicacion": "En Squid, se listan las ACLs consecutivas. Deben cumplirse ambas (AND implícito) para que la regla 'allow' se aplique.",
+    "pista": "allow red tiempo."
+  },
+  {
+    "question": "36. ¿Qué opción global en squid.conf establece el puerto de escucha?",
+    "options": [
+      "A. port",
+      "B. client_port",
+      "C. http_port",
+      "D. server_port",
+      "E. squid_port"
+    ],
+    "answer": "C",
+    "explicacion": "http_port (generalmente 3128) indica dónde escucha Squid las peticiones de los clientes.",
+    "pista": "Puerto HTTP."
+  },
+  {
+    "question": "37. Con mod_authz_core, ¿cuáles de las siguientes cadenas se pueden usar como argumento para 'Require'? (Elige tres)",
+    "options": [
+      "A. method",
+      "B. all",
+      "C. regex",
+      "D. header",
+      "E. expr"
+    ],
+    "answer": "A, B, E",
+    "explicacion": "Se puede usar 'Require all granted', 'Require method GET' o 'Require expr' (expresiones lógicas).",
+    "pista": "Todo, método o expresión."
+  },
+  {
+    "question": "38. ¿Qué herramienta crea una Solicitud de Firma de Certificado (CSR) para Apache?",
+    "options": [
+      "A. apachectl",
+      "B. certgen",
+      "C. cartool",
+      "D. httpsgen",
+      "E. openssl"
+    ],
+    "answer": "E",
+    "explicacion": "OpenSSL es la navaja suiza para criptografía y generación de CSR y claves privadas.",
+    "pista": "La herramienta estándar de SSL."
+  },
+  {
+    "question": "39. ¿Qué se debe hacer con un certificado intermedio en configuraciones clásicas de Apache?",
+    "options": [
+      "A. Fusionarlo con el certificado del servidor o referenciarlo en la cadena.",
+      "B. Borrarlo.",
+      "C. Guardarlo como CA root.",
+      "D. Importarlo al navegador.",
+      "E. Reenviarlo a la CA."
+    ],
+    "answer": "A",
+    "explicacion": "El servidor debe enviar la cadena completa. En Apache 2.4+ se concatena en el archivo del certificado; en versiones viejas se usaba SSLCertificateChainFile.",
+    "pista": "Debe servirse junto con el certificado principal."
+  },
+  {
+    "question": "40. ¿Qué directiva en un bloque server de Nginx define los puertos TCP?",
+    "answer": "listen",
+    "explicacion": "La directiva 'listen' especifica la IP y el puerto (ej: listen 80;) donde el servidor aceptará conexiones.",
+    "pista": "Escuchar."
+  },
+  
+  
+  
   {
     "question": "41. Al intentar realizar un proxy inverso de un servidor web a través de Nginx, ¿qué palabra clave falta en el siguiente ejemplo de configuración? 'location / { ________ http://proxiedserver:8080; }'",
     "options": [

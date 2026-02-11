@@ -1,4 +1,4 @@
-var preguntas202_400 = [
+var preguntas202_400_EN = [
   {
     "question": "1. Después de configurar Apache para ejecutarse en un entorno chroot como usuario no-root, httpd ya no arranca. ¿Cuál es la causa principal del problema?",
     "options": [

@@ -1,6 +1,6 @@
-const APP_VERSION = "3.1.0"; 
-let arr = []; // Preguntas activas (las 60 seleccionadas)
-let fullPool = []; // Pool completo
+const APP_VERSION = "3.6.0"; 
+let arr = []; // Preguntas del examen actual
+let fullPool = []; // Todas las preguntas disponibles
 let arrOpt = ["A", "B", "C", "D", "E"];
 let preguntas_hechas = [];
 let numCorrect = 0;
@@ -12,7 +12,7 @@ let seconds = 0;
 function switchExam(examKey) {
     fullPool = [];
     
-    // Mapeo de claves a variables globales
+    // Identificar el pool de preguntas (Variables globales de tus archivos .js)
     if (examKey === "LPIC2_2") {
         if (window.preguntasLPIC2_2) fullPool = window.preguntasLPIC2_2;
     } else if (examKey === "LPIC2_2_EN") {
@@ -23,21 +23,21 @@ function switchExam(examKey) {
         if (window.preguntas202_400_EN) fullPool = window.preguntas202_400_EN;
     }
 
-    // Validación
+    // Validación de seguridad
     if (!fullPool || fullPool.length === 0) {
-        $("#question").html(`<div style="color:var(--error-color); text-align:center; padding:20px;">
+        $("#question").html(`<div style="color:#ef4444; text-align:center; padding:20px;">
             <h2>⚠️ Error de carga</h2>
             <p>No se encontraron preguntas para: <b>${examKey}</b></p>
-            <p><small>Verifica los archivos .js</small></p>
+            <p><small>Verifica los archivos .js en la carpeta js/</small></p>
         </div>`);
         $("#answer, #buttons").html("");
         return;
     }
 
-    // PREPARAR EXAMEN: Mezclar y cortar a 60
+    // PREPARAR EXAMEN: Mezclar y USAR TODAS (sin recortar a 60)
     let tempArr = [...fullPool];
     shuffle(tempArr);
-    arr = tempArr.slice(0, 60);
+    arr = tempArr; // Ahora arr tiene TODAS las preguntas
 
     // Reiniciar
     resetStats();
@@ -187,7 +187,9 @@ function updateFooter() {
 }
 
 function updateProgressBar() {
-    let pct = (preguntas_hechas.length / 60) * 100; 
+    // Calculamos sobre el total real del array (arr.length)
+    let total = arr.length > 0 ? arr.length : 1;
+    let pct = (preguntas_hechas.length / total) * 100; 
     $("#progressBar").css("width", pct + "%");
 }
 
@@ -196,10 +198,12 @@ function showFinalResults() {
     $("#resultReport").show();
     clearInterval(timerInterval);
     
-    let score = Math.round((numCorrect / 60) * 100);
+    // Calculamos nota sobre el total real
+    let total = arr.length > 0 ? arr.length : 1;
+    let score = Math.round((numCorrect / total) * 100);
     $("#finalScore").text(score + "%");
     $("#finalStatsText").html(`
-        Has acertado <b>${numCorrect}</b> de <b>60</b> preguntas.<br><br>
+        Has acertado <b>${numCorrect}</b> de <b>${total}</b> preguntas.<br><br>
         Tiempo total: <span style="font-family:monospace; background:#eee; padding:5px; border-radius:4px;">${$("#timer").text()}</span>
     `);
 }

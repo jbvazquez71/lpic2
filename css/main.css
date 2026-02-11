@@ -20,8 +20,7 @@ body {
     flex-direction: column; 
     min-height: 100vh; 
     transition: background-color 0.3s, color 0.3s; 
-    /* IMPORTANTE: Espacio extra abajo para que el footer no tape el contenido */
-    padding-bottom: 140px; 
+    padding-bottom: 120px; 
 }
 
 /* --- MODO OSCURO --- */
@@ -29,7 +28,8 @@ body.dark-mode { background-color: var(--bg-dark); color: var(--text-dark); }
 body.dark-mode .card { background-color: var(--card-dark); color: var(--text-dark); border: 1px solid #334155; }
 body.dark-mode #header { background: var(--card-dark); border-bottom: 1px solid #334155; }
 body.dark-mode select, body.dark-mode button { background: #334155; color: #fff; border: 1px solid #475569; }
-body.dark-mode .footer-box { background: #334155; color: #f1f5f9; box-shadow: none; border: 1px solid #475569; }
+body.dark-mode #textAnswer { background: #0f172a; color: #fff; border: 1px solid #475569; }
+body.dark-mode #footer { background: #0f172a; }
 
 /* --- HEADER --- */
 #header { 
@@ -71,7 +71,6 @@ body.dark-mode .footer-box { background: #334155; color: #f1f5f9; box-shadow: no
     transition: 0.3s;
 }
 
-/* Opciones y Botones */
 .question h3 { margin-top: 0; line-height: 1.5; }
 
 .option-label { 
@@ -83,15 +82,22 @@ body.dark-mode .footer-box { background: #334155; color: #f1f5f9; box-shadow: no
     border-radius: 8px; 
     cursor: pointer; 
     transition: background 0.2s; 
-    border: 1px solid transparent; /* Evita saltos al añadir bordes */
+    border: 1px solid transparent; 
 }
 .option-label:hover { background: rgba(59, 130, 246, 0.05); }
 body.dark-mode .option-label:hover { background: rgba(255, 255, 255, 0.05); }
 
-/* Inputs de radio/checkbox */
 input[type="radio"], input[type="checkbox"] { transform: scale(1.2); margin-top: 4px; }
 
-/* Botones de acción */
+.text-input { 
+    width: 100%; 
+    padding: 12px; 
+    border: 2px solid #cbd5e1; 
+    border-radius: 8px; 
+    font-size: 1rem; 
+    margin-top: 10px; 
+}
+
 button#actionBtn, button#nextBtn, button#restartBtn { 
     background: var(--primary-color); 
     color: white; 
@@ -120,109 +126,61 @@ button:hover { filter: brightness(110%); }
 .fb-success { background-color: #ecfdf5; color: #065f46; border-left-color: var(--success-color); }
 .fb-error { background-color: #fef2f2; color: #991b1b; border-left-color: var(--error-color); }
 
-/* Bordes de validación en la tarjeta principal */
 .correct-border { border: 2px solid var(--success-color) !important; }
 .incorrect-border { border: 2px solid var(--error-color) !important; }
 
-/* --- FOOTER ESTILO ELEGANTE Y ALINEADO --- */
+/* --- FOOTER COMPACTO --- */
 #footer { 
-    background: #1e293b; /* Fondo oscuro elegante */
-    padding: 10px 15px; /* Menos padding vertical para ser más compacto */
+    background: #1e293b; 
+    padding: 10px 15px; 
     position: fixed; 
     bottom: 0; 
     width: 100%; 
     box-sizing: border-box;
     z-index: 1000;
-    box-shadow: 0 -4px 10px rgba(0,0,0,0.2); /* Sombra más suave hacia arriba */
-    
-    /* Grid Layout para distribución */
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
     display: grid; 
-    /* PC: 5 columnas de igual ancho */
     grid-template-columns: repeat(5, 1fr); 
-    gap: 8px; /* Espacio reducido entre cuadros */
-    align-items: end; /* Alinea los elementos al fondo si las etiquetas tuvieran distinta altura */
+    gap: 8px; 
+    align-items: end;
 }
 
-.footer-item { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 3px; /* Mínimo espacio entre la etiqueta pequeña y el cuadro */
-}
-
-.footer-item span { 
-    font-size: 0.65rem; /* Etiquetas más discretas */
-    color: #94a3b8; 
-    text-transform: uppercase; 
-    font-weight: 700; 
-    letter-spacing: 0.8px;
-    text-align: center;
-}
+.footer-item { display: flex; flex-direction: column; gap: 3px; }
+.footer-item span { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; text-align: center; }
 
 .footer-box { 
-    /* Estilo Visual */
-    background: rgba(255, 255, 255, 0.08); /* Fondo semitransparente más sutil */
+    background: rgba(255, 255, 255, 0.08); 
     color: #f1f5f9; 
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Borde fino elegante */
+    border: 1px solid rgba(255, 255, 255, 0.15); 
     border-radius: 6px; 
-    
-    /* Tipografía */
     font-weight: 600; 
-    font-size: 0.95rem; /* Tamaño de número equilibrado */
-    font-family: 'Segoe UI', Roboto, monospace; /* Fuente ligeramente más técnica para números */
-    
-    /* ALINEACIÓN PERFECTA (La clave) */
-    height: 32px; /* Altura FIJA idéntica para todos */
-    display: flex;
-    align-items: center;     /* Centrado vertical perfecto */
-    justify-content: center; /* Centrado horizontal perfecto */
-    padding: 0 5px; /* Solo padding lateral por seguridad */
-    
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: all 0.2s ease;
+    font-size: 0.95rem; 
+    font-family: 'Segoe UI', Roboto, monospace; 
+    height: 32px; 
+    display: flex; align-items: center; justify-content: center; 
+    padding: 0 5px; 
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-/* Pequeño efecto al pasar el ratón en PC para darle vida */
-.footer-box:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-/* Colores específicos para Aciertos y Fallos (sobrescriben el color base) */
 #hits { color: #34d399 !important; background: rgba(52, 211, 153, 0.1); border-color: rgba(52, 211, 153, 0.3); }
 #fails { color: #f87171 !important; background: rgba(248, 113, 113, 0.1); border-color: rgba(248, 113, 113, 0.3); }
 
-/* --- MODO OSCURO (Ajustes finos para el footer) --- */
-body.dark-mode #footer { background: #0f172a; } /* Fondo un poco más oscuro en modo dark */
-}
+@keyframes fadeIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
 
-/* --- REGLAS PARA MÓVIL (PANTALLAS PEQUEÑAS) --- */
+/* --- RESPONSIVE MÓVIL --- */
 @media (max-width: 600px) {
     #footer {
-        /* En Móvil: 3 columnas arriba, 2 abajo */
         grid-template-columns: repeat(6, 1fr); 
         padding: 10px;
         gap: 8px;
     }
+    .footer-item:nth-child(1) { grid-column: span 2; }
+    .footer-item:nth-child(2) { grid-column: span 2; }
+    .footer-item:nth-child(5) { grid-column: span 2; }
+    .footer-item:nth-child(3) { grid-column: span 3; }
+    .footer-item:nth-child(4) { grid-column: span 3; }
 
-    /* Distribución de celdas en móvil para que encajen perfecto */
-    /* Fila 1 */
-    .footer-item:nth-child(1) { grid-column: span 2; } /* Tiempo */
-    .footer-item:nth-child(2) { grid-column: span 2; } /* Preguntas */
-    .footer-item:nth-child(5) { grid-column: span 2; } /* Porcentaje (lo subimos) */
-    
-    /* Fila 2 */
-    .footer-item:nth-child(3) { grid-column: span 3; } /* Aciertos */
-    .footer-item:nth-child(4) { grid-column: span 3; } /* Fallos */
-
-    /* Ajustes de texto para móvil */
     .footer-item span { font-size: 0.6rem; }
-    .footer-box { font-size: 0.9rem; padding: 6px; }
-    
-    /* Header más compacto */
     h1 { font-size: 1.2rem; }
     #examSelect { max-width: 140px; font-size: 0.8rem; }
 }
-
-@keyframes fadeIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
