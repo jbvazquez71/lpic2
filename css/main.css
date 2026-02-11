@@ -124,51 +124,77 @@ button:hover { filter: brightness(110%); }
 .correct-border { border: 2px solid var(--success-color) !important; }
 .incorrect-border { border: 2px solid var(--error-color) !important; }
 
-/* --- FOOTER RESPONSIVE (EL CAMBIO IMPORTANTE) --- */
+/* --- FOOTER ESTILO ELEGANTE Y ALINEADO --- */
 #footer { 
-    background: #1e293b; 
-    padding: 15px; 
+    background: #1e293b; /* Fondo oscuro elegante */
+    padding: 10px 15px; /* Menos padding vertical para ser más compacto */
     position: fixed; 
     bottom: 0; 
     width: 100%; 
-    box-sizing: border-box; /* Asegura que el padding no aumente el ancho total */
+    box-sizing: border-box;
     z-index: 1000;
-    box-shadow: 0 -4px 6px -1px rgba(0,0,0,0.1);
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.2); /* Sombra más suave hacia arriba */
     
-    /* Grid Layout */
+    /* Grid Layout para distribución */
     display: grid; 
-    /* En PC: 5 columnas iguales */
+    /* PC: 5 columnas de igual ancho */
     grid-template-columns: repeat(5, 1fr); 
-    gap: 10px; 
+    gap: 8px; /* Espacio reducido entre cuadros */
+    align-items: end; /* Alinea los elementos al fondo si las etiquetas tuvieran distinta altura */
 }
 
 .footer-item { 
     display: flex; 
     flex-direction: column; 
-    align-items: center; 
-    gap: 5px; 
+    gap: 3px; /* Mínimo espacio entre la etiqueta pequeña y el cuadro */
 }
 
 .footer-item span { 
-    font-size: 0.7rem; 
+    font-size: 0.65rem; /* Etiquetas más discretas */
     color: #94a3b8; 
     text-transform: uppercase; 
-    font-weight: bold; 
-    letter-spacing: 0.5px;
+    font-weight: 700; 
+    letter-spacing: 0.8px;
+    text-align: center;
 }
 
 .footer-box { 
-    background: #f1f5f9; 
-    color: #1e293b; 
-    width: 100%; 
-    padding: 8px 5px; /* Padding reducido lateralmente */
+    /* Estilo Visual */
+    background: rgba(255, 255, 255, 0.08); /* Fondo semitransparente más sutil */
+    color: #f1f5f9; 
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Borde fino elegante */
     border-radius: 6px; 
-    font-weight: bold; 
-    font-size: 1rem; 
-    text-align: center; 
-    white-space: nowrap; /* Evita que el texto se parta */
+    
+    /* Tipografía */
+    font-weight: 600; 
+    font-size: 0.95rem; /* Tamaño de número equilibrado */
+    font-family: 'Segoe UI', Roboto, monospace; /* Fuente ligeramente más técnica para números */
+    
+    /* ALINEACIÓN PERFECTA (La clave) */
+    height: 32px; /* Altura FIJA idéntica para todos */
+    display: flex;
+    align-items: center;     /* Centrado vertical perfecto */
+    justify-content: center; /* Centrado horizontal perfecto */
+    padding: 0 5px; /* Solo padding lateral por seguridad */
+    
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: all 0.2s ease;
+}
+
+/* Pequeño efecto al pasar el ratón en PC para darle vida */
+.footer-box:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Colores específicos para Aciertos y Fallos (sobrescriben el color base) */
+#hits { color: #34d399 !important; background: rgba(52, 211, 153, 0.1); border-color: rgba(52, 211, 153, 0.3); }
+#fails { color: #f87171 !important; background: rgba(248, 113, 113, 0.1); border-color: rgba(248, 113, 113, 0.3); }
+
+/* --- MODO OSCURO (Ajustes finos para el footer) --- */
+body.dark-mode #footer { background: #0f172a; } /* Fondo un poco más oscuro en modo dark */
 }
 
 /* --- REGLAS PARA MÓVIL (PANTALLAS PEQUEÑAS) --- */
