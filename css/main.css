@@ -226,6 +226,7 @@ button:disabled {
     animation: fadeIn 0.3s ease-in;
     border-left: 5px solid transparent;
     line-height: 1.6;
+    position: relative;
 }
 .fb-success { 
     background-color: #ecfdf5; 
@@ -236,6 +237,31 @@ button:disabled {
     background-color: #fef2f2; 
     color: #991b1b; 
     border-left-color: var(--error-color); 
+}
+
+/* Imagen de celebración */
+.celebration-img {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.85;
+    animation: celebrationPop 0.5s ease-out;
+}
+
+@keyframes celebrationPop {
+    0% { 
+        transform: scale(0) rotate(-45deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+    100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 0.85;
+    }
 }
 
 body.dark-mode .fb-success {
@@ -383,6 +409,8 @@ kbd {
     max-width: 500px;
     width: 90%;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .modal-header {
@@ -483,9 +511,64 @@ body.dark-mode .question-count-btn:hover {
     border-color: #3b82f6;
 }
 
+/* Sección de campo personalizado */
+.custom-count-section {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
 @media (max-width: 600px) {
     .question-count-options {
         grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .question-count-btn {
+        padding: 15px;
+    }
+    
+    .question-count-btn i {
+        font-size: 1.5rem;
+    }
+    
+    .question-count-btn .count {
+        font-size: 1.5rem;
+    }
+    
+    .question-count-btn .label {
+        font-size: 0.75rem;
+    }
+    
+    .modal-header {
+        padding: 15px;
+    }
+    
+    .modal-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .modal-body p {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    
+    .custom-count-section {
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    .custom-count-section label {
+        font-size: 0.9rem !important;
+    }
+    
+    #customQuestionCount {
+        font-size: 1rem;
+        padding: 8px !important;
     }
 }
 
