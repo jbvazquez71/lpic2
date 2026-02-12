@@ -1,4 +1,4 @@
-const APP_VERSION = "4.0.0"; 
+const APP_VERSION = "4.1.1"; 
 
 // Variables globales
 let arr = []; // Preguntas del examen actual
@@ -12,6 +12,8 @@ let numIncorrect = 0;
 let timerInterval;
 let seconds = 0;
 let examFinished = false;
+let desiredQuestionCount = null; // Número de preguntas que el usuario quiere
+let pendingExamKey = null; // Examen pendiente de iniciar
 
 // Constantes para LocalStorage
 const STORAGE_KEY = 'lpic_exam_state';
@@ -33,7 +35,8 @@ function saveProgress() {
             numCorrect,
             numIncorrect,
             seconds,
-            examFinished
+            examFinished,
+            desiredQuestionCount // Guardar el número de preguntas seleccionadas
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch (error) {
@@ -55,7 +58,10 @@ function loadProgress() {
         
         // Preguntar al usuario si quiere continuar
         const timePassed = Math.floor((Date.now() - state.timestamp) / 60000); // minutos
-        const message = `¿Deseas continuar tu examen anterior?\n\nExamen: ${savedExam}\nProgreso: ${state.preguntas_hechas.length} preguntas\nTiempo: ${timePassed} min atrás`;
+        const countInfo = state.desiredQuestionCount === 'all' 
+            ? 'todas las preguntas' 
+            : `${state.desiredQuestionCount} preguntas`;
+        const message = `¿Deseas continuar tu examen anterior?\n\nExamen: ${savedExam}\nModo: ${countInfo}\nProgreso: ${state.preguntas_hechas.length} contestadas\nTiempo: ${timePassed} min atrás`;
         
         if (!confirm(message)) {
             localStorage.removeItem(STORAGE_KEY);
@@ -73,6 +79,7 @@ function loadProgress() {
         numIncorrect = state.numIncorrect || 0;
         seconds = state.seconds || 0;
         examFinished = state.examFinished || false;
+        desiredQuestionCount = state.desiredQuestionCount || null; // Restaurar número de preguntas
         
         updateFooter();
         updateProgressBar();
@@ -166,6 +173,84 @@ $("<style>")
     .appendTo("head");
 
 // ===========================================
+// SELECCIÓN DE NÚMERO DE PREGUNTAS
+// ===========================================
+
+function showQuestionCountModal(examKey) {
+    pendingExamKey = examKey;
+    
+    // Actualizar el contador de "Todas las preguntas"
+    // Primero necesitamos cargar temporalmente el pool para saber cuántas hay
+    let tempPool = [];
+    if (examKey === "LPIC2_2") {
+        if (window.preguntasLPIC2_2) tempPool = window.preguntasLPIC2_2;
+    } else if (examKey === "LPIC2_2_EN") {
+        if (window.preguntasLPIC2_2_EN) tempPool = window.preguntasLPIC2_2_EN;
+    } else if (examKey === "LPI_400") {
+        if (window.preguntas202_400) tempPool = window.preguntas202_400;
+    } else if (examKey === "LPI_400_EN") {
+        if (window.preguntas202_400_EN) tempPool = window.preguntas202_400_EN;
+    }
+    
+    $("#allQuestionsCount").text(`Todas (${tempPool.length})`);
+    $("#questionCountModal").fadeIn(200);
+}
+
+function selectQuestionCount(count) {
+    if (count === 'all') {
+        desiredQuestionCount = 'all';
+    } else {
+        desiredQuestionCount = parseInt(count);
+    }
+    
+    $("#questionCountModal").fadeOut(200);
+    
+    // Iniciar el examen con el número de preguntas seleccionado
+    if (pendingExamKey) {
+        switchExam(pendingExamKey);
+        pendingExamKey = null;
+    }
+}
+
+function selectCustomCount() {
+    const customValue = $("#customQuestionCount").val();
+    const customCount = parseInt(customValue);
+    
+    // Validar
+    if (!customValue || isNaN(customCount) || customCount < 1) {
+        $("#questionCountError").text("⚠️ Introduce un número válido (mínimo 1)").show();
+        return;
+    }
+    
+    // Obtener el pool temporal para validar el máximo
+    let tempPool = [];
+    if (pendingExamKey === "LPIC2_2") {
+        if (window.preguntasLPIC2_2) tempPool = window.preguntasLPIC2_2;
+    } else if (pendingExamKey === "LPIC2_2_EN") {
+        if (window.preguntasLPIC2_2_EN) tempPool = window.preguntasLPIC2_2_EN;
+    } else if (pendingExamKey === "LPI_400") {
+        if (window.preguntas202_400) tempPool = window.preguntas202_400;
+    } else if (pendingExamKey === "LPI_400_EN") {
+        if (window.preguntas202_400_EN) tempPool = window.preguntas202_400_EN;
+    }
+    
+    if (customCount > tempPool.length) {
+        $("#questionCountError").text(`⚠️ El examen solo tiene ${tempPool.length} preguntas`).show();
+        return;
+    }
+    
+    $("#questionCountError").hide();
+    selectQuestionCount(customCount);
+}
+
+// Cerrar modal con Enter en el campo personalizado
+$(document).on('keypress', '#customQuestionCount', function(e) {
+    if (e.which === 13) {
+        selectCustomCount();
+    }
+});
+
+// ===========================================
 // MOTOR DE SELECCIÓN DE EXAMEN
 // ===========================================
 
@@ -189,10 +274,17 @@ function switchExam(examKey, restoring = false) {
             throw new Error(`No se encontraron preguntas para: ${examKey}`);
         }
 
-        // PREPARAR EXAMEN: Mezclar y USAR TODAS
+        // PREPARAR EXAMEN: Mezclar
         let tempArr = [...fullPool];
         shuffle(tempArr);
-        arr = tempArr;
+        
+        // Aplicar el límite de preguntas si está configurado
+        if (desiredQuestionCount && desiredQuestionCount !== 'all') {
+            const limit = Math.min(desiredQuestionCount, tempArr.length);
+            arr = tempArr.slice(0, limit);
+        } else {
+            arr = tempArr; // Usar todas
+        }
 
         // Reiniciar solo si no estamos restaurando
         if (!restoring) {
@@ -201,7 +293,8 @@ function switchExam(examKey, restoring = false) {
             nextQuestion();
         }
         
-        showNotification(`Examen cargado: ${arr.length} preguntas`, "success");
+        const countText = desiredQuestionCount === 'all' ? 'todas' : desiredQuestionCount;
+        showNotification(`Examen cargado: ${arr.length} preguntas (${countText} seleccionadas)`, "success");
         
     } catch (error) {
         console.error("Error en switchExam:", error);
@@ -567,12 +660,17 @@ function checkAnswer(index) {
     $("input").prop("disabled", true);
     $("#nextBtn").focus();
 
+    // Marcar pregunta como contestada ANTES de actualizar el footer
+    if (!preguntas_hechas.includes(index)) {
+        preguntas_hechas.push(index);
+    }
+    
     updateFooter();
     saveProgress();
 }
 
 function processNext(index) {
-    preguntas_hechas.push(index);
+    // La pregunta ya fue agregada a preguntas_hechas en checkAnswer
     updateProgressBar();
     nextQuestion();
 }
@@ -790,9 +888,16 @@ function showFinalResults() {
     let emoji = score >= 90 ? "🏆" : score >= 75 ? "🎉" : score >= 60 ? "👍" : "📚";
     
     $("#finalScore").html(`${emoji} ${score}%`);
+    
+    // Texto con información del número de preguntas
+    const countText = desiredQuestionCount === 'all' 
+        ? `todas las ${total}` 
+        : `${total} de ${fullPool.length}`;
+    
     $("#finalStatsText").html(`
         Has acertado <b>${numCorrect}</b> de <b>${total}</b> preguntas.<br>
-        Fallaste <b>${numIncorrect}</b> preguntas.<br><br>
+        Fallaste <b>${numIncorrect}</b> preguntas.<br>
+        <small style="color: #64748b;">(Respondiste ${countText} preguntas disponibles)</small><br><br>
         Tiempo total: <span style="font-family:monospace; background:#eee; padding:5px; border-radius:4px;">
             <i class="fas fa-clock"></i> ${$("#timer").text()}
         </span>
@@ -806,7 +911,8 @@ function showFinalResults() {
         correct: numCorrect,
         incorrect: numIncorrect,
         total: total,
-        time: $("#timer").text()
+        time: $("#timer").text(),
+        questionCount: desiredQuestionCount
     });
     
     clearProgress(); // Limpiar progreso al terminar
@@ -845,7 +951,8 @@ $(document).ready(() => {
         // Cambiar examen con confirmación
         $("#examSelect").on('change', function() {
             if (confirmRestart()) {
-                switchExam($(this).val());
+                const examKey = $(this).val();
+                showQuestionCountModal(examKey); // Mostrar modal de selección
             } else {
                 // Restaurar selección anterior
                 $(this).val(localStorage.getItem('current_exam') || 'LPIC2_2');
@@ -882,10 +989,10 @@ $(document).ready(() => {
             const progressLoaded = loadProgress();
             
             if (!progressLoaded) {
-                // Carga inicial normal
+                // Carga inicial: mostrar modal de selección
                 let def = $("#examSelect").val();
                 if (def) {
-                    switchExam(def);
+                    showQuestionCountModal(def);
                 }
             }
         }, 500);

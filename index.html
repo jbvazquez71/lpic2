@@ -55,7 +55,10 @@
             <div id="question" class="question" role="region" aria-live="polite"></div>
             <div id="answer" class="answer"></div>
             
-            <!-- Navegación entre preguntas -->
+            <!-- Botón principal de acción (va primero) -->
+            <div id="buttons" class="buttons"></div>
+            
+            <!-- Navegación entre preguntas (va después) -->
             <div id="navigation" class="navigation-buttons" style="display:none;">
                 <button id="prevBtn" onclick="navigateQuestion(-1)" aria-label="Pregunta anterior">
                     <i class="fas fa-arrow-left"></i> Anterior
@@ -67,8 +70,6 @@
                     <i class="fas fa-list"></i> Revisar
                 </button>
             </div>
-            
-            <div id="buttons" class="buttons"></div>
             
             <!-- Atajos de teclado (ayuda) -->
             <div id="keyboardHelp" class="keyboard-help" style="display:none;">
@@ -133,6 +134,60 @@
         </div>
     </div>
     
+    <!-- Modal de selección de número de preguntas -->
+    <div id="questionCountModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-list-ol"></i> ¿Cuántas preguntas quieres?</h3>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 20px; color: #64748b;">
+                    Selecciona el número de preguntas para este examen:
+                </p>
+                <div class="question-count-options">
+                    <button class="question-count-btn" onclick="selectQuestionCount(20)">
+                        <i class="fas fa-bolt"></i>
+                        <span class="count">20</span>
+                        <span class="label">Rápido</span>
+                    </button>
+                    <button class="question-count-btn" onclick="selectQuestionCount(40)">
+                        <i class="fas fa-running"></i>
+                        <span class="count">40</span>
+                        <span class="label">Medio</span>
+                    </button>
+                    <button class="question-count-btn" onclick="selectQuestionCount(60)">
+                        <i class="fas fa-fire"></i>
+                        <span class="count">60</span>
+                        <span class="label">Completo</span>
+                    </button>
+                    <button class="question-count-btn" onclick="selectQuestionCount('all')">
+                        <i class="fas fa-infinity"></i>
+                        <span class="count" id="allQuestionsCount">Todas</span>
+                        <span class="label">Banco completo</span>
+                    </button>
+                </div>
+                <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 600;">
+                        <i class="fas fa-edit"></i> O personaliza:
+                    </label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" 
+                               id="customQuestionCount" 
+                               min="1" 
+                               placeholder="Ej: 30"
+                               style="flex: 1; padding: 10px; border: 2px solid #cbd5e1; border-radius: 6px;"
+                               aria-label="Número personalizado de preguntas">
+                        <button onclick="selectCustomCount()" 
+                                style="padding: 10px 20px; background: var(--success-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                            <i class="fas fa-check"></i> OK
+                        </button>
+                    </div>
+                    <small id="questionCountError" style="color: var(--error-color); display: none; margin-top: 5px;"></small>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal de ayuda de teclado -->
     <div id="keyboardModal" class="modal" style="display:none;">
         <div class="modal-content">

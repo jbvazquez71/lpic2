@@ -423,6 +423,72 @@ kbd {
     color: var(--primary-color);
 }
 
+/* --- MODAL DE SELECCIÓN DE PREGUNTAS --- */
+.question-count-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.question-count-btn {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border: 2px solid #cbd5e1;
+    padding: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+}
+
+.question-count-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+}
+
+.question-count-btn:active {
+    transform: translateY(-1px);
+}
+
+.question-count-btn i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.question-count-btn .count {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.question-count-btn .label {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+body.dark-mode .question-count-btn {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-color: #475569;
+}
+
+body.dark-mode .question-count-btn:hover {
+    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+    border-color: #3b82f6;
+}
+
+@media (max-width: 600px) {
+    .question-count-options {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* --- FOOTER COMPACTO --- */
 #footer { 
     background: #1e293b; 
@@ -486,8 +552,8 @@ kbd {
 @media (max-width: 600px) {
     #footer {
         grid-template-columns: repeat(6, 1fr); 
-        padding: 10px;
-        gap: 8px;
+        padding: 8px 10px;
+        gap: 6px;
     }
     .footer-item:nth-child(1) { grid-column: span 2; }
     .footer-item:nth-child(2) { grid-column: span 2; }
@@ -495,7 +561,13 @@ kbd {
     .footer-item:nth-child(3) { grid-column: span 3; }
     .footer-item:nth-child(4) { grid-column: span 3; }
 
-    .footer-item span { font-size: 0.6rem; }
+    .footer-item span { font-size: 0.55rem; }
+    .footer-box { 
+        font-size: 0.85rem; 
+        height: 28px;
+        padding: 0 4px;
+    }
+    
     h1 { font-size: 1.2rem; }
     #examSelect { max-width: 140px; font-size: 0.8rem; }
     
@@ -507,6 +579,8 @@ kbd {
         width: 95%;
         margin: 20px;
     }
+    
+    body { padding-bottom: 100px; } /* Reducir espacio del footer */
 }
 
 /* --- ACCESIBILIDAD --- */
