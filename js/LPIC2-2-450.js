@@ -131,8 +131,8 @@ var preguntasLPIC2_2 = [
       "D. ~/.ssh/id_rsa",
       "E. ~/.ssh/known_hosts"
     ],
-    "answer": "A",
-    "explicacion": "El servidor remoto debe tener tu llave pública en su archivo authorized_keys.",
+    "answer": "C",
+    "explicacion": "Debes transmitir tu clave pública (.pub) al servidor remoto, donde se agregará al archivo authorized_keys del servidor.",
     "pista": "Llaves autorizadas."
   },
   {
@@ -602,7 +602,7 @@ var preguntasLPIC2_2 = [
       "C. missing-peers",
       "D. unknown-clients"
     ],
-    "answer": "E",
+    "answer": "D",
     "explicacion": "La palabra clave 'unknown-clients' controla si el servidor asigna IPs a hosts que no reconoce en sus declaraciones.",
     "pista": "Clientes 'desconocidos'."
   },
@@ -759,7 +759,6 @@ var preguntasLPIC2_2 = [
       "E. Todos los procesos utilizan la versión más reciente."
     ],
     "answer": "A",
-    "explicacion": "testparm es un verificador de sintaxis para smb.conf; asegura que el archivo sea legible y válido.",
     "pista": "Validación del archivo de configuración."
   },
   {
@@ -1011,7 +1010,7 @@ var preguntasLPIC2_2 = [
       "D. cat",
       "E. netmap"
     ],
-    "answer": "B",
+    "answer": "B, C",
     "explicacion": "Netcat (nc) y Telnet permiten abrir conexiones TCP crudas a cualquier puerto.",
     "pista": "La 'navaja suiza' y la clásica consola remota."
   },
@@ -1076,7 +1075,7 @@ var preguntasLPIC2_2 = [
       "D. ~/.ssh/id_rsa.crt",
       "E. ~/.ssh/id_rsa"
     ],
-    "answer": "B",
+    "answer": "B, E",
     "explicacion": "Se generan la llave privada (id_rsa) y la pública (id_rsa.pub) en el directorio .ssh.",
     "pista": "Los archivos de llave pública y privada."
   },
@@ -1204,9 +1203,9 @@ var preguntasLPIC2_2 = [
       "D. relay",
       "E. reject"
     ],
-    "answer": "C, D, E",
-    "explicacion": "Las acciones básicas incluyen entregar a una carpeta (fileinto), rechazar el mensaje (reject) o reenviarlo (relay).",
-    "pista": "Acciones relacionadas con archivar, rechazar y retransmitir."
+    "answer": "B, C, E",
+    "explicacion": "Las acciones principales de Sieve incluyen descartar silenciosamente (discard), entregar a una carpeta (fileinto) y rechazar el mensaje (reject).",
+    "pista": "Acciones para eliminar silenciosamente, archivar o devolver el correo."
   },
   {
     "question": "103. ¿Qué sentencias permiten combinaciones lógicas de condiciones en los filtros Sieve? (Elige dos)",
