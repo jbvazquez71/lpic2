@@ -131,9 +131,9 @@ var preguntasLPIC2_2_EN = [
       "D. ~/.ssh/id_rsa",
       "E. ~/.ssh/known_hosts"
     ],
-    "answer": "C",
-    "explicacion": "You must transfer your public key (.pub) to the remote server, where it will be added to the server's authorized_keys file.",
-    "pista": ""Public versus private."
+    "answer": "A",
+    "explicacion": "The remote server must have your public key listed in its authorized_keys file.",
+    "pista": "Keys that are authorized."
   },
   {
     "question": "12. What is the name of the network security scanner project which, at the core, is a server with a set of network vulnerability tests?",
@@ -654,8 +654,8 @@ var preguntasLPIC2_2_EN = [
       "E. Use maildir format"
     ],
     "answer": "A, D",
-    "explicacion": "To prevent open relaying, it is necessary to limit who can send 'through' the server and to which 'destinations'.",
-    "pista": "Filter by local domains for inbound and by internal network for outbound."
+    "explicacion": "Preventing open relay involves limiting allowed destinations and internal relaying.",
+    "pista": "Local domains and internal relay."
   },
   {
     "question": "57. To see username and peer IP in 'ps ax' for Dovecot, which option must be set?",
@@ -1007,7 +1007,7 @@ var preguntasLPIC2_2_EN = [
       "D. cat",
       "E. netmap"
     ],
-    "answer": "B, C",
+    "answer": "B",
     "explicacion": "Netcat (nc) and Telnet are versatile tools that can open raw TCP connections to any port.",
     "pista": "The 'Swiss-army knife' and the classic remote console tool."
   },
@@ -1072,7 +1072,7 @@ var preguntasLPIC2_2_EN = [
       "D. ~/.ssh/id_rsa.crt",
       "E. ~/.ssh/id_rsa"
     ],
-    "answer": "B, E",
+    "answer": "B",
     "explicacion": "ssh-keygen generates the private key (id_rsa) and the public key (id_rsa.pub) in the .ssh directory.",
     "pista": "The public and private key files."
   },
@@ -1200,9 +1200,9 @@ var preguntasLPIC2_2_EN = [
       "D. relay",
       "E. reject"
     ],
-    "answer": "B, C, E",
-    "explicacion": "Standard Sieve actions and common extensions include silently deleting a message (discard), delivering it to a specific folder (fileinto), or refusing it with an error notification (reject).",
-    "pista": "Actions for silent deletion, archiving, or bouncing the email."
+    "answer": "C, D, E",
+    "explicacion": "Core Sieve actions include 'fileinto' for delivery, 'reject' to inform the sender, and 'relay' to forward the mail.",
+    "pista": "Actions related to filing, rejecting, and relaying."
   },
   {
     "question": "103. Which of the following statements allow the logical combinations of conditions in Sieve filters? (Choose two.)",

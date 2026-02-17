@@ -889,7 +889,7 @@ var preguntasLPIC2_2 = [
       "D. ServerLog",
       "E. VHostLog"
     ],
-    "answer": "A",
+    "answer": "A, B",
     "explicacion": "TransferLog y CustomLog definen el formato y la ubicación de los registros de acceso.",
     "pista": "Directivas relacionadas con el acceso."
   },
