@@ -654,8 +654,8 @@ var preguntasLPIC2_2_EN = [
       "E. Use maildir format"
     ],
     "answer": "A, D",
-    "explicacion": "Preventing open relay involves limiting allowed destinations and internal relaying.",
-    "pista": "Local domains and internal relay."
+    "explicacion": "To prevent open relaying, it is necessary to limit who can send 'through' the server and to which 'destinations'.",
+    "pista": "Filter by local domains for inbound and by internal network for outbound."
   },
   {
     "question": "57. To see username and peer IP in 'ps ax' for Dovecot, which option must be set?",
@@ -741,7 +741,7 @@ var preguntasLPIC2_2_EN = [
   },
   {
     "question": "64. In order to export /usr and /bin via NFSv4 with bind mounts, which option in /etc/exports might need modification to show the root folder? (Specify ONLY the option name)",
-    "answer": "mount",
+    "answer": "fsid=0",
     "explicacion": "The 'mount' or 'crossmnt' options are necessary for the client to see the directory hierarchy in NFSv4.",
     "pista": "Related to mount points."
   },

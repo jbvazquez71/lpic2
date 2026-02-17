@@ -657,9 +657,9 @@ var preguntasLPIC2_2 = [
       "D. Restringir Postfix para que solo retransmita SMTP saliente desde la red interna.",
       "E. Usar el formato maildir."
     ],
-    "answer": "A",
+    "answer": "A, D",
     "explicacion": "Para evitar el open relay se debe limitar quién puede enviar 'a través' del servidor y a qué 'destinos'.",
-    "pista": "Limitar dominios y retransmisión interna."
+    "pista": "Filtra por dominios locales para la entrada y por red interna para la salida"
   },
   {
     "question": "57. Para ver el nombre de usuario y la IP del par en 'ps ax' para Dovecot, ¿qué opción debe activarse?",
@@ -840,9 +840,9 @@ var preguntasLPIC2_2 = [
       "D. Proporciona una lista de hosts al cliente.",
       "E. Envía el nombre de host de la URL solicitada durante el saludo TLS (handshake)."
     ],
-    "answer": "B",
-    "explicacion": "SNI permite al navegador indicar el nombre del sitio que desea visitar durante el inicio de la conexión TLS.",
-    "pista": "Hosting virtual para SSL."
+    "answer": "B, E",
+    "explicacion": "SNI (Server Name Indication) permite que un servidor web aloje múltiples sitios con SSL/TLS usando una sola dirección IP. Esto es posible porque el cliente envía el nombre del dominio deseado durante el inicio de la conexión (handshake), permitiendo al servidor mostrar el certificado correcto.",
+    "pista": "Hosting virtual para SSL/TLS compartiendo IP."
   },
   {
     "question": "73. ¿Qué directiva de Apache especifica la llave privada RSA utilizada en la generación del certificado SSL?",
