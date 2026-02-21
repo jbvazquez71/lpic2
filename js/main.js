@@ -1,4 +1,4 @@
-const APP_VERSION = "4.2.0"; // Versión actualizada (Vanilla JS)
+const APP_VERSION = "4.3.0"; // Versión con Swipe UX y Haptics
 
 // Estado centralizado de la aplicación
 const state = {
@@ -21,6 +21,10 @@ const state = {
 // Constantes para LocalStorage
 const STORAGE_KEY = 'lpic_exam_state';
 const STORAGE_HISTORY = 'lpic_exam_history';
+
+// Variables para Swipe
+let touchStartX = 0;
+let touchEndX = 0;
 
 // ===========================================
 // FUNCIONES AUXILIARES DOM
@@ -90,7 +94,6 @@ function loadProgress() {
         if (state.examFinished) {
             showFinalResults();
         } else {
-            // Reiniciar timer considerando los segundos que ya habían pasado
             startTimer(); 
             nextQuestion();
         }
@@ -258,7 +261,6 @@ function resetStats() {
 
 function startTimer() {
     clearInterval(state.timerInterval);
-    // Solución al Timer Drift: Usamos la hora actual menos los segundos que ya hayan pasado (si restauramos sesión)
     state.timerStartTime = Date.now() - (state.seconds * 1000);
     
     state.timerInterval = setInterval(() => {
@@ -267,7 +269,6 @@ function startTimer() {
         let s = (state.seconds % 60).toString().padStart(2, '0');
         el("timer").innerText = `${m}:${s}`;
         
-        // Guardar progreso cada minuto
         if (state.seconds % 60 === 0) saveProgress(); 
     }, 1000);
 }
@@ -379,7 +380,7 @@ function showAnsweredQuestion(index) {
     `;
     
     el("answer").insertAdjacentHTML('beforeend', feedbackHtml);
-    el("buttons").innerHTML = ""; // Limpiar botones de acción
+    el("buttons").innerHTML = ""; 
     updateNavigationButtons();
 }
 
@@ -457,7 +458,6 @@ function displayQuestion(index) {
     
     updateNavigationButtons();
     
-    // Asignar eventos de marcado a los inputs
     document.querySelectorAll('input[name="opt"]').forEach(input => {
         input.addEventListener('change', function() {
             document.querySelectorAll('.option-label').forEach(lbl => lbl.classList.remove('selected'));
@@ -495,7 +495,6 @@ function checkAnswer(index) {
         let c = correct.split(",").map(s=>s.trim()).sort().join(", ");
         isCorrect = (u === c);
     } else {
-        // Validación mejorada para comandos (limpia espacios múltiples y sobrantes)
         let cleanUserAns = userAns.replace(/\s+/g, ' ').trim().toLowerCase();
         let cleanCorrect = correct.replace(/\s+/g, ' ').trim().toLowerCase();
         isCorrect = (cleanUserAns === cleanCorrect);
@@ -512,9 +511,13 @@ function checkAnswer(index) {
     if (isCorrect) {
         state.numCorrect++;
         mainCard.classList.add("correct-border");
+        // Haptic feedback (Vibración de acierto)
+        if (navigator.vibrate) navigator.vibrate(50);
     } else {
         state.numIncorrect++;
         mainCard.classList.add("incorrect-border");
+        // Haptic feedback (Vibración de error)
+        if (navigator.vibrate) navigator.vibrate([50, 60, 50]);
     }
 
     let feedbackHtml = `
@@ -614,7 +617,7 @@ function reviewQuestion(index) {
 }
 
 // ===========================================
-// ATAJOS DE TECLADO
+// ATAJOS DE TECLADO Y GESTOS MÓVILES
 // ===========================================
 function setupKeyboardShortcuts() {
     document.addEventListener('keydown', function(e) {
@@ -639,7 +642,6 @@ function setupKeyboardShortcuts() {
                 if (input.type === 'checkbox') input.checked = !input.checked;
                 else input.checked = true;
                 
-                // Disparar evento change manualmente para actualizar estilos
                 input.dispatchEvent(new Event('change'));
             }
             return;
@@ -675,12 +677,43 @@ function setupKeyboardShortcuts() {
         if (e.which === 27) closeKeyboardModal();
     });
     
-    // Configurar listener para Enter en input personalizado de preguntas
     document.addEventListener('keypress', function(e) {
         if (e.target.id === 'customQuestionCount' && e.which === 13) {
             selectCustomCount();
         }
     });
+}
+
+function handleSwipe() {
+    const swipeThreshold = 50; 
+    const diff = touchStartX - touchEndX;
+
+    if (Math.abs(diff) < swipeThreshold) return; 
+
+    if (diff > 0) {
+        // Deslizar izquierda -> Siguiente o Saltar
+        const nextBtn = el("nextBtn");
+        const skipBtn = el("skipBtn");
+        if (nextBtn && nextBtn.offsetParent !== null) nextBtn.click();
+        else if (skipBtn && skipBtn.offsetParent !== null) skipQuestion();
+    } else {
+        // Deslizar derecha -> Anterior
+        const prevBtn = el("prevBtn");
+        if (prevBtn && prevBtn.offsetParent !== null && !prevBtn.disabled) navigateQuestion(-1);
+    }
+}
+
+function setupTouchGestures() {
+    const mainCard = el("mainCard");
+    
+    mainCard.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+
+    mainCard.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, {passive: true});
 }
 
 function toggleKeyboardModal() {
@@ -773,6 +806,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         el("versionBadge").innerText = "v" + APP_VERSION;
         setupKeyboardShortcuts();
+        setupTouchGestures(); // Iniciar los gestos del móvil
         
         el("examSelect").addEventListener('change', function() {
             if (confirmRestart()) {
@@ -795,7 +829,6 @@ document.addEventListener('DOMContentLoaded', () => {
             el("toggleDarkMode").innerHTML = '<i class="fas fa-sun"></i>';
         }
 
-        // Delegación de eventos para botones generados dinámicamente o estáticos
         document.body.addEventListener('click', function(e) {
             if (e.target.closest('#restartBtn')) {
                 e.preventDefault();

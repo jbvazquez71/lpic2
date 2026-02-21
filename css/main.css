@@ -95,6 +95,8 @@ body.dark-mode .explanation-block { background: rgba(255,255,255,0.05); }
     width: 100%; 
     max-width: 800px; 
     transition: 0.3s;
+    /* Evitamos que el deslizamiento mueva la página web hacia los lados */
+    touch-action: pan-y; 
 }
 
 /* --- INFO DE RESPUESTAS MÚLTIPLES --- */
@@ -125,6 +127,10 @@ body.dark-mode .explanation-block { background: rgba(255,255,255,0.05); }
     border-radius: 5px;
     font-family: monospace;
     margin-top: 10px;
+    /* Scroll para código muy largo en móvil */
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .option-label { 
@@ -467,6 +473,8 @@ body.dark-mode .question-count-btn:hover {
 #footer { 
     background: #1e293b; 
     padding: 10px 15px; 
+    /* Adaptación para la zona de la barra de navegación de iOS/Android */
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
     position: fixed; 
     bottom: 0; 
     width: 100%; 
@@ -506,16 +514,8 @@ body.dark-mode .question-count-btn:hover {
     text-overflow: ellipsis;
 }
 
-#hits { 
-    color: #34d399 !important; 
-    background: rgba(52, 211, 153, 0.1); 
-    border-color: rgba(52, 211, 153, 0.3); 
-}
-#fails { 
-    color: #f87171 !important; 
-    background: rgba(248, 113, 113, 0.1); 
-    border-color: rgba(248, 113, 113, 0.3); 
-}
+#hits { color: #34d399 !important; background: rgba(52, 211, 153, 0.1); border-color: rgba(52, 211, 153, 0.3); }
+#fails { color: #f87171 !important; background: rgba(248, 113, 113, 0.1); border-color: rgba(248, 113, 113, 0.3); }
 
 @keyframes fadeIn { 
     from { opacity:0; transform:translateY(5px); } 
@@ -555,6 +555,7 @@ body.dark-mode .question-count-btn:hover {
     #footer {
         grid-template-columns: repeat(6, 1fr); 
         padding: 8px 10px;
+        padding-bottom: calc(8px + env(safe-area-inset-bottom));
         gap: 6px;
     }
     .footer-item:nth-child(1) { grid-column: span 2; }
@@ -564,11 +565,7 @@ body.dark-mode .question-count-btn:hover {
     .footer-item:nth-child(4) { grid-column: span 3; }
 
     .footer-item span { font-size: 0.55rem; }
-    .footer-box { 
-        font-size: 0.85rem; 
-        height: 28px;
-        padding: 0 4px;
-    }
+    .footer-box { font-size: 0.85rem; height: 28px; padding: 0 4px; }
     
     h1 { font-size: 1.2rem; }
     #examSelect { max-width: 140px; font-size: 0.8rem; }
