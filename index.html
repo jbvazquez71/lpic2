@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador LPIC-2 Pro</title>
     
-    <!-- Font Awesome para iconos (reemplaza emojis) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <script src="js/LPIC2-2-450.js"></script>
     <script src="js/LPIC2-2-450-EN.js"></script>
@@ -20,7 +17,7 @@
 </head>
 <body>
     <div id="header" role="banner">
-        <h1>Test LPIC-2 <span class="version-badge" aria-label="Versión"></span></h1>
+        <h1>Test LPIC-2 <span id="versionBadge" class="version-badge" aria-label="Versión"></span></h1>
         <div class="header-right">
             <select id="examSelect" aria-label="Seleccionar examen">
                 <option value="LPIC2_2" selected>LPIC-2 202-450 (Castellano)</option>
@@ -46,7 +43,6 @@
 
     <div id="content" role="main">
         <div class="card" id="mainCard">
-            <!-- Info de respuestas múltiples -->
             <div id="multiSelectInfo" class="multi-select-info" style="display:none;" role="alert">
                 <i class="fas fa-info-circle"></i>
                 <span>Selecciona TODAS las respuestas correctas</span>
@@ -55,10 +51,8 @@
             <div id="question" class="question" role="region" aria-live="polite"></div>
             <div id="answer" class="answer"></div>
             
-            <!-- Botón principal de acción (va primero) -->
             <div id="buttons" class="buttons"></div>
             
-            <!-- Navegación entre preguntas (va después) -->
             <div id="navigation" class="navigation-buttons" style="display:none;">
                 <button id="prevBtn" onclick="navigateQuestion(-1)" aria-label="Pregunta anterior">
                     <i class="fas fa-arrow-left"></i> Anterior
@@ -71,7 +65,6 @@
                 </button>
             </div>
             
-            <!-- Atajos de teclado (ayuda) -->
             <div id="keyboardHelp" class="keyboard-help" style="display:none;">
                 <small>
                     <i class="fas fa-keyboard"></i> 
@@ -83,7 +76,6 @@
             </div>
         </div>
 
-        <!-- Resultados finales -->
         <div class="card" id="resultReport" style="display:none; text-align:center;" role="region" aria-live="polite">
             <h2><i class="fas fa-chart-bar"></i> Resultados del Examen</h2>
             <div id="finalScore" style="font-size: 4rem; margin: 20px 0; font-weight: bold; color: var(--primary-color);" aria-label="Puntuación final"></div>
@@ -99,7 +91,6 @@
             </div>
         </div>
         
-        <!-- Modo de revisión -->
         <div class="card" id="reviewPanel" style="display:none;">
             <div class="review-header">
                 <h2><i class="fas fa-clipboard-list"></i> Modo Revisión</h2>
@@ -134,7 +125,6 @@
         </div>
     </div>
     
-    <!-- Modal de selección de número de preguntas -->
     <div id="questionCountModal" class="modal" style="display:none;">
         <div class="modal-content">
             <div class="modal-header">
@@ -188,7 +178,6 @@
         </div>
     </div>
 
-    <!-- Modal de ayuda de teclado -->
     <div id="keyboardModal" class="modal" style="display:none;">
         <div class="modal-content">
             <div class="modal-header">
