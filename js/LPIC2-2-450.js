@@ -997,7 +997,7 @@ var preguntasLPIC2_2 = [
       "D. nobody",
       "E. guest"
     ],
-    "answer": "A",
+    "answer": "A, B",
     "explicacion": "Por defecto, vsftpd trata tanto 'anonymous' como 'ftp' como inicios de sesión anónimos.",
     "pista": "El nombre del protocolo y el término estándar."
   },
